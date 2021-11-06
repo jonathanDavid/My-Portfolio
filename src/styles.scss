@@ -1,0 +1,57 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-indigo);
+$my-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+
+@include angular-material-theme($my-app-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Zen Antique Soft", serif; background: #1d1d1d; color: #fff; }
+
+
+.full-width-div {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.title {
+  font-family: 'Zen Antique Soft', serif;
+  font-size: 400%;
+  font-weight: bold;
+  color: #fff;
+}
+
+.paragraph {
+  font-family:  'Roboto Mono', monospace;
+  color: #b1b1b1;
+  font-size: 150%;
+  font-weight: 100;
+  background-color: #1d1d1d;
+}
+
+.paragraph-white {
+  font-family:  'Roboto Mono', monospace;
+  color: fff;
+  font-size: 120%;
+  font-weight: 100;
+  background-color: #1d1d1d;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+
+.details {
+  font-family: 'Handlee', cursive;
+  color: #b1b1b1;
+  font-weight: 100;
+  font-size: 80%;
+}
+
+.color-secondary {
+  color: #ffea00;
+}
