@@ -1,0 +1,48 @@
+name: Build Angular Site
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Angular
+        run: npm install -g @angular/cli@10.1.7
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Dev
+        run: ng build --configuration="development" --aot=true
+
+      - name: Upload to S3
+        uses: ItsKarma/aws-cli@v1.70.0
+        with:
+          args: s3 cp dist/portfolio/ s3://${{ secrets.BUCKET_NAME }}/ --recursive
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-east-1'

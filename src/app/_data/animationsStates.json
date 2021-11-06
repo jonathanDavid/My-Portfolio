@@ -1,0 +1,23 @@
+[
+    {"state": false, "element": "github"},
+    {"state": false, "element": "linkedIn"},
+    {"state": false, "element": "next-1"},
+    {"state": false, "element": "next-2"},
+    {"state": false, "element": "next-3"},
+    {"state": false, "element": "angular"},
+    {"state": false, "element": "wordpress"},
+    {"state": false, "element": "ionic"},
+    {"state": false, "element": "javascript"},
+    {"state": false, "element": "typescript"},
+    {"state": false, "element": "python"},
+    {"state": false, "element": "git"},
+    {"state": false, "element": "aws"},
+    {"state": false, "element": "postman"},
+    {"state": false, "element": "unity"},
+    {"state": false, "element": "neo4j"},
+    {"state": false, "element": "nodejs"},
+    {"state": false, "element": "mongodb"},
+    {"state": false, "element": "docker"},
+    {"state": false, "element": "express"},
+    {"state": false, "element": "terraform"}
+  ]
