@@ -34,9 +34,9 @@ body { margin: 0; font-family: Roboto, "Zen Antique Soft", serif; background: #1
 
 .paragraph-white {
   font-family:  'Roboto Mono', monospace;
-  color: fff;
+  color: #cfcfcf;
   font-size: 120%;
-  font-weight: 100;
+  font-weight: thin;
   background-color: #1d1d1d;
 }
 
@@ -54,4 +54,65 @@ a:hover {
 
 .color-secondary {
   color: #ffea00;
+}
+
+div {
+  text-align: center;
+}
+
+#tsparticles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#container-p {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#particles-js,
+#over {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#over {
+  z-index: 10;
+}
+
+.section {
+  height: 100%;
+  padding:5%;
+}
+
+.max-height {
+  height: 100%;
+}
+
+.partial-height {
+  height: 70%;
+}
+
+.social-icon{
+  height: 60px;
+}
+
+.separate{
+  margin-top: 25%;
+}
+
+.tool-icon{
+  width: 70px;
+  height: 70px;
+  max-width: 100%
+}
+
+.fixed-row-bottom { 
+  position:fixed;
+  bottom:0;
+  width:100%;
 }

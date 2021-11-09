@@ -23,6 +23,7 @@
     "paths": {
       "@data/*": ["src/app/_data/*"],
       "@services/*": ["src/app/_services/*"],
+      "@assets/*": ["src/assets/*"],
       "@models/*": ["src/app/_models/*"],
       "@components/*": ["src/app/components/*"],
       "@environments/*": ["src/environments/*"]
