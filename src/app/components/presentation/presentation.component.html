@@ -1,0 +1,42 @@
+<div class="section text-justify" ngsReveal>
+    <div class="row max-height">
+        <div class="col-10 max-height">
+            <div class="row partial-height">
+                <div class="col text-justify">
+                    <p *ngIf="showAnimationsOrder[0]" class="title color-secondary">
+                        <teximate [text]="'Hi,'" [enter]="enterFlipAnimation" (finish)="finish()" (play)="play()"></teximate>
+                    </p>
+                    <br/>
+                    <p *ngIf="showAnimationsOrder[1]" class="title">
+                        <teximate [text]="'Nice to meet you,'" (finish)="finish()" [enter]="enterFlipSecondAnimation"></teximate>
+                    </p>
+                    <br/>
+                    <p *ngIf="showAnimationsOrder[2]" class="title">
+                        <teximate text="I'm Jonathan" (finish)="finish()" [enter]="enterBounceThirdAnimation"></teximate>
+                    </p>
+                    <p *ngIf="showAnimationsOrder[3]" class="paragraph mt-5">
+                        <teximate [text]="'Backend and Frontend developer, Passionate about design'" (finish)="showSocialIcons()" [enter]="enterFlipThirdAnimation_1"></teximate>
+                    </p>
+                </div>
+            </div>
+            <div *ngIf="showSocial" class="row justify-content-end" [ngsRevealSet]="{reset:true}" [ngsInterval]="50" [ngsSelector]="'.item'">
+                <ng-lottie class="item" width="120px" height="150px" [options]="spaceSuitOptions"></ng-lottie>
+            </div>
+            <div *ngIf="showSocial" class="row justify-content-end" [ngsRevealSet]="{reset:true}" [ngsInterval]="50" [ngsSelector]="'.item'">
+                <a  [@rubberBand]="getAnimationStateByName('github')" (mouseenter)="startNameAnimation('github')" href="https://github.com/jonathanDavid" target="_blank">
+                    <img class="item social-icon" src="../../../assets/img/github_media_social_icon.svg">
+                </a>
+                <a  [@rubberBand]="getAnimationStateByName('linkedIn')" (mouseenter)="startNameAnimation('linkedIn')" href="https://www.linkedin.com/in/jonathan-ilias/" target="_blank">
+                    <img class="item social-icon" src="../../../assets/img/in_linked_media_social_icon.svg">
+                </a>         
+            </div>
+        </div>
+        <div class="col-2" >
+            <div class="row justify-content-end">
+                <a href="#" [@fadeIn]="getAnimationStateByName('next-1')" (mouseenter)="startNameAnimation('next-1')">
+                    <p class="details">Know more &#8669;</p>
+                </a> 
+            </div>                                       
+        </div>
+    </div>          
+</div>

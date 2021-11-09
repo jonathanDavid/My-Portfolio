@@ -12,7 +12,14 @@ import { WelcomeModule } from '@components/welcome/welcome.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgsRevealModule } from 'ngx-scrollreveal';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 import { ConnectionServiceModule, ConnectionServiceOptions, ConnectionServiceOptionsToken } from 'ngx-connection-service';
+
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -30,6 +37,7 @@ import { ConnectionServiceModule, ConnectionServiceOptions, ConnectionServiceOpt
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     HammerModule,
+    LottieModule.forRoot({ player: playerFactory }),
     ToastrModule.forRoot({
       preventDuplicates: true,
       countDuplicates: true,

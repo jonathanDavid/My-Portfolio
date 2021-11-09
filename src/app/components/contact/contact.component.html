@@ -1,0 +1,46 @@
+<div class="section text-justify max-height m-0 p-0" ngsReveal>
+    <div class="row max-height m-0 p-0">
+        <div class="col-6 max-height p-5">
+            <div class="row mt-5">
+                <div class="col mt-5  text-justify">
+                    <p class="title">Talk <span class="color-secondary">to me</span></p>                            
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col paragraph">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-justify">
+                                Let me know if you got any great opportunities for me out there.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row"  [ngsRevealSet]="{reset:true}" [ngsInterval]="100" [ngsSelector]="'.tool-form'">
+                        <div class="col">
+                            <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/{form_id}" method="post">
+                                <fieldset id="fs-frm-inputs">
+                                    <label class="tool-form" for="full-name">Full Name</label>
+                                    <input class="tool-form" type="text" name="name" id="full-name" placeholder="First and Last" required="">
+                                    <label class="tool-form" for="email-address">Email Address</label>
+                                    <input class="tool-form" type="email" name="_replyto" id="email-address" placeholder="email@domain.tld" required="">
+                                    <label class="tool-form" for="message">Message</label>
+                                    <textarea class="tool-form" rows="5" name="message" id="message" placeholder="Aenean lacinia bibendum nulla sed consectetur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla nullam quis risus." required=""></textarea>
+                                    <input class="tool-form" type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                                </fieldset>
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div> 
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        <div class="col-6 max-height m-0 p-0">
+            <div class="contact-map lazyloaded  max-height" data-bgset="../../../../../assets/img/map.svg" style="background-image: url(&quot;../../../../../assets/img/map.svg&quot;)">
+                <picture style="display: none;">
+                    <source data-srcset="../../../../../assets/img/map.svg" sizes="1773px" srcset="../../../../../assets/img/map.svg">
+                    <img alt="" class="lazyautosizes lazyloaded" data-sizes="auto" sizes="1773px">
+                </picture>
+            </div>           
+        </div>
+    </div>    
+</div>

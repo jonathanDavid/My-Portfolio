@@ -3,26 +3,26 @@ import { Router } from '@angular/router';
 import { TextAnimation } from 'ngx-teximate';
 import { flipInX, bounceIn } from 'ng-animate';
 import { rubberBandAnimation, fadeInAnimation } from 'angular-animations';
-import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import * as _ from 'lodash';
-
-import particlesOptions from '@data/particles.json';
 import animationsStates from '@data/animationsStates.json';
+
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss'],
+  selector: 'app-presentation',
+  templateUrl: './presentation.component.html',
+  styleUrls: ['./presentation.component.scss'],
   animations: [
     rubberBandAnimation(),
     fadeInAnimation()
   ]
 })
-export class WelcomeComponent implements OnInit {
+export class PresentationComponent implements OnInit {
   
-  id = "tsparticles";      
-  particlesOptions = particlesOptions;
+  spaceSuitOptions: AnimationOptions = {
+    path: 'assets/lottie/space.json',
+  };
   animationsStates = animationsStates;
+
   enterFlipAnimation: TextAnimation = {
     animation: flipInX,
     delay: 200,
@@ -88,14 +88,6 @@ export class WelcomeComponent implements OnInit {
   play(){
     this.currentIndex++;
     this.showAnimationsOrder[this.currentIndex] = true;
-  }
-
-  options: AnimationOptions = {
-    path: 'assets/lottie/cloud-hosting.json',
-  };
-
-  animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
   }
 
 }

@@ -1,34 +1,27 @@
 import { NgModule } from '@angular/core';
 import { NgParticlesModule } from "ng-particles";
-import { WelcomeComponent } from './welcome.component';
+import { CardComponent } from './card.component';
 import { CommonModule } from '@angular/common';  
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgsRevealModule } from 'ngx-scrollreveal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeximateModule } from 'ngx-teximate';
 import { LottieModule } from 'ngx-lottie';
-import { PresentationModule } from '@components/presentation/presentation.module';
-import { AboutModule } from '@components/about/about.module';
-import { ContactModule } from '@components/contact/contact.module';
-import { ShowcaseModule } from '@components/showcase/showcase.module';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [ WelcomeComponent ],
+  declarations: [ CardComponent ],
   imports: [ 
     BrowserAnimationsModule,
     TeximateModule,
     NgxSpinnerModule,
+    NgbModule,
     NgParticlesModule,
     NgsRevealModule,
-    PresentationModule,
-    ContactModule,
-    ShowcaseModule,
-    AboutModule,
     LottieModule,
     CommonModule
   ],
-  exports: [ WelcomeComponent ],
+  exports: [ CardComponent ],
   providers: [  ]
 })
 
-export class WelcomeModule { }
+export class CardModule { }
