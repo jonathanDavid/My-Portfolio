@@ -7,7 +7,7 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeximateModule } from 'ngx-teximate';
 import { LottieModule } from 'ngx-lottie';
-
+import { SwiperModule } from "swiper/angular";
 
 @NgModule({
   declarations: [ AboutComponent ],
@@ -15,6 +15,7 @@ import { LottieModule } from 'ngx-lottie';
     BrowserAnimationsModule,
     TeximateModule,
     NgxSpinnerModule,
+    SwiperModule,
     NgParticlesModule,
     NgsRevealModule,
     LottieModule,

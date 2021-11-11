@@ -1,7 +1,13 @@
-.sub-section{
-  padding-left:5% !important;
+.preview-container{
+  height:100%; 
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.my-section{
-  height: 100%;
+.preview{
+  width:100%;
+  margin: 0;
+  padding: 0;
 }
