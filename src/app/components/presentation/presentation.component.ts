@@ -19,7 +19,7 @@ import animationsStates from '@data/animationsStates.json';
 export class PresentationComponent implements OnInit {
   
   spaceSuitOptions: AnimationOptions = {
-    path: 'assets/lottie/space.json',
+    path: 'assets/lottie/rocket-animation.json',
   };
   animationsStates = animationsStates;
 

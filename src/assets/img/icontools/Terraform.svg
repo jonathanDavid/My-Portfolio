@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="Terraform.svg"
+   width="512"
+   height="512"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.1294821"
+     inkscape:cx="316.51675"
+     inkscape:cy="288.18518"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg12" />
+  <rect
+     style="fill:#5c4ee5;stroke:#ffffff;stroke-width:1.90376;stroke-linecap:round;paint-order:stroke fill markers;fill-opacity:1"
+     id="rect1015"
+     width="510.09622"
+     height="510.09622"
+     x="0.95187998"
+     y="0.95187998" />
+  <g
+     id="g1209"
+     transform="translate(18.494375,-14.968357)">
+    <g
+       id="g1390"
+       transform="matrix(2.8592593,0,0,2.8592593,162.02117,184.76168)">
+      <path
+         style="fill:#4040b2;fill-opacity:1;stroke:none;stroke-width:0.349741px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 57.859696,119.30593 H 116.15204 V 73.145317 L 52.800002,10.72 36.4,20.2 H 34.6 L 0,0.15 18.2,31.74 v 18.94 c 16.65853,28.993587 20.00798,34.607637 39.659696,68.62593 z"
+         id="path6459"
+         sodipodi:nodetypes="cccccccccc" />
+      <path
+         class="rect-light"
+         fill="#5c4ee5"
+         d="M 18.2,10.72 34.6,20.2 V 39.13 L 18.2,29.66"
+         id="path8"
+         style="fill:#ffffff" />
+      <path
+         class="rect-dark"
+         fill="#4040b2"
+         d="M 36.4,39.13 52.8,29.67 V 10.72 L 36.4,20.2"
+         id="path6"
+         style="fill:#999999" />
+      <path
+         class="rect-light"
+         fill="#5c4ee5"
+         d="m 0,19.09 16.4,9.47 V 9.62 L 0,0.15 m 18.2,50.53 16.4,9.47 V 41.21 L 18.2,31.74"
+         id="path10"
+         style="fill:#ffffff" />
+    </g>
+  </g>
+</svg>

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { rubberBandAnimation, fadeInAnimation } from 'angular-animations';
+import { rubberBandAnimation, bounceInAnimation } from 'angular-animations';
 import { AnimationOptions } from 'ngx-lottie';
 import * as _ from 'lodash';
 import animationsStates from '@data/animationsStates.json';
+import { NgsRevealService } from 'ngx-scrollreveal';
+import SwiperCore, { EffectCoverflow, Pagination } from "swiper";
+SwiperCore.use([EffectCoverflow, Pagination]);
 
 @Component({
   selector: 'app-about',
@@ -11,19 +14,32 @@ import animationsStates from '@data/animationsStates.json';
   styleUrls: ['./about.component.scss'],
   animations: [
     rubberBandAnimation(),
-    fadeInAnimation()
-  ]
+    bounceInAnimation()
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
 
   searchOptions: AnimationOptions = {
-    path: 'assets/lottie/developer-technology.json',
+    path: 'assets/lottie/space.json',
   };
-  animationsStates = animationsStates;
-  constructor(private router: Router) { 
+  animationsStates = animationsStates;  
+  afterRevealSubscription:any = null;
+  showIcons=false;
+  constructor(private router: Router, private revealService: NgsRevealService) { 
   }
 
   ngOnInit(): void {
+    this.showIcons = false;
+    this.afterRevealSubscription = this.revealService.afterReveal$.subscribe((el: HTMLElement) => {
+        if(el.id==="lastText"){
+          this.showIcons = true;
+        }
+    });
+  }
+
+  ngOnDestroy() {
+    this.afterRevealSubscription.unsubscribe();
   }
 
   startNameAnimation(name: string){    

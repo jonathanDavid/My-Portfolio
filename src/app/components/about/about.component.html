@@ -1,97 +1,97 @@
 <div class="section text-justify" ngsReveal>            
     <div class="row">
-        <div class="col-8">
+        <div class="col-10">
             <div class="row">
                 <div class="col text-justify">
                     <p class="title">Ab<span class="color-secondary">out</span></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-7 text-justify">                            
-                    <p class="paragraph-white mt-5">
-                        I come from a remote town near the capital of  La Guajira a Colombia´s department. Through my effort and some luck I was able to obtain a scholarship to study at the university.
+                <div class="col-7 text-justify" [ngsRevealSet]="{reset:true}" [ngsInterval]="300" [ngsSelector]="'.item-text'">                            
+                    <p class="paragraph-white mt-5 item-text">
+                        I come from a remote town near the capital of  La Guajira a Colombia´s department. Through my effort and some luck I was able to obtain a scholarship to study at the university in the city of Barranquilla where I currently live.
                     </p>
-                    <p class="paragraph-white mt-5">
+                    <p class="paragraph-white mt-5 item-text">
                         My profecional path started as an intern before finishing my studies. Throughout my career I have had the opportunity to work with companies of different kinds, which has allowed me to develop skills in the frontend and backend fields.
                     </p>
-                    <p class="paragraph-white mt-5">
-                        
+                    <p class="paragraph-white mt-5 item-text">
+                        Here you can find the main technologies with which I have worked, my skills, projects carried out among others.
                     </p>
-                    <!--<p disabled class="paragraph-white mt-5">
-                        In the first one I have a full-time job and as a cloud platform I have learned tools more focused on the backend part, I consider myself lucky to be an important part of the Omnix team, I joined the company as an intern when the development team was composed for 5 people only and the company that it is today was just a concept, I have been able to relate to all the logistics behind a purchase, concepts such as the fullfilment process, order status, integrations with third parties, omnichannel, the inventory management among others. In a world with so many physical restrictions, tools like Omnix have more and more relevance.
-                    </p>-->
+                    <a href="#">
+                        <p id="lastText" class="item-text details mt-5 ">
+                            Let's build something meaningful together &#8669;
+                        </p>
+                    </a>
+                    <div class="item-text">
+                        <ng-lottie  width="200px" height="200px" [options]="searchOptions"></ng-lottie>
+                    </div>                    
                 </div>
-                <div class="col-5">
+                <div *ngIf="showIcons" class="col-5">
                     <div [ngsRevealSet]="{reset:true}" [ngsInterval]="100" [ngsSelector]="'.tool-icon'">
                         <div class="row justify-content-center mt-5">
                             <a href="https://www.mongodb.com/" [@rubberBand]="getAnimationStateByName('mongodb')" (mouseenter)="startNameAnimation('mongodb')" target="_blank"> 
-                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" class="tool-icon" /> 
+                                <img src="../../../assets/img/icontools/Mongodb.svg" alt="mongodb" class="tool-icon" /> 
                             </a>                                    
                             <a href="https://neo4j.com/" [@rubberBand]="getAnimationStateByName('neo4j')" (mouseenter)="startNameAnimation('neo4j')" target="_blank">
-                                <img src="https://cdn.worldvectorlogo.com/logos/neo4j.svg" alt="neo4j" class="tool-icon" > 
+                                <img src="../../../assets/img/icontools/Neo4j.svg" alt="neo4j" class="tool-icon" > 
                             </a>
                             <a href="https://wordpress.com/" [@rubberBand]="getAnimationStateByName('wordpress')" (mouseenter)="startNameAnimation('wordpress')" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/1024px-WordPress_blue_logo.svg.png" alt="wordpress" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Wordpress.svg" alt="wordpress" class="tool-icon"/>
                             </a>
                             <a href="https://ionicframework.com/" [@rubberBand]="getAnimationStateByName('ionic')" (mouseenter)="startNameAnimation('ionic')" target="_blank">
-                                <img src="https://png.pngtree.com/svg/20170719/ionic_1307248.png" alt="ionic" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Ionic.svg" alt="ionic" class="tool-icon"/>
                             </a>                            
                         </div>
                         <div class="row justify-content-center mt-5">
                             <a href="https://expressjs.com" [@rubberBand]="getAnimationStateByName('express')" (mouseenter)="startNameAnimation('express')" target="_blank">
-                                <img  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" class="tool-icon p-1"/> 
+                                <img  src="../../../assets/img/icontools/Expressjs.svg" alt="express" class="tool-icon"/>
                             </a>
                             <a href="https://git-scm.com/" [@rubberBand]="getAnimationStateByName('git')" (mouseenter)="startNameAnimation('git')" target="_blank">
-                                <img src="https://miro.medium.com/max/650/1*zzvdRmHGGXONZpuQ2FeqsQ.png" alt="git" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Git.svg" alt="git" class="tool-icon"/>
                             </a>                                
                             <a href="https://postman.com" [@rubberBand]="getAnimationStateByName('postman')" (mouseenter)="startNameAnimation('postman')" target="_blank">
                                 <img
-                                    src="https://camo.githubusercontent.com/93b32389bf746009ca2370de7fe06c3b5146f4c99d99df65994f9ced0ba41685/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f676574706f73746d616e2f676574706f73746d616e2d69636f6e2e737667" alt="postman" class="tool-icon"/>
+                                    src="../../../assets/img/icontools/Postman.svg" alt="postman" class="tool-icon"/>
                             </a>
                             <a href="https://unity.com/" [@rubberBand]="getAnimationStateByName('unity')" (mouseenter)="startNameAnimation('unity')" target="_blank">
-                                <img src="https://camo.githubusercontent.com/f8f5c4f90fe3c43e5b7858360cf3a4eeffcaa0bdf7352c7c8c4b9c1489bb7f99/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f756e69747933642f756e69747933642d69636f6e2e737667" alt="unity" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Unity.svg" alt="unity" class="tool-icon"/>
                             </a>
                         </div>
                         <div class="row justify-content-center mt-5">
                             <a href="https://angular.io" [@rubberBand]="getAnimationStateByName('angular')" (mouseenter)="startNameAnimation('angular')" target="_blank">
-                                <img src="https://camo.githubusercontent.com/9eecc42439347332f256a326363924551042f5b96235f972982512199476611a/68747470733a2f2f616e67756c61722e696f2f6173736574732f696d616765732f6c6f676f732f616e67756c61722f616e67756c61722e737667" alt="angular" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Angular.svg" alt="angular" class="tool-icon"/>
                             </a>
                             <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" [@rubberBand]="getAnimationStateByName('javascript')" (mouseenter)="startNameAnimation('javascript')" target="_blank">
-                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Javascript.svg" alt="javascript" class="tool-icon"/>
                             </a>
                             <a href="https://www.typescriptlang.org/" [@rubberBand]="getAnimationStateByName('typescript')" (mouseenter)="startNameAnimation('typescript')" target="_blank">
-                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" class="tool-icon"/>
+                                <img src="../../../assets/img/icontools/Typescriptlang.svg" alt="typescript" class="tool-icon"/>
                             </a>
                             <a href="https://www.python.org" [@rubberBand]="getAnimationStateByName('python')" (mouseenter)="startNameAnimation('python')" target="_blank"> 
-                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" class="tool-icon"/> 
+                                <img src="../../../assets/img/icontools/Python.svg" alt="python" class="tool-icon"/> 
                             </a>
                         </div>    
                         <div class="row justify-content-center mt-5">
                             <a href="https://nodejs.org/es/" [@rubberBand]="getAnimationStateByName('nodejs')" (mouseenter)="startNameAnimation('nodejs')" target="_blank">
-                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" class="tool-icon"/> 
+                                <img src="../../../assets/img/icontools/Nodejs.svg" alt="nodejs" class="tool-icon"/> 
                             </a>
                             <a href="https://aws.amazon.com" [@rubberBand]="getAnimationStateByName('aws')" (mouseenter)="startNameAnimation('aws')" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/AWS_Simple_Icons_AWS_Cloud.svg" alt="aws" class="tool-icon" />
+                                <img src="../../../assets/img/icontools/Aws.svg" alt="aws" class="tool-icon" />
                             </a>
                             <a href="https://registry.terraform.io/" [@rubberBand]="getAnimationStateByName('terraform')" (mouseenter)="startNameAnimation('terraform')" target="_blank"> 
-                                <img src="https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/541/formation-terraform.png" alt="terraform" class="tool-icon"/> 
+                                <img src="../../../assets/img/icontools/Terraform.svg" alt="terraform" class="tool-icon"/> 
                             </a>
                             <a href="https://www.docker.com/" [@rubberBand]="getAnimationStateByName('docker')" (mouseenter)="startNameAnimation('docker')" target="_blank"> 
-                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" class="tool-icon"/> 
+                                <img src="../../../assets/img/icontools/Docker.svg" alt="docker" class="tool-icon"/> 
                             </a>
                         </div>                   
                     </div>
                 </div>
-            </div>                  
-        </div>
-        <div class="col-2">
-            <div class="row justify-content-center mt-5" [ngsRevealSet]="{reset:true}" [ngsInterval]="50" [ngsSelector]="'.lottie'">
-                <ng-lottie class="lottie mt-3" width="400px" height="400px" [options]="searchOptions"></ng-lottie>
-            </div>            
+            </div>               
         </div>
         <div class="col-2">
             <div class="row justify-content-end">
-                <a href="#" [@fadeIn]="getAnimationStateByName('next-2')" (mouseenter)="startNameAnimation('next-2')">
+                <a href="#">
                     <p class="details">Know more &#8669;</p>
                 </a> 
             </div>               
