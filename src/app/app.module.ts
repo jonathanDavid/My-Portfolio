@@ -15,7 +15,7 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { ConnectionServiceModule, ConnectionServiceOptions, ConnectionServiceOptionsToken } from 'ngx-connection-service';
-
+import 'hammerjs';
 
 export function playerFactory() {
   return player;
