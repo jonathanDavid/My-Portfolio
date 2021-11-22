@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { WelcomeComponent } from '@components/welcome/welcome.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
   { path: '',  component:  WelcomeComponent },

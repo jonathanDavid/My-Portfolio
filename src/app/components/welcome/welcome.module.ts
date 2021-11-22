@@ -11,7 +11,8 @@ import { PresentationModule } from '@components/presentation/presentation.module
 import { AboutModule } from '@components/about/about.module';
 import { ContactModule } from '@components/contact/contact.module';
 import { ShowcaseModule } from '@components/showcase/showcase.module';
-
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [ WelcomeComponent ],
   imports: [ 
@@ -21,6 +22,8 @@ import { ShowcaseModule } from '@components/showcase/showcase.module';
     NgParticlesModule,
     NgsRevealModule,
     PresentationModule,
+    ScrollingModule,
+    NgScrollbarModule,
     ContactModule,
     ShowcaseModule,
     AboutModule,
