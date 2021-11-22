@@ -13,7 +13,7 @@ import { rubberBandAnimation, fadeInAnimation } from 'angular-animations';
 })
 export class ShowcaseComponent implements OnInit {
   
-
+  invertY = false;
   constructor(private router: Router) { 
   }
 

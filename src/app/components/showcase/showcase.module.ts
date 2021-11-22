@@ -7,7 +7,8 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeximateModule } from 'ngx-teximate';
 import { LottieModule } from 'ngx-lottie';
-import { CardModule } from '@components/showcase/card/card.module';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [ ShowcaseComponent ],
   imports: [ 
@@ -17,7 +18,8 @@ import { CardModule } from '@components/showcase/card/card.module';
     NgParticlesModule,
     NgsRevealModule,
     LottieModule,
-    CardModule,
+    NgScrollbarModule,
+    ScrollingModule,
     CommonModule
   ],
   exports: [ ShowcaseComponent ],

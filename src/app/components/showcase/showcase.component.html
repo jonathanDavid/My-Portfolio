@@ -1,45 +1,29 @@
-<div class="section text-justify" ngsReveal>
-    <div class="row mb-5">
-        <p class="title">My Portfolio</p>            
-    </div>
-    <div class="row partial-height">        
-        <div class="col-2 preview-container">
+
+<div class="section div text-justify" ngsReveal>
             <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
+                <div class="col section-title text-justify">
+                    <p class="title">My Portfolio</p>                            
+                </div>
             </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-            <div class="row">
-                <img class="preview" src="https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png" />
-            </div>
-        </div>
-        <div class="col-11">
-            <app-card></app-card>
-        </div>        
-    </div>
+            <div class="row partial-height">    
+                <div class="grid" [ngsRevealSet]="{reset:true}" [ngsInterval]="100" [ngsSelector]="'.empty'">
+                    <div class="card item2">
+                        <a href="https://runprop.innomake.co/" target="_blank"><h2>Runprop</h2></a>
+                    </div>
+                    <div class="card item3 empty"></div>
+                    <div class="card item4 empty"></div>
+                    <div class="card item5">
+                        <a href="https://garnish.innomake.co/" target="_blank"><h2>Garnish</h2></a>
+                    </div>
+                    <div class="card item7 empty"></div>
+                    <div class="card item8">
+                        <a href="#"><h2>My Portfolio</h2></a>
+                    </div>
+                    <div class="card item9 empty"></div>
+                    <div class="card item10 empty"></div>
+                    <div class="card item11">
+                        <a href="https://agrocitricos.innomake.co/" target="_blank"><h2>Agrocitricos</h2></a>
+                    </div>
+                </div>
+            </div>      
 </div>
