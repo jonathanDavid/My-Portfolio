@@ -51,6 +51,7 @@ export class PresentationComponent implements OnInit {
   showSocial = false;
   showTools = false;
   currentIndex = 0;
+
   constructor(private router: Router) { 
   }
 
@@ -88,6 +89,10 @@ export class PresentationComponent implements OnInit {
   play(){
     this.currentIndex++;
     this.showAnimationsOrder[this.currentIndex] = true;
+  }
+
+  moveToTimeline(){
+    this.router.navigate(['/timeline']);
   }
 
 }

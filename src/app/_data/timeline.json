@@ -1,0 +1,108 @@
+[
+    {
+        "icon":"university",
+        "title":"First studies",
+        "year":"2015",
+        "content":"I started my studies in system engineering at the Universidad Del Norte when I was 15 years old thanks to a scholarship granted by the government",
+        "links":[
+            {
+                "tooltip":"Universidad Del Norte",
+                "link":"https://www.uninorte.edu.co",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"gamepad",
+        "title":"Global Game Jam",
+        "year":"2018",
+        "content":"Made my first public video game called Uplink in 48 hours",
+        "links":[
+            {
+                "tooltip":"GGJ - Uplink",
+                "link":"https://globalgamejam.org/2018/games/uplink",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"briefcase",
+        "title":"Internship",
+        "year":"2019",
+        "content":"While I was in my 9th semester, I started my internship at a company called Xpectrum working on the Omnix product",
+        "links":[
+            {
+                "tooltip":"Internship",
+                "link":"https://www.linkedin.com/company/xpectrumtech/?originalSubdomain=co",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"briefcase",
+        "title":"I got hire",
+        "year":"2020",
+        "content":"After a six-month internship, I started working with the Omnix team at Xpectrum as a software developer",
+        "links":[
+            {
+                "tooltip":"Xpectrum",
+                "link":"https://www.linkedin.com/company/xpectrumtech/?originalSubdomain=co",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"gamepad",
+        "title":"Global Game Jam",
+        "year":"2020",
+        "content":"Made my second public video game called Otto in 48 hours",
+        "links":[
+            {
+                "tooltip":"GGJ - Otto",
+                "link":"https://globalgamejam.org/2020/games/otto-5",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"briefcase",
+        "title":"I graduated",
+        "year":"2020",
+        "content":"I graduated as a systems engineer",
+        "links":[
+            {
+                "tooltip":"Universidad Del Norte",
+                "link":"https://www.uninorte.edu.co",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"briefcase",
+        "title":"Innomake found me",
+        "year":"2020",
+        "content":"I started a part-time job as a front-end developer at Innomake",
+        "links":[
+            {
+                "tooltip":"Innomake",
+                "link":"https://innomake.co/",
+                "icon":"link"
+            }
+        ]
+    },
+    {
+        "icon":"briefcase",
+        "title":"Omnix Is born",
+        "year":"2021",
+        "content":"The once Omnix product is now consolidated as a company. I followed my professional path with them",
+        "links":[
+            {
+                "tooltip":"Omnix",
+                "link":"https://omnixcorp.com/",
+                "icon":"link"
+            }
+        ]
+    }
+
+
+]

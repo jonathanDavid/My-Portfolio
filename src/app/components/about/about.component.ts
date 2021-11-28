@@ -56,4 +56,8 @@ export class AboutComponent implements OnInit, OnDestroy {
     }    
   }
 
+  moveToTimeline(){
+    this.router.navigate(['/timeline']);
+  }
+
 }

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { WelcomeModule } from '@components/welcome/welcome.module';
+import { TimelineModule } from '@components/timeline/timeline.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgsRevealModule } from 'ngx-scrollreveal';
@@ -28,6 +29,7 @@ export function playerFactory() {
   imports: [
     NgParticlesModule,
     WelcomeModule,
+    TimelineModule,
     MatSidenavModule,
     HttpClientModule,
     NgsRevealModule,
