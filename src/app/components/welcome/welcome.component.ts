@@ -19,7 +19,9 @@ import animationsStates from '@data/animationsStates.json';
   ]
 })
 export class WelcomeComponent implements OnInit {
-  
+  arrowDownOptions: AnimationOptions = {
+    path: 'assets/lottie/arrow-down.json',
+  };
   id = "tsparticles";      
   particlesOptions = particlesOptions;
   animationsStates = animationsStates;

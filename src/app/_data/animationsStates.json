@@ -19,5 +19,7 @@
     {"state": false, "element": "mongodb"},
     {"state": false, "element": "docker"},
     {"state": false, "element": "express"},
-    {"state": false, "element": "terraform"}
+    {"state": false, "element": "terraform"},
+    {"state": false, "element": "facebook"},
+    {"state": false, "element": "tweeter"}
   ]

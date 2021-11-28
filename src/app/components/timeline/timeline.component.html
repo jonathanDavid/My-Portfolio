@@ -1,0 +1,51 @@
+
+<div>
+    <div id="particles-js">
+        <ng-particles [id]="id" [options]="particlesOptions"></ng-particles>
+    </div>
+    <div class="col m-0 p-0" >
+      <div class="container">
+        <mzd-timeline [alternateSide]="true" [firstContentSide]="'left'">
+            <mzd-timeline-content ngsReveal  *ngFor="let timeline of timelineInfo" [card]="false">
+                <mzd-icon class="icon-text">
+                  <fa-icon [icon]="timeline.icon"></fa-icon>
+                </mzd-icon>
+                <mat-card class="card-bg">
+                  <mat-card-header class="m-0 p-0">
+                    <mat-card-title class="title-card">
+                      {{ timeline.title }}
+                    </mat-card-title>
+                    <mat-card-subtitle class="subtitle-card">
+                      {{ timeline.year }}
+                    </mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content >
+                    <div class="row">
+                      <div class="col">
+                        <p class="content-card">{{ timeline.content }}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-1" *ngFor="let link of timeline.links">
+                        <a [href]="link.link" target="_blank">
+                          <fa-icon class="icon-link-text" [icon]="link.icon"></fa-icon>
+                        </a>
+                      </div>
+                    </div>              
+                  </mat-card-content>
+                </mat-card>
+            </mzd-timeline-content>
+        </mzd-timeline>
+      </div>
+    </div>
+</div>
+<div style="z-index:5; position : fixed;display : flex; 
+align-self : flex-end; top : 5%; right: 5%; margin-bottom : 0px;">
+  <a (click)="moveToHome()">
+    <p class="details">&#8668;Back</p>
+  </a> 
+</div>
+<div style="z-index:5; position : fixed;display : flex; 
+align-self : flex-end; bottom: 2%; left: 3%; margin-bottom : 0px;">
+  <ng-lottie width="90px" height="90px" [options]="arrowDownOptions"></ng-lottie>
+</div>

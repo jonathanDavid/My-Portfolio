@@ -1,6 +1,6 @@
 <div class="section text-justify" ngsReveal>            
     <div class="row">
-        <div class="col-10">
+        <div class="col">
             <div class="row">
                 <div class="col text-justify">
                     <p class="title">Ab<span class="color-secondary">out</span></p>
@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-7 text-justify" [ngsRevealSet]="{reset:true}" [ngsInterval]="300" [ngsSelector]="'.item-text'">                            
                     <p class="paragraph-white mt-5 item-text">
-                        I come from a remote town near the capital of  La Guajira a Colombia´s department. Through my effort and some luck I was able to obtain a scholarship to study at the university in the city of Barranquilla where I currently live.
+                        I come from a remote town near the capital of  La Guajira - Colombia. Through my effort and some luck I was able to obtain a scholarship to study at the university in the city of Barranquilla where I currently live.
                     </p>
                     <p class="paragraph-white mt-5 item-text">
                         My profecional path started as an intern before finishing my studies. Throughout my career I have had the opportunity to work with companies of different kinds, which has allowed me to develop skills in the frontend and backend fields.
@@ -89,12 +89,11 @@
                 </div>
             </div>               
         </div>
-        <div class="col-2">
-            <div class="row justify-content-end">
-                <a href="#">
-                    <p class="details">Know more &#8669;</p>
-                </a> 
-            </div>               
-        </div>
-    </div>   
+    </div>
+    <div style="z-index:5; position : fixed;display : flex; 
+    align-self : flex-end; top : 5%; right: 5%; margin-bottom : 0px;">
+        <a (click)="moveToTimeline()">
+            <p class="details">Know more &#8669;</p>
+        </a> 
+    </div>    
 </div>  

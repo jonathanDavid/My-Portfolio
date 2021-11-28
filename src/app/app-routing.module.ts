@@ -3,14 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { WelcomeComponent } from '@components/welcome/welcome.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { TimelineComponent } from '@components/timeline/timeline.component';
 
 const routes: Routes = [
   { path: '',  component:  WelcomeComponent },
-  { path: 'login',  component:  WelcomeComponent },
-  { path: 'sign-in',  component:  WelcomeComponent},
-  { path: 'forgot-password',  component:  WelcomeComponent},
-  { path: 'reset-password',  component:  WelcomeComponent},
+  { path: 'timeline',  component:  TimelineComponent},
   { path: '**', redirectTo: 'dashboard' }
 ];
 
