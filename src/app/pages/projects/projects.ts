@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProjectCard } from '../../components/project-card/project-card';
+import { Icon } from '../../components/icon/icon';
+import { RevealDirective } from '../../core/reveal.directive';
 import { SeoService } from '../../core/seo.service';
 import { projects } from '../../data/projects';
+import { breadcrumb } from '../../core/structured-data';
 
 @Component({
   selector: 'app-projects',
-  imports: [ProjectCard],
+  imports: [ProjectCard, Icon, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
@@ -20,6 +23,12 @@ export class Projects {
       description:
         'Shipped production systems and in-progress experiments — from a real-time Smart TV signage platform to serverless AWS backends and ML allocation services.',
       path: 'projects',
+      structuredData: [
+        breadcrumb([
+          { name: 'Home', path: '' },
+          { name: 'Projects', path: 'projects' },
+        ]),
+      ],
     });
   }
 }

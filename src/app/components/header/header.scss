@@ -5,9 +5,10 @@
 }
 
 .site-header {
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .bar {
@@ -26,17 +27,26 @@
 }
 .brand:hover { text-decoration: none; }
 
-.brand__mark {
+/* Avatar brand mark with glowing gradient ring */
+.brand__avatar {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  font-weight: 700;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--brand-gradient);
+  background-size: 200% 200%;
+  animation: gradient-pan 6s ease infinite;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent-3) 45%, transparent);
+}
+.brand__avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #060910;
+  display: block;
 }
 
 .brand__name { font-size: 0.98rem; letter-spacing: -0.01em; }
@@ -44,18 +54,24 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.2rem;
 }
 
 .nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--text-muted);
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.4rem 0.7rem;
   border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
 }
-.nav a:hover { color: var(--text); text-decoration: none; }
+.nav a app-icon { color: var(--accent-3); opacity: 0.85; }
+.nav a:hover { color: var(--text); text-decoration: none; background: color-mix(in srgb, var(--accent-3) 8%, transparent); }
 .nav a.active { color: var(--accent); }
+.nav a.active app-icon { opacity: 1; }
 
 .theme-toggle {
   display: grid;
@@ -68,30 +84,28 @@
   background: var(--surface);
   color: var(--text);
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:hover {
+  border-color: var(--accent-3);
+  color: var(--accent-3);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent-3) 30%, transparent);
+}
 
 .menu-toggle {
   display: none;
-  flex-direction: column;
-  gap: 5px;
+  place-items: center;
   width: 42px;
   height: 38px;
-  padding: 9px 8px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 9px;
+  color: var(--text);
   cursor: pointer;
-}
-.menu-toggle span {
-  height: 2px;
-  border-radius: 2px;
-  background: var(--text);
 }
 
 @media (max-width: 640px) {
-  .menu-toggle { display: flex; }
+  .menu-toggle { display: grid; }
   .nav {
     position: absolute;
     top: 64px;

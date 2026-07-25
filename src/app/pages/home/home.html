@@ -1,27 +1,71 @@
 <!-- Hero -->
 <section class="hero section">
+  <app-starfield />
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow"><app-icon name="sparkles" [size]="15" />{{ site.role }}</p>
+      <h1 class="hero__name">
+        <span class="gradient-text">Jonathan Ilias</span><span class="hero__dot">.</span>
+      </h1>
+      <p class="hero__tagline lead">{{ site.tagline }}</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" routerLink="/projects">
+          View projects <app-icon name="arrow-right" [size]="18" />
+        </a>
+        <a class="btn btn--ghost" routerLink="/experience">
+          <app-icon name="briefcase" [size]="18" /> Experience
+        </a>
+      </div>
+
+      <div class="hero__links">
+        <a href="https://github.com/jonathanDavid" target="_blank" rel="noopener">
+          <app-tech-chip name="GitHub" [size]="16" [bare]="true" /> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/jonathan-ilias" target="_blank" rel="noopener">
+          <app-tech-chip name="LinkedIn" [size]="16" [bare]="true" /> LinkedIn
+        </a>
+        <a [href]="'mailto:' + site.email">
+          <app-icon name="mail" [size]="16" /> {{ site.email }}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__avatar" appReveal="scale">
+      <span class="hero__ring" aria-hidden="true"></span>
+      <span class="hero__halo" aria-hidden="true"></span>
+      <picture>
+        <source srcset="assets/avatar-320.webp" type="image/webp" />
+        <img
+          src="assets/avatar-320.png"
+          alt="Jonathan Ilias avatar"
+          width="240"
+          height="240"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+    </div>
+  </div>
+
+  <!-- Stats -->
   <div class="container">
-    <p class="eyebrow">{{ site.role }}</p>
-    <h1 class="hero__name">
-      Jonathan Ilias<span class="hero__dot">.</span>
-    </h1>
-    <p class="hero__tagline lead">{{ site.tagline }}</p>
-
-    <div class="hero__actions">
-      <a class="btn btn--primary" routerLink="/projects">View projects</a>
+    <div class="stats">
+      @for (s of site.stats; track s.label; let i = $index) {
+        <div class="stat glass" appReveal="up" [revealDelay]="i * 80">
+          <span class="stat__icon"><app-icon [name]="s.icon" [size]="20" /></span>
+          <span class="stat__num" [appCountUp]="s.value" [suffix]="s.suffix">{{ s.value }}{{ s.suffix }}</span>
+          <span class="stat__label">{{ s.label }}</span>
+        </div>
+      }
     </div>
+  </div>
 
-    <div class="hero__links">
-      <a href="https://github.com/jonathanDavid" target="_blank" rel="noopener">GitHub</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://www.linkedin.com/in/jonathan-ilias" target="_blank" rel="noopener">LinkedIn</a>
-      <span aria-hidden="true">·</span>
-      <a [href]="'mailto:' + site.email">{{ site.email }}</a>
-    </div>
-
-    <div class="chip-row hero__stack" aria-label="Core technologies">
+  <!-- Tech marquee-ish logo wall -->
+  <div class="container">
+    <div class="hero__stack" aria-label="Core technologies" appReveal="up">
       @for (t of site.stacks; track t) {
-        <span class="chip">{{ t }}</span>
+        <app-tech-chip [name]="t" />
       }
     </div>
   </div>
@@ -30,17 +74,20 @@
 <!-- Featured projects -->
 <section class="section featured">
   <div class="container">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">Selected work</p>
-        <h2>Featured projects</h2>
+    <div class="section-head" appReveal="up">
+      <div class="section-head__title">
+        <span class="head-icon"><app-icon name="rocket" [size]="20" /></span>
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2>Featured projects</h2>
+        </div>
       </div>
-      <a class="see-all" routerLink="/projects">All projects →</a>
+      <a class="see-all" routerLink="/projects">All projects <app-icon name="arrow-right" [size]="16" /></a>
     </div>
 
     <div class="grid">
-      @for (p of featured; track p.slug) {
-        <app-project-card [project]="p" />
+      @for (p of featured; track p.slug; let i = $index) {
+        <app-project-card [project]="p" appReveal="up" [revealDelay]="i * 90" />
       }
     </div>
   </div>
@@ -49,18 +96,22 @@
 <!-- Condensed experience strip -->
 <section class="section xp-strip">
   <div class="container">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">Career</p>
-        <h2>Where I've worked</h2>
+    <div class="section-head" appReveal="up">
+      <div class="section-head__title">
+        <span class="head-icon"><app-icon name="briefcase" [size]="20" /></span>
+        <div>
+          <p class="eyebrow">Career</p>
+          <h2>Where I've worked</h2>
+        </div>
       </div>
-      <a class="see-all" routerLink="/experience">Full timeline →</a>
+      <a class="see-all" routerLink="/experience">Full timeline <app-icon name="arrow-right" [size]="16" /></a>
     </div>
 
     <ol class="xp-list">
-      @for (r of roles; track r.company) {
-        <li class="xp-item">
+      @for (r of roles; track r.company; let i = $index) {
+        <li class="xp-item" appReveal="left" [revealDelay]="i * 80">
           <div class="xp-item__period">
+            <span class="xp-item__icon"><app-icon [name]="r.icon ?? 'briefcase'" [size]="18" /></span>
             {{ r.period }}
             @if (r.current) { <span class="now">Now</span> }
           </div>

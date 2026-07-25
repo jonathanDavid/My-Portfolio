@@ -1,6 +1,7 @@
 .site-footer {
   border-top: 1px solid var(--border);
-  background: var(--bg-elevated);
+  background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
+  backdrop-filter: blur(8px);
   padding-block: clamp(3rem, 7vw, 5rem) 2rem;
   margin-top: 2rem;
 }
@@ -25,11 +26,15 @@
   font-size: 0.95rem;
 }
 .footer-meta .muted {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+.footer-meta .muted app-icon { color: var(--accent-3); }
 
 .footer-bottom {
   display: flex;
@@ -42,6 +47,12 @@
   font-size: 0.85rem;
   color: var(--text-faint);
 }
+.footer-bottom .muted {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.footer-bottom .muted app-icon { color: var(--accent-3); }
 
 @media (max-width: 720px) {
   .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }

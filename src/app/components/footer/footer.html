@@ -1,28 +1,41 @@
 <footer class="site-footer" id="contact">
   <div class="container">
     <div class="footer-grid">
-      <div>
-        <p class="eyebrow">Get in touch</p>
-        <h2>Let's build something.</h2>
+      <div appReveal="up">
+        <p class="eyebrow"><app-icon name="send" [size]="15" />Get in touch</p>
+        <h2><span class="gradient-text">Let's build something.</span></h2>
         <p class="lead">
           Open to senior full-stack and cloud engineering roles. The fastest way to reach me is email.
         </p>
         <div class="footer-actions">
-          <a class="btn btn--primary" [href]="'mailto:' + site.email">Email me</a>
-          <a class="btn" href="https://www.linkedin.com/in/jonathan-ilias" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn" href="https://github.com/jonathanDavid" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn--primary" [href]="'mailto:' + site.email">
+            <app-icon name="mail" [size]="18" /> Email me
+          </a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/jonathan-ilias" target="_blank" rel="noopener">
+            <app-tech-chip name="LinkedIn" [size]="18" [bare]="true" /> LinkedIn
+          </a>
+          <a class="btn btn--ghost" href="https://github.com/jonathanDavid" target="_blank" rel="noopener">
+            <app-tech-chip name="GitHub" [size]="18" [bare]="true" /> GitHub
+          </a>
         </div>
       </div>
 
-      <div class="footer-meta">
-        <p><span class="muted">Location</span><br />{{ site.location }}</p>
-        <p><span class="muted">Email</span><br /><a [href]="'mailto:' + site.email">{{ site.email }}</a></p>
+      <div class="footer-meta" appReveal="up" [revealDelay]="80">
+        <p>
+          <span class="muted"><app-icon name="map-pin" [size]="14" /> Location</span><br />{{ site.location }}
+        </p>
+        <p>
+          <span class="muted"><app-icon name="mail" [size]="14" /> Email</span><br />
+          <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+        </p>
       </div>
     </div>
 
     <div class="footer-bottom">
       <span>© {{ year }} {{ site.name }}</span>
-      <span class="muted">Built with Angular · statically prerendered</span>
+      <span class="muted">
+        <app-icon name="zap" [size]="13" /> Built with Angular · statically prerendered
+      </span>
     </div>
   </div>
 </footer>

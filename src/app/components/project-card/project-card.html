@@ -1,37 +1,70 @@
-<article class="card project">
-  <div class="project__head">
-    <span class="status" [class.status--wip]="project().status === 'in-progress'">
-      {{ project().status === 'in-progress' ? 'In progress' : 'Shipped' }}
-    </span>
-    <span class="year">{{ project().year }}</span>
-  </div>
+<article class="project-flip" [class.is-case]="project().caseStudy">
+  <div class="flip-inner">
+    <!-- FRONT -->
+    <div class="face front card glass">
+      <div class="project__head">
+        <span class="project__icon"><app-icon [name]="project().icon ?? 'boxes'" [size]="22" /></span>
+        <span class="project__badges">
+          <span class="status" [class.status--wip]="project().status === 'in-progress'">
+            {{ project().status === 'in-progress' ? 'In progress' : 'Shipped' }}
+          </span>
+          <span class="year">{{ project().year }}</span>
+        </span>
+      </div>
 
-  <h3 class="project__title">
-    @if (project().caseStudy) {
-      <a [routerLink]="['/projects', project().slug]">{{ project().title }}</a>
-    } @else {
-      {{ project().title }}
-    }
-  </h3>
+      <h3 class="project__title">
+        @if (project().caseStudy) {
+          <a [routerLink]="['/projects', project().slug]">{{ project().title }}</a>
+        } @else {
+          {{ project().title }}
+        }
+      </h3>
 
-  <p class="project__tagline">{{ project().tagline }}</p>
-  <p class="project__summary">{{ project().summary }}</p>
+      <p class="project__tagline">{{ project().tagline }}</p>
+      <p class="project__summary">{{ project().summary }}</p>
 
-  <div class="chip-row project__tech">
-    @for (t of project().tech; track t) {
-      <span class="chip">{{ t }}</span>
-    }
-  </div>
+      <!-- Links live on the front too, so touch / no-hover users always reach them -->
+      <div class="project__front-links">
+        <div class="chip-row project__tech project__tech--front">
+          @for (t of project().tech.slice(0, 4); track t) {
+            <app-tech-chip [name]="t" />
+          }
+        </div>
+        <span class="flip-hint" aria-hidden="true">
+          <app-icon name="component" [size]="14" /> Hover for stack &amp; links
+        </span>
+      </div>
+    </div>
 
-  <div class="project__links">
-    @if (project().caseStudy) {
-      <a class="link-cta" [routerLink]="['/projects', project().slug]">
-        Read the case study
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    }
-    @for (repo of project().repos ?? []; track repo.href) {
-      <a class="repo" [href]="repo.href" target="_blank" rel="noopener">{{ repo.label }}</a>
-    }
+    <!-- BACK -->
+    <div class="face back card glass">
+      <p class="back__eyebrow"><app-icon name="component" [size]="15" /> Stack &amp; links</p>
+      <div class="chip-row back__tech">
+        @for (t of project().tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="back__links">
+        @if (project().caseStudy) {
+          <a class="link-cta" [routerLink]="['/projects', project().slug]">
+            <app-icon name="arrow-up-right" [size]="16" /> View case study
+          </a>
+        }
+        @for (repo of project().repos ?? []; track repo.href) {
+          <a class="repo" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="14" />{{ repo.label }}
+          </a>
+        }
+        @if (project().link) {
+          <a class="repo" [href]="project().link!.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="14" />{{ project().link!.label }}
+          </a>
+        }
+        @if (!project().caseStudy && !(project().repos?.length) && !project().link) {
+          <span class="repo repo--muted"><app-icon name="git-branch" [size]="14" /> Repo coming soon</span>
+        }
+      </div>
+    </div>
   </div>
 </article>

@@ -1,24 +1,28 @@
 <section class="section">
   <div class="container">
-    <p class="eyebrow">Projects</p>
-    <h1>Things I've built</h1>
-    <p class="lead">
+    <p class="eyebrow" appReveal="up"><app-icon name="boxes" [size]="15" />Projects</p>
+    <h1 appReveal="up"><span class="gradient-text">Things I've built</span></h1>
+    <p class="lead" appReveal="up" [revealDelay]="60">
       Production systems I shipped, and honest work-in-progress I'm building to explore new corners
       of the stack. No dead links — in-progress cards say so.
     </p>
 
-    <h2 class="group-title">Shipped</h2>
+    <h2 class="group-title" appReveal="up">
+      <span class="head-icon"><app-icon name="rocket" [size]="18" /></span> Shipped
+    </h2>
     <div class="grid">
-      @for (p of shipped; track p.slug) {
-        <app-project-card [project]="p" />
+      @for (p of shipped; track p.slug; let i = $index) {
+        <app-project-card [project]="p" appReveal="up" [revealDelay]="i * 80" />
       }
     </div>
 
-    <h2 class="group-title">In progress</h2>
+    <h2 class="group-title" appReveal="up">
+      <span class="head-icon"><app-icon name="sparkles" [size]="18" /></span> In progress
+    </h2>
     <p class="muted group-note">Active experiments — repos go public as they mature.</p>
     <div class="grid">
-      @for (p of inProgress; track p.slug) {
-        <app-project-card [project]="p" />
+      @for (p of inProgress; track p.slug; let i = $index) {
+        <app-project-card [project]="p" appReveal="up" [revealDelay]="i * 70" />
       }
     </div>
   </div>

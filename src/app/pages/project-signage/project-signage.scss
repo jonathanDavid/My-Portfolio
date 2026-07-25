@@ -1,13 +1,22 @@
 .narrow { max-width: 760px; }
 
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
 .case-hero { padding-top: clamp(2rem, 5vw, 3.5rem); }
 .back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: var(--mono);
   font-size: 0.82rem;
   color: var(--text-muted);
   margin-bottom: 1.4rem;
 }
+.back app-icon.flip { transform: rotate(180deg); }
 .back:hover { color: var(--accent); text-decoration: none; }
 
 .case-tech { margin: 1.4rem 0; }
@@ -19,14 +28,18 @@
 }
 
 /* Architecture diagram */
-.arch { background: var(--bg-elevated); border-block: 1px solid var(--border); }
+.arch {
+  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+  border-block: 1px solid var(--border);
+}
 
 .diagram-wrap {
   margin: 2rem 0;
   overflow-x: auto;
-  border: 1px solid var(--border);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  background: var(--surface);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
   padding: 1rem;
 }
 .diagram {
@@ -47,7 +60,7 @@
 .d-infra-label { font-size: 13px; fill: var(--text-faint); }
 .d-core {
   fill: color-mix(in srgb, var(--accent) 16%, var(--surface));
-  stroke: var(--accent);
+  stroke: var(--accent-3);
   stroke-width: 1.5;
 }
 .d-core-title { font-size: 18px; font-weight: 700; fill: var(--text); text-anchor: middle; }
@@ -58,15 +71,26 @@
 .d-db { fill: var(--surface-2); stroke: var(--border); }
 .d-db-title { font-size: 14px; font-weight: 700; fill: var(--text); text-anchor: middle; }
 .d-db-sub { font-size: 11px; text-anchor: middle; }
-.d-link { stroke: var(--accent); stroke-width: 2; }
+.d-link { stroke: var(--accent-3); stroke-width: 2; }
 .d-link--db { stroke: var(--border); stroke-dasharray: 4 4; }
-.d-edge { font-size: 11px; fill: var(--accent); }
+.d-edge { font-size: 11px; fill: var(--accent-3); }
 
 .surfaces {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin-top: 1.5rem;
+}
+.surface__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  color: var(--accent-3);
+  background: color-mix(in srgb, var(--accent-3) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-3) 26%, var(--border));
+  margin-bottom: 0.7rem;
 }
 .surface h3 { color: var(--accent); font-size: 1rem; margin-bottom: 0.4rem; }
 .surface p { font-size: 0.9rem; margin: 0; }
@@ -97,10 +121,18 @@
   border-top: 1px solid var(--border);
 }
 .decision:first-of-type { border-top: 0; }
-.decision h3 { color: var(--accent); margin-bottom: 0.5rem; }
+.decision h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.decision h3 app-icon { color: var(--accent-3); }
 .decision p { margin: 0; color: var(--text-muted); }
 
 .case-cta { text-align: center; }
+.case-cta h2 { justify-content: center; }
 .case-cta .repo-links { justify-content: center; margin-top: 1.2rem; }
 
 @media (max-width: 640px) {

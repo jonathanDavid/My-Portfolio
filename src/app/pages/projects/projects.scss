@@ -5,6 +5,9 @@
 }
 
 .group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   margin-top: 3rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border);

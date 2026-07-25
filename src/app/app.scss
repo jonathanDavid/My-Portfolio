@@ -21,3 +21,65 @@ main {
   transition: top 0.2s ease;
 }
 .skip-link:focus { top: 0.75rem; text-decoration: none; }
+
+/* ---------- Animated cyber background ---------- */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 700px at 50% -10%, color-mix(in srgb, var(--accent-3) 10%, transparent), transparent 60%),
+    var(--bg);
+}
+
+/* Dot-matrix grid */
+.bg-fx__grid {
+  position: absolute;
+  inset: -2px;
+  background-image:
+    radial-gradient(circle at center, color-mix(in srgb, var(--accent-3) 22%, transparent) 1px, transparent 1.4px);
+  background-size: 34px 34px;
+  opacity: 0.34;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 72%);
+}
+:root[data-theme='light'] .bg-fx__grid { opacity: 0.5; }
+
+/* Drifting aurora blobs */
+.bg-fx__aurora {
+  position: absolute;
+  width: 46vw;
+  height: 46vw;
+  max-width: 640px;
+  max-height: 640px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+  animation: aurora-drift 22s ease-in-out infinite;
+}
+.bg-fx__aurora--a {
+  top: -8%;
+  left: -6%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 55%, transparent), transparent 70%);
+}
+.bg-fx__aurora--b {
+  top: 12%;
+  right: -10%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 50%, transparent), transparent 70%);
+  animation-duration: 28s;
+  animation-direction: reverse;
+}
+.bg-fx__aurora--c {
+  bottom: -14%;
+  left: 30%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-3) 42%, transparent), transparent 70%);
+  animation-duration: 34s;
+}
+:root[data-theme='light'] .bg-fx__aurora { opacity: 0.28; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-fx__aurora { animation: none; }
+}
