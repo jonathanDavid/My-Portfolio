@@ -8,7 +8,8 @@ h2 {
 
 .case-hero { padding-top: clamp(2rem, 5vw, 3.5rem); }
 .back {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 0.4rem;
   font-family: var(--mono);
