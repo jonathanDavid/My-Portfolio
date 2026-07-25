@@ -1,3 +1,5 @@
+import type { IconName } from '../components/icon/icon-registry';
+
 export interface Role {
   company: string;
   title: string;
@@ -7,6 +9,8 @@ export interface Role {
   summary: string;
   highlights: string[];
   tech: string[];
+  /** Surface icon for the role. */
+  icon?: IconName;
 }
 
 export const experience: Role[] = [
@@ -15,6 +19,7 @@ export const experience: Role[] = [
     title: 'Full Stack Developer',
     period: 'Oct 2022 — Present',
     current: true,
+    icon: 'tv',
     summary:
       'Owned the Digital Signage Platform — three client surfaces plus the cloud infrastructure behind them.',
     highlights: [
@@ -38,6 +43,7 @@ export const experience: Role[] = [
     company: 'Omnix IA',
     title: 'Back End Developer',
     period: 'Apr 2021 — Oct 2022',
+    icon: 'cloud',
     summary:
       'Shipped serverless retail backends for enterprise customers across Chile and Peru.',
     highlights: [
@@ -51,6 +57,7 @@ export const experience: Role[] = [
     company: 'Xpectrum',
     title: 'Back End Developer',
     period: 'Jan 2019 — Apr 2021',
+    icon: 'terminal',
     summary:
       'Started as an intern on the Omnix product and grew into a full-time backend engineer.',
     highlights: [

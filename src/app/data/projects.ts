@@ -1,6 +1,10 @@
+import type { IconName } from '../components/icon/icon-registry';
+
 export interface RepoLink {
   label: string;
   href: string;
+  /** Surface icon for the repo. */
+  icon?: IconName;
 }
 
 export interface Project {
@@ -19,6 +23,8 @@ export interface Project {
   repos?: RepoLink[];
   /** External demo/live link, if any. */
   link?: RepoLink;
+  /** Representative UI icon for the project card. */
+  icon?: IconName;
 }
 
 export const projects: Project[] = [
@@ -42,11 +48,12 @@ export const projects: Project[] = [
     featured: true,
     caseStudy: true,
     year: '2022–2025',
+    icon: 'tv',
     repos: [
-      { label: 'signage-web', href: 'https://github.com/jonathanDavid/signage-web' },
-      { label: 'signage-api', href: 'https://github.com/jonathanDavid/signage-api' },
-      { label: 'signage-tv', href: 'https://github.com/jonathanDavid/signage-tv' },
-      { label: 'signage-infra', href: 'https://github.com/jonathanDavid/signage-infra' },
+      { label: 'signage-web', href: 'https://github.com/jonathanDavid/signage-web', icon: 'panels' },
+      { label: 'signage-api', href: 'https://github.com/jonathanDavid/signage-api', icon: 'server' },
+      { label: 'signage-tv', href: 'https://github.com/jonathanDavid/signage-tv', icon: 'tv' },
+      { label: 'signage-infra', href: 'https://github.com/jonathanDavid/signage-infra', icon: 'cloud' },
     ],
   },
   {
@@ -59,6 +66,7 @@ export const projects: Project[] = [
     status: 'shipped',
     featured: true,
     year: '2021–2022',
+    icon: 'cloud',
   },
   {
     slug: 'ga-allocation-services',
@@ -70,6 +78,7 @@ export const projects: Project[] = [
     status: 'shipped',
     featured: true,
     year: '2019–2021',
+    icon: 'activity',
   },
   {
     slug: 'live-dashboard-go',
@@ -81,6 +90,7 @@ export const projects: Project[] = [
     status: 'in-progress',
     featured: false,
     year: '2026',
+    icon: 'gauge',
   },
   {
     slug: 'route-graph-neo4j',
@@ -92,6 +102,7 @@ export const projects: Project[] = [
     status: 'in-progress',
     featured: false,
     year: '2026',
+    icon: 'route',
   },
   {
     slug: 'event-driven-pipeline',
@@ -103,6 +114,7 @@ export const projects: Project[] = [
     status: 'in-progress',
     featured: false,
     year: '2026',
+    icon: 'workflow',
   },
   {
     slug: 'ga-visualizer',
@@ -114,6 +126,7 @@ export const projects: Project[] = [
     status: 'in-progress',
     featured: false,
     year: '2026',
+    icon: 'sparkles',
   },
   {
     slug: 'road-trip-agent',
@@ -125,6 +138,7 @@ export const projects: Project[] = [
     status: 'in-progress',
     featured: false,
     year: '2026',
+    icon: 'bot',
   },
 ];
 

@@ -1,7 +1,16 @@
+import type { IconName } from '../components/icon/icon-registry';
+
 export interface SocialLink {
   label: string;
   href: string;
   kind: 'github' | 'linkedin' | 'email';
+}
+
+export interface Stat {
+  value: number;
+  suffix: string;
+  label: string;
+  icon: IconName;
 }
 
 export const site = {
@@ -16,6 +25,13 @@ export const site = {
     'I build scalable SaaS products and cloud-native platforms — from Samsung Smart TV apps and real-time WebSocket streaming to serverless AWS backends and Terraform-managed infrastructure.',
   summary:
     '7+ years shipping production software across the stack: TypeScript, Python and Go on the code side; React, Angular and NestJS on the app side; AWS, Azure, Terraform, Docker and Kubernetes on the platform side.',
+  /** Grounded in the experience highlights — shown as animated counters. */
+  stats: [
+    { value: 7, suffix: '+', label: 'Years shipping', icon: 'calendar' },
+    { value: 100, suffix: '+', label: 'REST endpoints', icon: 'network' },
+    { value: 20, suffix: '+', label: 'AWS Lambdas', icon: 'zap' },
+    { value: 11, suffix: '+', label: 'Terraform modules', icon: 'cloud' },
+  ] as Stat[],
   social: [
     { label: 'GitHub', href: 'https://github.com/jonathanDavid', kind: 'github' },
     {
