@@ -1,7 +1,7 @@
 export interface SocialLink {
   label: string;
   href: string;
-  kind: 'github' | 'linkedin' | 'email' | 'cv';
+  kind: 'github' | 'linkedin' | 'email';
 }
 
 export const site = {
@@ -25,8 +25,6 @@ export const site = {
     },
     { label: 'Email', href: 'mailto:jdavid.ilias@gmail.com', kind: 'email' },
   ] as SocialLink[],
-  /** Résumé lives in assets so the link never dies. */
-  cvHref: 'assets/jonathan-ilias-cv.pdf',
   stacks: [
     'TypeScript',
     'JavaScript',

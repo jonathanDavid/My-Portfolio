@@ -53,10 +53,4 @@ export const timeline: TimelineEntry[] = [
     content:
       'Owned a four-surface Smart TV signage platform end to end — Tizen/SSSP players, WebSocket streaming, a NestJS API and Terraform-managed AWS/Azure infrastructure.',
   },
-  {
-    year: '2025',
-    title: 'Senior Full Stack at Stefanini',
-    content:
-      'Joined Stefanini building multi-cloud enterprise platforms and contributing to cloud-architecture decisions.',
-  },
 ];

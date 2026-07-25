@@ -11,20 +11,6 @@ export interface Role {
 
 export const experience: Role[] = [
   {
-    company: 'Stefanini',
-    title: 'Full Stack Developer',
-    period: 'Nov 2025 — Present',
-    current: true,
-    summary:
-      'Building and operating internal enterprise platforms across a multi-cloud footprint.',
-    highlights: [
-      'Designed and delivered 5+ microservices and REST APIs serving thousands of requests per day.',
-      'Provisioned multi-cloud infrastructure on AWS and Azure with 11+ reusable Terraform modules.',
-      'Automated build and deploy with Kubernetes, Docker Compose, GitHub Actions and Azure DevOps.',
-    ],
-    tech: ['TypeScript', 'Node.js', 'AWS', 'Azure', 'Terraform', 'Kubernetes', 'Docker'],
-  },
-  {
     company: 'UDT / Havrion',
     title: 'Full Stack Developer',
     period: 'Oct 2022 — Nov 2025',

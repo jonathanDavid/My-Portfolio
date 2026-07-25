@@ -19,7 +19,7 @@ export class Experience {
     inject(SeoService).update({
       title: 'Experience',
       description:
-        '7+ years across Stefanini, UDT/Havrion, Omnix IA and Xpectrum — Smart TV apps, real-time streaming, serverless AWS backends, Terraform infrastructure and ML services.',
+        '7+ years across UDT/Havrion, Omnix IA and Xpectrum — Smart TV apps, real-time streaming, serverless AWS backends, Terraform infrastructure and ML services.',
       path: 'experience',
     });
   }
