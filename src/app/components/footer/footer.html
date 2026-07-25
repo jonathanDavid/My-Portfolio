@@ -1,0 +1,28 @@
+<footer class="site-footer" id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="eyebrow">Get in touch</p>
+        <h2>Let's build something.</h2>
+        <p class="lead">
+          Open to senior full-stack and cloud engineering roles. The fastest way to reach me is email.
+        </p>
+        <div class="footer-actions">
+          <a class="btn btn--primary" [href]="'mailto:' + site.email">Email me</a>
+          <a class="btn" href="https://www.linkedin.com/in/jonathan-ilias" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/jonathanDavid" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="footer-meta">
+        <p><span class="muted">Location</span><br />{{ site.location }}</p>
+        <p><span class="muted">Email</span><br /><a [href]="'mailto:' + site.email">{{ site.email }}</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ year }} {{ site.name }}</span>
+      <span class="muted">Built with Angular · statically prerendered</span>
+    </div>
+  </div>
+</footer>

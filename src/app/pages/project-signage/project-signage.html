@@ -1,0 +1,194 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects">← All projects</a>
+      <p class="eyebrow">Flagship case study · {{ project.year }}</p>
+      <h1>Digital Signage Platform</h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <span class="chip">{{ t }}</span>
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn" [href]="repo.href" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+            {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow">
+      <h2>The problem</h2>
+      <p>
+        Retail and enterprise venues need to drive content on fleets of Smart TVs — menu boards,
+        promotions, live spotlights — and change it <em>now</em>, from a browser, without walking to
+        each screen. Off-the-shelf signage was either a closed appliance or a heavy CMS that couldn't
+        target Samsung's Tizen/SSSP hardware or push updates in real time.
+      </p>
+      <p>
+        The goal: a platform where an operator edits a screen in a web console and every TV reflects
+        the change within seconds — reliable enough to run unattended for weeks, and cheap enough to
+        scale across many venues.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container">
+      <h2>Architecture — three surfaces + infrastructure</h2>
+      <p class="lead">
+        Four repositories, one contract. A control plane, an API, an on-device player and the cloud
+        that runs them — the API is the single source of truth and the WebSocket hub that keeps every
+        surface in sync.
+      </p>
+
+      <div class="diagram-wrap" role="img"
+        aria-label="Architecture: signage-web control plane and signage-tv player both connect over WebSockets and REST to the signage-api NestJS service backed by Prisma and PostgreSQL, all running on AWS ECS provisioned by signage-infra Terraform.">
+        <svg class="diagram" viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg">
+          <!-- infra boundary -->
+          <rect class="d-infra" x="12" y="86" width="796" height="330" rx="16" />
+          <text class="d-infra-label" x="30" y="112">signage-infra · Terraform → AWS ECS · VPC · RDS</text>
+
+          <!-- API core -->
+          <rect class="d-core" x="300" y="188" width="220" height="120" rx="12" />
+          <text class="d-core-title" x="410" y="222">signage-api</text>
+          <text class="d-core-sub" x="410" y="248">NestJS · REST + WebSocket gateway</text>
+          <text class="d-core-sub" x="410" y="270">Prisma ORM</text>
+
+          <!-- DB -->
+          <rect class="d-db" x="338" y="336" width="144" height="56" rx="10" />
+          <text class="d-db-title" x="410" y="362">PostgreSQL</text>
+          <text class="d-db-sub" x="410" y="380">screens · media · state</text>
+
+          <!-- Web -->
+          <rect class="d-surface" x="40" y="150" width="200" height="96" rx="12" />
+          <text class="d-s-title" x="140" y="182">signage-web</text>
+          <text class="d-s-sub" x="140" y="206">React control plane</text>
+          <text class="d-s-sub" x="140" y="226">editor · scheduling</text>
+
+          <!-- TV -->
+          <rect class="d-surface" x="580" y="150" width="200" height="96" rx="12" />
+          <text class="d-s-title" x="680" y="182">signage-tv</text>
+          <text class="d-s-sub" x="680" y="206">Tizen / SSSP player</text>
+          <text class="d-s-sub" x="680" y="226">React on-device</text>
+
+          <!-- connectors -->
+          <line class="d-link" x1="240" y1="198" x2="300" y2="220" />
+          <line class="d-link" x1="580" y1="198" x2="520" y2="220" />
+          <line class="d-link d-link--db" x1="410" y1="308" x2="410" y2="336" />
+
+          <text class="d-edge" x="248" y="182">WS + REST</text>
+          <text class="d-edge" x="512" y="182" text-anchor="end">WS + REST</text>
+        </svg>
+      </div>
+
+      <div class="surfaces">
+        <div class="card surface">
+          <h3>signage-web</h3>
+          <p class="muted">React control plane — a drag-friendly editor for screens, playlists and scheduling. Operators publish; the API broadcasts.</p>
+        </div>
+        <div class="card surface">
+          <h3>signage-api</h3>
+          <p class="muted">NestJS service with a WebSocket gateway and Prisma over PostgreSQL. The single source of truth and the real-time hub.</p>
+        </div>
+        <div class="card surface">
+          <h3>signage-tv</h3>
+          <p class="muted">On-device player for Samsung Tizen / SSSP. Subscribes over WebSockets, renders content and reports playback state.</p>
+        </div>
+        <div class="card surface">
+          <h3>signage-infra</h3>
+          <p class="muted">Terraform modules provisioning the AWS footprint — ECS services, networking and the managed database.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="section shots">
+    <div class="container">
+      <h2>Inside the product</h2>
+      <figure class="shot">
+        <img src="assets/screenshots/editor.png" alt="Web control-plane editor arranging screen content" loading="lazy" width="1600" height="900" />
+        <figcaption>The web control plane — composing a screen layout that publishes to every TV.</figcaption>
+      </figure>
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="assets/screenshots/tv-spotlight.png" alt="Smart TV player rendering a spotlight layout" loading="lazy" width="1280" height="720" />
+          <figcaption>On-device Tizen player rendering a live spotlight layout.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/web-screens.png" alt="Web console listing managed screens" loading="lazy" width="1280" height="720" />
+          <figcaption>Managing a fleet of screens from the web console.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2>Decisions &amp; trade-offs</h2>
+
+      <div class="decision">
+        <h3>WebSockets over polling</h3>
+        <p>
+          Menu changes and live spotlights must land in seconds, so the API pushes over a WebSocket
+          gateway instead of TVs polling REST. Players hold a persistent connection and reconcile
+          against REST on reconnect — the trade-off is connection state to manage (heartbeats,
+          back-off reconnect), which is worth it for latency and server load on large fleets.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>One API as the source of truth</h3>
+        <p>
+          Web and TV are deliberately thin. All screen, media and schedule state lives behind the
+          NestJS API with Prisma, so the browser editor and the on-device player can never disagree
+          about what should be on screen — the API decides and broadcasts.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>Tizen / SSSP as a first-class target</h3>
+        <p>
+          Building the player as a React app packaged for Samsung SSSP meant designing for constrained
+          device memory and long uptimes rather than a desktop browser. Streaming media over
+          WebSockets from the SSSP surface measurably improved live-video performance versus the
+          legacy approach.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>Infrastructure as code from day one</h3>
+        <p>
+          The whole footprint — ECS services, networking, database — is Terraform, so a new
+          environment is a plan/apply rather than console clicking. That discipline paid off as the
+          platform grew across venues.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow">
+      <h2>Explore the code</h2>
+      <p class="muted">All four repositories are public.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">{{ repo.label }}</a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

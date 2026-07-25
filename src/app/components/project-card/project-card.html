@@ -1,0 +1,37 @@
+<article class="card project">
+  <div class="project__head">
+    <span class="status" [class.status--wip]="project().status === 'in-progress'">
+      {{ project().status === 'in-progress' ? 'In progress' : 'Shipped' }}
+    </span>
+    <span class="year">{{ project().year }}</span>
+  </div>
+
+  <h3 class="project__title">
+    @if (project().caseStudy) {
+      <a [routerLink]="['/projects', project().slug]">{{ project().title }}</a>
+    } @else {
+      {{ project().title }}
+    }
+  </h3>
+
+  <p class="project__tagline">{{ project().tagline }}</p>
+  <p class="project__summary">{{ project().summary }}</p>
+
+  <div class="chip-row project__tech">
+    @for (t of project().tech; track t) {
+      <span class="chip">{{ t }}</span>
+    }
+  </div>
+
+  <div class="project__links">
+    @if (project().caseStudy) {
+      <a class="link-cta" [routerLink]="['/projects', project().slug]">
+        Read the case study
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    }
+    @for (repo of project().repos ?? []; track repo.href) {
+      <a class="repo" [href]="repo.href" target="_blank" rel="noopener">{{ repo.label }}</a>
+    }
+  </div>
+</article>

@@ -1,0 +1,64 @@
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Experience</p>
+    <h1>7+ years, shipping across the stack</h1>
+    <p class="lead">
+      From intern to senior engineer — building Smart TV apps, real-time streaming, serverless
+      backends and the cloud infrastructure underneath them.
+    </p>
+    <a class="btn" [href]="site.cvHref" target="_blank" rel="noopener">Download full CV</a>
+  </div>
+</section>
+
+<!-- Roles -->
+<section class="section roles">
+  <div class="container">
+    <ol class="role-list">
+      @for (r of roles; track r.company) {
+        <li class="role">
+          <div class="role__meta">
+            <span class="role__period">{{ r.period }}</span>
+            @if (r.current) { <span class="now">Current</span> }
+          </div>
+          <div class="role__body">
+            <h2 class="role__title">{{ r.title }}</h2>
+            <p class="role__company">{{ r.company }}</p>
+            <p class="role__summary muted">{{ r.summary }}</p>
+            <ul class="role__highlights">
+              @for (h of r.highlights; track h) {
+                <li>{{ h }}</li>
+              }
+            </ul>
+            <div class="chip-row role__tech">
+              @for (t of r.tech; track t) {
+                <span class="chip">{{ t }}</span>
+              }
+            </div>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- Personal timeline -->
+<section class="section story">
+  <div class="container">
+    <p class="eyebrow">The story</p>
+    <h2>How I got here</h2>
+    <ol class="timeline">
+      @for (t of timeline; track t.year + t.title) {
+        <li class="tl-item">
+          <div class="tl-year">{{ t.year }}</div>
+          <div class="tl-content">
+            <h3>{{ t.title }}</h3>
+            <p class="muted">{{ t.content }}</p>
+            @if (t.link) {
+              <a [href]="t.link.href" target="_blank" rel="noopener">{{ t.link.label }} ↗</a>
+            }
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

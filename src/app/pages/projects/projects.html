@@ -1,0 +1,25 @@
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Projects</p>
+    <h1>Things I've built</h1>
+    <p class="lead">
+      Production systems I shipped, and honest work-in-progress I'm building to explore new corners
+      of the stack. No dead links — in-progress cards say so.
+    </p>
+
+    <h2 class="group-title">Shipped</h2>
+    <div class="grid">
+      @for (p of shipped; track p.slug) {
+        <app-project-card [project]="p" />
+      }
+    </div>
+
+    <h2 class="group-title">In progress</h2>
+    <p class="muted group-note">Active experiments — repos go public as they mature.</p>
+    <div class="grid">
+      @for (p of inProgress; track p.slug) {
+        <app-project-card [project]="p" />
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+<!-- Hero -->
+<section class="hero section">
+  <div class="container">
+    <p class="eyebrow">{{ site.role }}</p>
+    <h1 class="hero__name">
+      Jonathan Ilias<span class="hero__dot">.</span>
+    </h1>
+    <p class="hero__tagline lead">{{ site.tagline }}</p>
+
+    <div class="hero__actions">
+      <a class="btn btn--primary" routerLink="/projects">View projects</a>
+      <a class="btn" [href]="site.cvHref" target="_blank" rel="noopener">Download CV</a>
+    </div>
+
+    <div class="hero__links">
+      <a href="https://github.com/jonathanDavid" target="_blank" rel="noopener">GitHub</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://www.linkedin.com/in/jonathan-ilias" target="_blank" rel="noopener">LinkedIn</a>
+      <span aria-hidden="true">·</span>
+      <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+    </div>
+
+    <div class="chip-row hero__stack" aria-label="Core technologies">
+      @for (t of site.stacks; track t) {
+        <span class="chip">{{ t }}</span>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Featured projects -->
+<section class="section featured">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h2>Featured projects</h2>
+      </div>
+      <a class="see-all" routerLink="/projects">All projects →</a>
+    </div>
+
+    <div class="grid">
+      @for (p of featured; track p.slug) {
+        <app-project-card [project]="p" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Condensed experience strip -->
+<section class="section xp-strip">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Career</p>
+        <h2>Where I've worked</h2>
+      </div>
+      <a class="see-all" routerLink="/experience">Full timeline →</a>
+    </div>
+
+    <ol class="xp-list">
+      @for (r of roles; track r.company) {
+        <li class="xp-item">
+          <div class="xp-item__period">
+            {{ r.period }}
+            @if (r.current) { <span class="now">Now</span> }
+          </div>
+          <div class="xp-item__body">
+            <h3>{{ r.title }} · <span class="company">{{ r.company }}</span></h3>
+            <p class="muted">{{ r.summary }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

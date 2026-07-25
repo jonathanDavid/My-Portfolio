@@ -1,0 +1,92 @@
+.roles { background: var(--bg-elevated); border-block: 1px solid var(--border); }
+
+.role-list { list-style: none; margin: 0; padding: 0; }
+
+.role {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  padding: 2.2rem 0;
+  border-top: 1px solid var(--border);
+}
+.role:first-child { border-top: 0; }
+
+.role__meta { padding-top: 0.4rem; }
+.role__period {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+.now {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 0.12rem 0.55rem;
+}
+
+.role__title { font-size: 1.35rem; margin-bottom: 0.2rem; }
+.role__company { color: var(--accent); font-weight: 600; margin-bottom: 0.6rem; }
+.role__summary { margin-bottom: 0.9rem; }
+
+.role__highlights {
+  margin: 0 0 1.1rem;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+.role__highlights li { color: var(--text); }
+.role__highlights li::marker { color: var(--accent); }
+
+/* Personal timeline */
+.timeline {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  padding: 0 0 1.8rem 2rem;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.tl-year {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  padding-top: 0.15rem;
+}
+.tl-content h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.tl-content a { font-size: 0.85rem; font-weight: 600; }
+
+@media (max-width: 680px) {
+  .role { grid-template-columns: 1fr; gap: 0.75rem; }
+  .role__meta { padding-top: 0; }
+  .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
+}
