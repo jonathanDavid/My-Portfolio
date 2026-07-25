@@ -1,0 +1,55 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+.tech {
+  --brand: currentColor;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  padding: 0.28rem 0.62rem 0.28rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tech__logo {
+  display: inline-flex;
+  line-height: 0;
+  color: var(--brand);
+}
+.tech__svg {
+  display: inline-flex;
+  line-height: 0;
+}
+/* Injected via innerHTML — not tagged by view encapsulation, so reach it deep */
+::ng-deep .tech__svg svg { display: block; }
+
+.tech:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--brand) 60%, var(--border));
+  color: var(--text);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand) 25%, transparent),
+    0 6px 18px color-mix(in srgb, var(--brand) 22%, transparent);
+}
+
+/* Bare: just the coloured logo, used in dense logo strips */
+.tech--bare {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+.tech--bare:hover {
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: none;
+}
