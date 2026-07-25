@@ -6,23 +6,32 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Jonathan Ilias — Senior Full Stack & Cloud Engineer. 7+ years building scalable SaaS and cloud-native platforms with TypeScript, Angular, NestJS, AWS, Azure and Terraform.">
-  <meta name="theme-color" content="#0b0f12">
+  <meta name="theme-color" content="#070b11" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+  <meta name="color-scheme" content="dark light">
   <meta name="author" content="Jonathan Ilias">
+  <meta name="robots" content="index,follow">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
-  <!-- Set theme before first paint to avoid a flash of the wrong theme -->
+  <!-- Set theme + enable motion before first paint (no FOUC, no reveal flash) -->
   <script>
     (function () {
+      var d = document.documentElement;
       try {
         var t = localStorage.getItem('ji-theme');
         if (t !== 'dark' && t !== 'light') {
           t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         }
-        document.documentElement.setAttribute('data-theme', t);
+        d.setAttribute('data-theme', t);
       } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'dark');
+        d.setAttribute('data-theme', 'dark');
       }
+      try {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('reveal-ready');
+        }
+      } catch (e) {}
     })();
   </script>
 </head>

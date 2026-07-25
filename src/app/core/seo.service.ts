@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 import { site } from '../data/site';
+import { baseGraph } from './structured-data';
 
 export interface SeoData {
   title: string;
@@ -9,6 +10,9 @@ export interface SeoData {
   /** Route path without leading slash, e.g. 'projects'. Empty for home. */
   path?: string;
   image?: string;
+  type?: 'website' | 'profile' | 'article';
+  /** Page-specific JSON-LD nodes, merged into the site @graph. */
+  structuredData?: Record<string, unknown>[];
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,13 +30,17 @@ export class SeoService {
 
     this.title.setTitle(fullTitle);
     this.setMeta('description', data.description);
+    this.setMeta('robots', 'index,follow');
+    this.setMeta('author', site.name);
 
     this.setMeta('og:title', fullTitle, 'property');
     this.setMeta('og:description', data.description, 'property');
-    this.setMeta('og:type', 'website', 'property');
+    this.setMeta('og:type', data.type ?? 'website', 'property');
     this.setMeta('og:url', url, 'property');
     this.setMeta('og:image', image, 'property');
+    this.setMeta('og:image:alt', `${site.name} — ${site.role}`, 'property');
     this.setMeta('og:site_name', site.name, 'property');
+    this.setMeta('og:locale', 'en_US', 'property');
 
     this.setMeta('twitter:card', 'summary_large_image');
     this.setMeta('twitter:title', fullTitle);
@@ -40,6 +48,7 @@ export class SeoService {
     this.setMeta('twitter:image', image);
 
     this.setCanonical(url);
+    this.setJsonLd([...baseGraph(), ...(data.structuredData ?? [])]);
   }
 
   private setMeta(name: string, content: string, attr: 'name' | 'property' = 'name'): void {
@@ -54,5 +63,17 @@ export class SeoService {
       this.doc.head.appendChild(link);
     }
     link.setAttribute('href', url);
+  }
+
+  private setJsonLd(nodes: Record<string, unknown>[]): void {
+    const graph = { '@context': 'https://schema.org', '@graph': nodes };
+    let script = this.doc.getElementById('ld-json') as HTMLScriptElement | null;
+    if (!script) {
+      script = this.doc.createElement('script');
+      script.id = 'ld-json';
+      script.type = 'application/ld+json';
+      this.doc.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(graph);
   }
 }
