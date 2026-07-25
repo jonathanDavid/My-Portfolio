@@ -48,7 +48,7 @@ export const timeline: TimelineEntry[] = [
     link: { label: 'Omnix', href: 'https://omnixcorp.com/' },
   },
   {
-    year: '2022 — 2025',
+    year: '2022 — Present',
     title: 'Digital Signage at UDT / Havrion',
     content:
       'Owned a four-surface Smart TV signage platform end to end — Tizen/SSSP players, WebSocket streaming, a NestJS API and Terraform-managed AWS/Azure infrastructure.',

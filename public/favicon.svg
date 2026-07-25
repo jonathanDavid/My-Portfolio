@@ -1,6 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JI">
-  <rect width="64" height="64" rx="14" fill="#0b0f12"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#2dd4bf" stroke-width="2"/>
-  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle"
-        font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2dd4bf">JI</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0EA5A4"/>
+      <stop offset="1" stop-color="#4338CA"/>
+    </linearGradient>
+  </defs>
+
+  <!-- rounded background -->
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+
+  <!-- headphones band -->
+  <path d="M16 33 a16 16 0 0 1 32 0" fill="none" stroke="#0F172A" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- hair -->
+  <path d="M18 30 a14 12 0 0 1 28 0 v2 h-28 z" fill="#1E293B"/>
+
+  <!-- face -->
+  <rect x="20" y="26" width="24" height="26" rx="11" fill="#F2C9A0"/>
+
+  <!-- ear cups -->
+  <rect x="14" y="30" width="7" height="12" rx="3.5" fill="#0F172A"/>
+  <rect x="43" y="30" width="7" height="12" rx="3.5" fill="#0F172A"/>
+
+  <!-- glasses -->
+  <g fill="#38BDF8" stroke="#0F172A" stroke-width="2.5">
+    <rect x="21.5" y="33" width="9" height="8" rx="2.5"/>
+    <rect x="33.5" y="33" width="9" height="8" rx="2.5"/>
+  </g>
+  <path d="M30.5 37 h3" stroke="#0F172A" stroke-width="2.5"/>
+
+  <!-- smile -->
+  <path d="M28 46 q4 3 8 0" fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- code prompt badge -->
+  <g stroke="#FDE68A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M50 50 l3 3 l-3 3"/>
+  </g>
 </svg>
