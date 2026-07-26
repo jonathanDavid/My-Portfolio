@@ -8,6 +8,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: '', renderMode: RenderMode.Prerender },
   { path: 'projects', renderMode: RenderMode.Prerender },
   { path: 'projects/digital-signage', renderMode: RenderMode.Prerender },
+  { path: 'projects/retail-serverless', renderMode: RenderMode.Prerender },
+  { path: 'projects/ga-allocation-services', renderMode: RenderMode.Prerender },
   { path: 'experience', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Prerender },
 ];

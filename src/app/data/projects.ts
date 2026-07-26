@@ -65,6 +65,7 @@ export const projects: Project[] = [
     tech: ['AWS Lambda', 'API Gateway', 'SQS', 'SNS', 'DynamoDB', 'Terraform', 'esbuild', 'TypeScript'],
     status: 'shipped',
     featured: true,
+    caseStudy: true,
     year: '2021–2022',
     icon: 'cloud',
     repos: [
@@ -82,6 +83,7 @@ export const projects: Project[] = [
     tech: ['FastAPI', 'Python', 'NumPy', 'Genetic Algorithms', 'WebSockets', 'Canvas', 'React'],
     status: 'shipped',
     featured: true,
+    caseStudy: true,
     year: '2019–2021',
     icon: 'activity',
     repos: [

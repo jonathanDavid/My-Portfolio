@@ -18,6 +18,18 @@ export const routes: Routes = [
     title: 'Digital Signage Platform · Jonathan Ilias',
   },
   {
+    path: 'projects/retail-serverless',
+    loadComponent: () =>
+      import('./pages/project-retail/project-retail').then((m) => m.ProjectRetail),
+    title: 'Retail Serverless Backend · Jonathan Ilias',
+  },
+  {
+    path: 'projects/ga-allocation-services',
+    loadComponent: () =>
+      import('./pages/project-genetic/project-genetic').then((m) => m.ProjectGenetic),
+    title: 'Genetic-Algorithm Visualizer · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',

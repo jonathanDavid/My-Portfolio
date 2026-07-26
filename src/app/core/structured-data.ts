@@ -119,3 +119,31 @@ export function signageCreativeWork(
     inLanguage: 'en',
   };
 }
+
+/**
+ * Generic SoftwareSourceCode builder for a case study, used by the retail and
+ * genetic pages so each prerendered page carries a rich project node.
+ */
+export function caseStudyCreativeWork(opts: {
+  slug: string;
+  name: string;
+  headline: string;
+  description: string;
+  languages: string[];
+  tech: string[];
+}): Record<string, unknown> {
+  return {
+    '@type': 'SoftwareSourceCode',
+    '@id': `${BASE}projects/${opts.slug}#project`,
+    name: opts.name,
+    headline: opts.headline,
+    description: opts.description,
+    url: `${BASE}projects/${opts.slug}`,
+    author: { '@id': PERSON_ID },
+    creator: { '@id': PERSON_ID },
+    programmingLanguage: opts.languages,
+    keywords: opts.tech.join(', '),
+    isPartOf: { '@id': SITE_ID },
+    inLanguage: 'en',
+  };
+}
