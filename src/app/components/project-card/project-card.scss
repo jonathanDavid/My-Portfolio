@@ -18,9 +18,10 @@
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* Flip on hover AND focus-within (keyboard users reach the back) */
+/* Flip on hover, focus-within (keyboard) AND tap (:host.is-flipped, touch) */
 .project-flip:hover .flip-inner,
-.project-flip:focus-within .flip-inner {
+.project-flip:focus-within .flip-inner,
+:host(.is-flipped) .flip-inner {
   transform: rotateY(180deg);
 }
 
@@ -63,7 +64,8 @@
   flex: none;
   transition: transform 0.3s ease;
 }
-.project-flip:hover .project__icon { transform: translateY(-2px) scale(1.06) rotate(-4deg); }
+.project-flip:hover .project__icon,
+:host(.is-flipped) .project__icon { transform: translateY(-2px) scale(1.06) rotate(-4deg); }
 .project__badges {
   display: inline-flex;
   align-items: center;
@@ -169,24 +171,20 @@
 .repo--muted { border-bottom: 0; color: var(--text-faint); }
 .repo--muted:hover { color: var(--text-faint); }
 
-/* ---------- Glow on hover/focus ---------- */
+/* ---------- Glow on hover/focus/flip ---------- */
 .project-flip:hover .face,
-.project-flip:focus-within .face {
+.project-flip:focus-within .face,
+:host(.is-flipped) .face {
   border-color: color-mix(in srgb, var(--accent-3) 55%, var(--border));
   box-shadow: var(--shadow), var(--glow);
 }
 
-/* ---------- Touch / no-hover: single non-flipping card, links inline ---------- */
+/* Touch / no-hover: tap toggles the flip (JS sets :host.is-flipped). Only one
+   flip hint variant is shown per input type. */
+.flip-hint__tap { display: none; }
 @media (hover: none) {
-  .project-flip { height: auto; }
-  .flip-inner { display: block; transform: none !important; }
-  .project-flip .face {
-    backface-visibility: visible;
-    -webkit-backface-visibility: visible;
-  }
-  .project-flip .back { transform: none; margin-top: 0.9rem; }
-  /* Back already lists the full stack + links; drop the front's partial row */
-  .project__front-links { display: none; }
+  .flip-hint__hover { display: none; }
+  .flip-hint__tap { display: inline; }
 }
 
 /* ---------- Reduced motion: crossfade instead of rotation ---------- */
@@ -200,8 +198,11 @@
   .project-flip .back { transform: none; opacity: 0; }
   .project-flip .front { opacity: 1; }
   .project-flip:hover .back,
-  .project-flip:focus-within .back { opacity: 1; }
+  .project-flip:focus-within .back,
+  :host(.is-flipped) .back { opacity: 1; }
   .project-flip:hover .front,
-  .project-flip:focus-within .front { opacity: 0; }
-  .project-flip:hover .project__icon { transform: none; }
+  .project-flip:focus-within .front,
+  :host(.is-flipped) .front { opacity: 0; }
+  .project-flip:hover .project__icon,
+  :host(.is-flipped) .project__icon { transform: none; }
 }
