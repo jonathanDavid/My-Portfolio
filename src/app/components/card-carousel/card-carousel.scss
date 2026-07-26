@@ -27,6 +27,34 @@
   display: none;
 }
 
+/* ---------- Desktop (md+): strictly the grid, never the carousel ----------
+   Belt-and-suspenders so no carousel property can ever leak onto desktop:
+   the track stays a multi-column grid, and all carousel affordances (scroll-
+   snap, single-card sizing, scaled neighbours, arrows/dots) are neutralised. */
+@media (min-width: 768px) {
+  .cc__viewport {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .cc__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+  .cc__item {
+    flex: none;
+    scroll-snap-align: none;
+    margin: 0;
+  }
+  .cc__item app-project-card {
+    transform: none;
+    opacity: 1;
+  }
+  .cc__controls {
+    display: none;
+  }
+}
+
 /* ---------- Mobile: swipeable snap carousel ---------- */
 @media (max-width: 767px) {
   .cc__viewport {
@@ -46,13 +74,22 @@
     display: flex;
     grid-template-columns: none;
     gap: 0.75rem;
-    /* let the first and last card center */
-    padding-inline: 9%;
   }
 
   .cc__item {
+    /* active card ~82% of the viewport, a sliver of each neighbour peeking */
     flex: 0 0 82%;
     scroll-snap-align: center;
+  }
+  /* Center via margins on the ends rather than track padding, so the 82%
+     basis is measured against the full viewport (padding would shrink the
+     flex container and squash every card). This restores the peek on BOTH
+     neighbours while still letting the first/last card center. */
+  .cc__item:first-child {
+    margin-inline-start: 9%;
+  }
+  .cc__item:last-child {
+    margin-inline-end: 9%;
   }
   .cc__item app-project-card {
     display: block;
