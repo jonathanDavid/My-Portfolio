@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProjectCard } from '../../components/project-card/project-card';
+import { CardCarousel } from '../../components/card-carousel/card-carousel';
 import { Icon } from '../../components/icon/icon';
 import { TechChip } from '../../components/tech-chip/tech-chip';
 import { Starfield } from '../../components/starfield/starfield';
@@ -16,7 +16,7 @@ import { profilePageNode } from '../../core/structured-data';
   selector: 'app-home',
   imports: [
     RouterLink,
-    ProjectCard,
+    CardCarousel,
     Icon,
     TechChip,
     Starfield,

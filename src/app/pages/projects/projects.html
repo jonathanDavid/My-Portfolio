@@ -10,20 +10,12 @@
     <h2 class="group-title" appReveal="up">
       <span class="head-icon"><app-icon name="rocket" [size]="18" /></span> Shipped
     </h2>
-    <div class="grid">
-      @for (p of shipped; track p.slug; let i = $index) {
-        <app-project-card [project]="p" appReveal="up" [revealDelay]="i * 80" />
-      }
-    </div>
+    <app-card-carousel [projects]="shipped" label="Shipped projects" appReveal="up" />
 
     <h2 class="group-title" appReveal="up">
       <span class="head-icon"><app-icon name="sparkles" [size]="18" /></span> In progress
     </h2>
     <p class="muted group-note">Active experiments — repos go public as they mature.</p>
-    <div class="grid">
-      @for (p of inProgress; track p.slug; let i = $index) {
-        <app-project-card [project]="p" appReveal="up" [revealDelay]="i * 70" />
-      }
-    </div>
+    <app-card-carousel [projects]="inProgress" label="In-progress projects" appReveal="up" />
   </div>
 </section>

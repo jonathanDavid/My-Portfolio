@@ -85,11 +85,7 @@
       <a class="see-all" routerLink="/projects">All projects <app-icon name="arrow-right" [size]="16" /></a>
     </div>
 
-    <div class="grid">
-      @for (p of featured; track p.slug; let i = $index) {
-        <app-project-card [project]="p" appReveal="up" [revealDelay]="i * 90" />
-      }
-    </div>
+    <app-card-carousel [projects]="featured" label="Featured projects" appReveal="up" />
   </div>
 </section>
 

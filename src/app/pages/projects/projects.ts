@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ProjectCard } from '../../components/project-card/project-card';
+import { CardCarousel } from '../../components/card-carousel/card-carousel';
 import { Icon } from '../../components/icon/icon';
 import { RevealDirective } from '../../core/reveal.directive';
 import { SeoService } from '../../core/seo.service';
@@ -8,7 +8,7 @@ import { breadcrumb } from '../../core/structured-data';
 
 @Component({
   selector: 'app-projects',
-  imports: [ProjectCard, Icon, RevealDirective],
+  imports: [CardCarousel, Icon, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
