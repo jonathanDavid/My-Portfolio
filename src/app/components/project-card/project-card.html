@@ -3,7 +3,13 @@
     <!-- FRONT -->
     <div class="face front card glass">
       <div class="project__head">
-        <span class="project__icon"><app-icon [name]="project().icon ?? 'boxes'" [size]="22" /></span>
+        <span class="project__icon" [class.project__icon--app]="project().appIcon">
+          @if (project().appIcon) {
+            <img class="project__app-icon" [src]="project().appIcon" [alt]="project().title + ' app icon'" width="44" height="44" loading="lazy" />
+          } @else {
+            <app-icon [name]="project().icon ?? 'boxes'" [size]="22" />
+          }
+        </span>
         <span class="project__badges">
           <span class="status" [class.status--wip]="project().status === 'in-progress'">
             {{ project().status === 'in-progress' ? 'In progress' : 'Shipped' }}

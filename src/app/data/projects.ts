@@ -23,8 +23,11 @@ export interface Project {
   repos?: RepoLink[];
   /** External demo/live link, if any. */
   link?: RepoLink;
-  /** Representative UI icon for the project card. */
+  /** Representative UI icon for the project card (fallback). */
   icon?: IconName;
+  /** The real web-app's own brand icon (favicon), shown on the card/hero when
+   *  the project has a live app. Path under `public/`. Falls back to `icon`. */
+  appIcon?: string;
 }
 
 export const projects: Project[] = [
@@ -49,6 +52,7 @@ export const projects: Project[] = [
     caseStudy: true,
     year: '2022–2025',
     icon: 'tv',
+    appIcon: 'assets/app-icons/signage.svg',
     repos: [
       { label: 'signage-web', href: 'https://github.com/jonathanDavid/signage-web', icon: 'panels' },
       { label: 'signage-api', href: 'https://github.com/jonathanDavid/signage-api', icon: 'server' },
@@ -68,6 +72,7 @@ export const projects: Project[] = [
     caseStudy: true,
     year: '2021–2022',
     icon: 'cloud',
+    appIcon: 'assets/app-icons/retail.svg',
     repos: [
       { label: 'retail-serverless-web', href: 'https://github.com/jonathanDavid/retail-serverless-web', icon: 'gauge' },
       { label: 'retail-serverless-api', href: 'https://github.com/jonathanDavid/retail-serverless-api', icon: 'server' },
@@ -86,6 +91,7 @@ export const projects: Project[] = [
     caseStudy: true,
     year: '2019–2021',
     icon: 'activity',
+    appIcon: 'assets/app-icons/genetic.svg',
     repos: [
       { label: 'genetic-visualizer-api', href: 'https://github.com/jonathanDavid/genetic-visualizer-api', icon: 'server' },
       { label: 'genetic-visualizer-web', href: 'https://github.com/jonathanDavid/genetic-visualizer-web', icon: 'sparkles' },

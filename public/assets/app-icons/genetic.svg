@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Genetic Visualizer">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9085e9"/>
+      <stop offset="1" stop-color="#199e70"/>
+    </linearGradient>
+    <linearGradient id="strand" x1="8" y1="4" x2="24" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f4f6fb"/>
+      <stop offset="1" stop-color="#d6f5e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#bg)"/>
+  <g stroke="url(#strand)" stroke-width="2.1" stroke-linecap="round" fill="none">
+    <!-- two intertwined helix strands -->
+    <path d="M11 5 C 21 9, 21 14, 11 16 C 21 18, 21 23, 11 27"/>
+    <path d="M21 5 C 11 9, 11 14, 21 16 C 11 18, 11 23, 21 27"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.85">
+    <!-- base-pair rungs -->
+    <line x1="12.5" y1="8" x2="19.5" y2="8"/>
+    <line x1="13.2" y1="12.4" x2="18.8" y2="12.4"/>
+    <line x1="13.2" y1="19.6" x2="18.8" y2="19.6"/>
+    <line x1="12.5" y1="24" x2="19.5" y2="24"/>
+  </g>
+</svg>

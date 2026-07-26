@@ -88,6 +88,20 @@
   flex: none;
   transition: transform 0.3s ease;
 }
+/* When the card shows the real web-app's own favicon, drop the accent box so
+   the icon's own rounded-square background becomes the badge. */
+.project__icon--app {
+  background: none;
+  border-color: transparent;
+  overflow: hidden;
+  padding: 0;
+}
+.project__app-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  display: block;
+}
 .project-flip:hover .project__icon,
 :host(.is-flipped) .project__icon { transform: translateY(-2px) scale(1.06) rotate(-4deg); }
 .project__badges {
