@@ -195,14 +195,17 @@
     -webkit-backface-visibility: visible;
     transition: opacity 0.25s ease;
   }
-  .project-flip .back { transform: none; opacity: 0; }
-  .project-flip .front { opacity: 1; }
+  /* Crossfade in place. The hidden face is also made non-interactive so it
+     cannot intercept taps/links from the visible face (with backface-visibility
+     restored to `visible` both faces overlap the same grid cell). */
+  .project-flip .back { transform: none; opacity: 0; pointer-events: none; }
+  .project-flip .front { opacity: 1; pointer-events: auto; }
   .project-flip:hover .back,
   .project-flip:focus-within .back,
-  :host(.is-flipped) .back { opacity: 1; }
+  :host(.is-flipped) .back { opacity: 1; pointer-events: auto; }
   .project-flip:hover .front,
   .project-flip:focus-within .front,
-  :host(.is-flipped) .front { opacity: 0; }
+  :host(.is-flipped) .front { opacity: 0; pointer-events: none; }
   .project-flip:hover .project__icon,
   :host(.is-flipped) .project__icon { transform: none; }
 }
