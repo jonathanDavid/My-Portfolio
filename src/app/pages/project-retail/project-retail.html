@@ -62,7 +62,7 @@
 
       <div class="diagram-wrap" role="img" appReveal="scale"
         aria-label="Architecture: the React web dashboard POSTs an order to API Gateway, which invokes the ingest Lambda; ingest writes the order to DynamoDB with status received, returns 202, and enqueues to the orders SQS queue; the process Lambda consumes the queue, reserves inventory, updates DynamoDB and publishes to the order-events SNS topic; failures after three attempts land in the orders-dlq dead-letter queue; the dashboard polls GET /orders/:id via a status Lambda reading DynamoDB. All AWS resources are provisioned by the retail-serverless-infra Terraform.">
-        <svg class="diagram" viewBox="0 0 860 500" xmlns="http://www.w3.org/2000/svg">
+        <svg class="diagram" viewBox="0 0 860 500" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <!-- infra boundary -->
           <rect class="d-infra" x="176" y="58" width="668" height="418" rx="16" />
           <text class="d-infra-label" x="196" y="84">retail-serverless-infra · Terraform → AWS · HTTP API · Lambda · SQS · DynamoDB · SNS</text>
@@ -80,7 +80,7 @@
           <text class="d-s-sub" x="270" y="280">/v1/orders</text>
 
           <!-- ingest Lambda -->
-          <rect class="d-core" x="388" y="102" width="168" height="64" rx="12" />
+          <rect class="d-core" x="372" y="102" width="200" height="64" rx="12" />
           <text class="d-core-title" x="472" y="130">ingest λ</text>
           <text class="d-core-sub" x="472" y="150">validate → 202 → enqueue</text>
 
@@ -90,7 +90,7 @@
           <text class="d-db-sub" x="472" y="240">at-least-once</text>
 
           <!-- process Lambda -->
-          <rect class="d-core" x="388" y="286" width="168" height="64" rx="12" />
+          <rect class="d-core" x="372" y="286" width="200" height="64" rx="12" />
           <text class="d-core-title" x="472" y="314">process λ</text>
           <text class="d-core-sub" x="472" y="334">reserve → persist → notify</text>
 
@@ -100,27 +100,27 @@
           <text class="d-db-sub" x="472" y="437">maxReceiveCount 3</text>
 
           <!-- DynamoDB -->
-          <rect class="d-db" x="600" y="190" width="150" height="66" rx="10" />
+          <rect class="d-db" x="590" y="190" width="170" height="66" rx="10" />
           <text class="d-db-title" x="675" y="216">DynamoDB</text>
           <text class="d-db-sub" x="675" y="234">Orders · single-table</text>
 
           <!-- SNS -->
-          <rect class="d-surface" x="600" y="290" width="150" height="62" rx="12" />
+          <rect class="d-surface" x="590" y="290" width="170" height="62" rx="12" />
           <text class="d-s-title" x="675" y="316">SNS · order-events</text>
           <text class="d-s-sub" x="675" y="336">email · webhook</text>
 
           <!-- connectors -->
           <line class="d-link" x1="160" y1="250" x2="200" y2="250" />
-          <line class="d-link" x1="340" y1="232" x2="388" y2="150" />
+          <line class="d-link" x1="340" y1="232" x2="372" y2="150" />
           <line class="d-link" x1="472" y1="166" x2="472" y2="200" />
           <line class="d-link" x1="472" y1="252" x2="472" y2="286" />
-          <line class="d-link" x1="556" y1="312" x2="600" y2="240" />
-          <line class="d-link" x1="556" y1="322" x2="600" y2="318" />
+          <line class="d-link" x1="572" y1="312" x2="590" y2="240" />
+          <line class="d-link" x1="572" y1="322" x2="590" y2="318" />
           <line class="d-link d-link--dlq" x1="472" y1="350" x2="472" y2="398" />
-          <line class="d-link d-link--db" x1="600" y1="193" x2="344" y2="197" />
+          <line class="d-link d-link--db" x1="590" y1="193" x2="344" y2="197" />
 
           <!-- edge labels -->
-          <text class="d-edge" x="180" y="242" text-anchor="middle">POST /orders</text>
+          <text class="d-edge" x="180" y="242" text-anchor="middle">POST</text>
           <text class="d-edge" x="348" y="178">202</text>
           <text class="d-edge d-edge--warn" x="486" y="380">on fail ×3</text>
           <text class="d-edge d-edge--db" x="472" y="184" text-anchor="middle">status λ · GET /orders/:id · poll</text>

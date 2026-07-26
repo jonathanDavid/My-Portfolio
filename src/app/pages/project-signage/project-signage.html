@@ -54,13 +54,13 @@
 
       <div class="diagram-wrap" role="img" appReveal="scale"
         aria-label="Architecture: signage-web control plane and signage-tv player both connect over WebSockets and REST to the signage-api NestJS service backed by Prisma and PostgreSQL, all running on AWS ECS provisioned by signage-infra Terraform.">
-        <svg class="diagram" viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg">
+        <svg class="diagram" viewBox="0 0 820 470" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <!-- infra boundary -->
           <rect class="d-infra" x="12" y="86" width="796" height="330" rx="16" />
           <text class="d-infra-label" x="30" y="112">signage-infra · Terraform → AWS ECS · VPC · RDS</text>
 
           <!-- API core -->
-          <rect class="d-core" x="300" y="188" width="220" height="120" rx="12" />
+          <rect class="d-core" x="280" y="188" width="260" height="120" rx="12" />
           <text class="d-core-title" x="410" y="222">signage-api</text>
           <text class="d-core-sub" x="410" y="248">NestJS · REST + WebSocket gateway</text>
           <text class="d-core-sub" x="410" y="270">Prisma ORM</text>
@@ -83,8 +83,8 @@
           <text class="d-s-sub" x="680" y="226">React on-device</text>
 
           <!-- connectors -->
-          <line class="d-link" x1="240" y1="198" x2="300" y2="220" />
-          <line class="d-link" x1="580" y1="198" x2="520" y2="220" />
+          <line class="d-link" x1="240" y1="198" x2="280" y2="220" />
+          <line class="d-link" x1="580" y1="198" x2="540" y2="220" />
           <line class="d-link d-link--db" x1="410" y1="308" x2="410" y2="336" />
 
           <text class="d-edge" x="248" y="182">WS + REST</text>

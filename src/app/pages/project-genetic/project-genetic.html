@@ -64,16 +64,17 @@
 
       <div class="diagram-wrap" role="img" appReveal="scale"
         aria-label="Architecture: the FastAPI plus numpy genetic-algorithm engine streams one message per generation over a WebSocket; the web client's EventBuffer absorbs backpressure; a requestAnimationFrame loop drains a paced number of frames and folds them through a pure reducer into the run store; a hot tier of canvases (fitness chart, diversity meter) draws every frame with no React re-render, while a story tier of the map, store cards, timeline and Random-versus-Greedy-versus-GA comparison reads a throttled snapshot about three times a second.">
-        <svg class="diagram" viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg">
+        <svg class="diagram" viewBox="0 0 860 470" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <!-- api boundary -->
           <rect class="d-infra" x="16" y="150" width="230" height="180" rx="16" />
           <text class="d-infra-label" x="34" y="176">genetic-visualizer-api</text>
 
           <!-- API core -->
           <rect class="d-core" x="36" y="196" width="190" height="96" rx="12" />
-          <text class="d-core-title" x="131" y="228">FastAPI · numpy</text>
-          <text class="d-core-sub" x="131" y="250">GA engine</text>
-          <text class="d-core-sub" x="131" y="270">selection · crossover · mutation</text>
+          <text class="d-core-title" x="131" y="222">FastAPI · numpy</text>
+          <text class="d-core-sub" x="131" y="244">GA engine</text>
+          <text class="d-core-sub" x="131" y="264">selection · crossover</text>
+          <text class="d-core-sub" x="131" y="284">mutation</text>
 
           <!-- web boundary -->
           <rect class="d-infra d-infra--web" x="300" y="40" width="544" height="400" rx="16" />
@@ -92,13 +93,13 @@
           <text class="d-core-sub" x="587" y="270">+ milestones</text>
 
           <!-- hot tier -->
-          <rect class="d-hot" x="700" y="96" width="126" height="94" rx="12" />
+          <rect class="d-hot" x="694" y="96" width="138" height="94" rx="12" />
           <text class="d-s-title" x="763" y="126">Canvas 60fps</text>
           <text class="d-s-sub" x="763" y="148">fitness chart</text>
           <text class="d-s-sub" x="763" y="166">diversity meter</text>
 
           <!-- story tier -->
-          <rect class="d-surface" x="700" y="300" width="126" height="94" rx="12" />
+          <rect class="d-surface" x="694" y="300" width="138" height="94" rx="12" />
           <text class="d-s-title" x="763" y="330">Story tier</text>
           <text class="d-s-sub" x="763" y="352">map · cards</text>
           <text class="d-s-sub" x="763" y="370">timeline · compare</text>
@@ -106,8 +107,8 @@
           <!-- connectors -->
           <line class="d-link" x1="226" y1="244" x2="322" y2="244" />
           <line class="d-link" x1="472" y1="244" x2="512" y2="244" />
-          <line class="d-link" x1="662" y1="220" x2="700" y2="150" />
-          <line class="d-link d-link--db" x1="662" y1="268" x2="700" y2="340" />
+          <line class="d-link" x1="662" y1="220" x2="694" y2="150" />
+          <line class="d-link d-link--db" x1="662" y1="268" x2="694" y2="340" />
 
           <!-- edge labels -->
           <text class="d-edge" x="274" y="232" text-anchor="middle">WS · per-gen</text>
