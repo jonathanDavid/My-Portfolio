@@ -240,12 +240,32 @@
 .repo--muted { border-bottom: 0; color: var(--text-faint); }
 .repo--muted:hover { color: var(--text-faint); }
 
-/* ---------- Glow on hover/focus/flip ---------- */
-.project-flip:hover .face,
-.project-flip:focus-within .face,
+/* ---------- Glow on hover/focus/flip ----------
+   The is-flipped glow is signal-driven and works on every device. Hover and
+   focus-within are desktop/keyboard affordances only — gated behind
+   (hover: hover) so that on touch a tapped button's :focus-within cannot leave
+   the glow "stuck" on a card after the finger swipes away (it only cleared when
+   an arrow stole focus). On touch the ACTIVE carousel card carries the glow
+   instead (below), so the focus indicator follows the swipe. */
 :host(.is-flipped) .face {
   border-color: color-mix(in srgb, var(--accent-3) 55%, var(--border));
   box-shadow: var(--shadow), var(--glow);
+}
+@media (hover: hover) {
+  .project-flip:hover .face,
+  .project-flip:focus-within .face {
+    border-color: color-mix(in srgb, var(--accent-3) 55%, var(--border));
+    box-shadow: var(--shadow), var(--glow);
+  }
+}
+/* Touch / no-hover: the centered carousel card (its host gets .is-active from
+   the carousel, updated by the scroll handler on every swipe) carries the glow,
+   so the indicator tracks the finger instead of a stuck :focus-within. */
+@media (hover: none) {
+  :host(.is-active) .face {
+    border-color: color-mix(in srgb, var(--accent-3) 55%, var(--border));
+    box-shadow: var(--shadow), var(--glow);
+  }
 }
 
 /* Touch / no-hover: tap toggles the flip (JS sets :host.is-flipped). Only one

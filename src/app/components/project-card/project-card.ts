@@ -16,12 +16,17 @@ import { TechChip } from '../tech-chip/tech-chip';
   selector: 'app-project-card',
   imports: [RouterLink, Icon, TechChip],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class.is-flipped]': 'flipped()' },
+  host: { '[class.is-flipped]': 'flipped()', '[class.is-active]': 'active()' },
   templateUrl: './project-card.html',
   styleUrl: './project-card.scss',
 })
 export class ProjectCard {
   readonly project = input.required<Project>();
+
+  /** Whether this card is the centered/active one in the mobile carousel.
+   *  Drives the glow indicator on touch so it follows swipes, rather than a
+   *  stuck :focus-within (see project-card.scss). Ignored on desktop grid. */
+  readonly active = input(false);
 
   /** Tap-driven flip state (touch/no-hover only; desktop uses hover). */
   protected readonly flipped = signal(false);

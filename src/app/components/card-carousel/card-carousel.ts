@@ -44,7 +44,7 @@ import { Project } from '../../data/projects';
         <ul class="cc__track">
           @for (p of projects(); track p.slug; let i = $index) {
             <li #item class="cc__item" [class.is-active]="i === active()">
-              <app-project-card [project]="p" />
+              <app-project-card [project]="p" [active]="i === active()" />
             </li>
           }
         </ul>
