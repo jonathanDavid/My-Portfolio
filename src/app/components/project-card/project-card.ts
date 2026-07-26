@@ -27,6 +27,15 @@ export class ProjectCard {
   protected readonly flipped = signal(false);
   private readonly host = inject(ElementRef<HTMLElement>);
 
+  /**
+   * Force the card back to its front face. The carousel calls this on every
+   * card when the active slide changes, so navigating never reveals a back
+   * face left flipped from a previous card.
+   */
+  resetFlip(): void {
+    this.flipped.set(false);
+  }
+
   constructor() {
     afterNextRender(() => {
       // Only wire tap-to-flip where there is no hover (touch). On desktop the

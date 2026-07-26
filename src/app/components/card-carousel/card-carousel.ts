@@ -95,9 +95,23 @@ export class CardCarousel {
   private readonly viewportRef =
     viewChild.required<ElementRef<HTMLElement>>('viewport');
   private readonly itemRefs = viewChildren<ElementRef<HTMLElement>>('item');
+  private readonly cards = viewChildren(ProjectCard);
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly active = signal(0);
+
+  /** Turn every card back to its front — called whenever the active slide
+   *  changes so navigating never leaves a previous card flipped to its back. */
+  private resetFlips(): void {
+    for (const card of this.cards()) card.resetFlip();
+  }
+
+  /** Move the active index and reset any flipped cards in one place. */
+  private setActive(i: number): void {
+    if (i === this.active()) return;
+    this.active.set(i);
+    this.resetFlips();
+  }
 
   constructor() {
     afterNextRender(() => {
@@ -118,7 +132,8 @@ export class CardCarousel {
               best = i;
             }
           });
-          this.active.set(best);
+          // Swiping/dragging to a new card un-flips every card.
+          this.setActive(best);
         });
       };
       vp.addEventListener('scroll', onScroll, { passive: true });
@@ -140,7 +155,8 @@ export class CardCarousel {
       typeof matchMedia !== 'undefined' &&
       matchMedia('(prefers-reduced-motion: reduce)').matches;
     vp.scrollTo({ left, behavior: reduced ? 'auto' : 'smooth' });
-    this.active.set(clamped);
+    // Arrow / dot navigation also un-flips every card.
+    this.setActive(clamped);
   }
 
   protected prev(): void {
