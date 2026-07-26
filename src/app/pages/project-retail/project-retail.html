@@ -1,0 +1,277 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="cloud" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Retail Serverless Backend</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span>An honest portfolio reconstruction — rebuilt from scratch and from memory of the
+        event-driven retail backend I shipped at <strong>Omnix IA</strong> (20+ Lambdas,
+        100+ API Gateway endpoints, esbuild-optimized cold starts). Not employer code.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="shield" [size]="18" /></span> The problem</h2>
+      <p>
+        A retail order arrives over HTTP. It has to be accepted <em>fast</em> — a <code>202</code> in
+        milliseconds — and then processed <em>asynchronously</em>, so a slow inventory reservation or a
+        downstream hiccup never blocks the caller. Reserving stock, persisting the order and notifying
+        subscribers all happen off the request path.
+      </p>
+      <p>
+        That buys throughput and resilience, but it creates two hard problems: making an asynchronous
+        backend <strong>feel live</strong> to the operator watching an order, and <strong>isolating
+        failure</strong> so one poison message can't sink the pipeline. The whole thing had to stay
+        serverless, pay-per-use, and fully described in Terraform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — an async event pipeline</h2>
+      <p class="lead" appReveal="up">
+        Three repositories, one contract. A React dashboard, a set of esbuild-bundled Lambdas behind an
+        HTTP API, and the Terraform that provisions them. Orders flow forward through a queue; the
+        dashboard tracks state by polling — no socket server required.
+      </p>
+
+      <div class="diagram-wrap" role="img" appReveal="scale"
+        aria-label="Architecture: the React web dashboard POSTs an order to API Gateway, which invokes the ingest Lambda; ingest writes the order to DynamoDB with status received, returns 202, and enqueues to the orders SQS queue; the process Lambda consumes the queue, reserves inventory, updates DynamoDB and publishes to the order-events SNS topic; failures after three attempts land in the orders-dlq dead-letter queue; the dashboard polls GET /orders/:id via a status Lambda reading DynamoDB. All AWS resources are provisioned by the retail-serverless-infra Terraform.">
+        <svg class="diagram" viewBox="0 0 860 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- infra boundary -->
+          <rect class="d-infra" x="176" y="58" width="668" height="418" rx="16" />
+          <text class="d-infra-label" x="196" y="84">retail-serverless-infra · Terraform → AWS · HTTP API · Lambda · SQS · DynamoDB · SNS</text>
+
+          <!-- Web (outside infra) -->
+          <rect class="d-surface" x="20" y="206" width="140" height="88" rx="12" />
+          <text class="d-s-title" x="90" y="240">retail-…-web</text>
+          <text class="d-s-sub" x="90" y="262">React dashboard</text>
+          <text class="d-s-sub" x="90" y="280">cart · live board</text>
+
+          <!-- API Gateway -->
+          <rect class="d-surface" x="200" y="206" width="140" height="88" rx="12" />
+          <text class="d-s-title" x="270" y="240">API Gateway</text>
+          <text class="d-s-sub" x="270" y="262">HTTP API</text>
+          <text class="d-s-sub" x="270" y="280">/v1/orders</text>
+
+          <!-- ingest Lambda -->
+          <rect class="d-core" x="388" y="102" width="168" height="64" rx="12" />
+          <text class="d-core-title" x="472" y="130">ingest λ</text>
+          <text class="d-core-sub" x="472" y="150">validate → 202 → enqueue</text>
+
+          <!-- SQS orders -->
+          <rect class="d-db" x="408" y="200" width="128" height="52" rx="10" />
+          <text class="d-db-title" x="472" y="223">SQS · orders</text>
+          <text class="d-db-sub" x="472" y="240">at-least-once</text>
+
+          <!-- process Lambda -->
+          <rect class="d-core" x="388" y="286" width="168" height="64" rx="12" />
+          <text class="d-core-title" x="472" y="314">process λ</text>
+          <text class="d-core-sub" x="472" y="334">reserve → persist → notify</text>
+
+          <!-- DLQ -->
+          <rect class="d-dlq" x="402" y="398" width="140" height="50" rx="10" />
+          <text class="d-db-title" x="472" y="420">SQS · orders-dlq</text>
+          <text class="d-db-sub" x="472" y="437">maxReceiveCount 3</text>
+
+          <!-- DynamoDB -->
+          <rect class="d-db" x="600" y="190" width="150" height="66" rx="10" />
+          <text class="d-db-title" x="675" y="216">DynamoDB</text>
+          <text class="d-db-sub" x="675" y="234">Orders · single-table</text>
+
+          <!-- SNS -->
+          <rect class="d-surface" x="600" y="290" width="150" height="62" rx="12" />
+          <text class="d-s-title" x="675" y="316">SNS · order-events</text>
+          <text class="d-s-sub" x="675" y="336">email · webhook</text>
+
+          <!-- connectors -->
+          <line class="d-link" x1="160" y1="250" x2="200" y2="250" />
+          <line class="d-link" x1="340" y1="232" x2="388" y2="150" />
+          <line class="d-link" x1="472" y1="166" x2="472" y2="200" />
+          <line class="d-link" x1="472" y1="252" x2="472" y2="286" />
+          <line class="d-link" x1="556" y1="312" x2="600" y2="240" />
+          <line class="d-link" x1="556" y1="322" x2="600" y2="318" />
+          <line class="d-link d-link--dlq" x1="472" y1="350" x2="472" y2="398" />
+          <line class="d-link d-link--db" x1="600" y1="193" x2="344" y2="197" />
+
+          <!-- edge labels -->
+          <text class="d-edge" x="180" y="242" text-anchor="middle">POST /orders</text>
+          <text class="d-edge" x="348" y="178">202</text>
+          <text class="d-edge d-edge--warn" x="486" y="380">on fail ×3</text>
+          <text class="d-edge d-edge--db" x="472" y="184" text-anchor="middle">status λ · GET /orders/:id · poll</text>
+        </svg>
+      </div>
+
+      <div class="surfaces">
+        <div class="card glass surface" appReveal="up" [revealDelay]="0">
+          <span class="surface__icon"><app-icon name="gauge" [size]="20" /></span>
+          <h3>retail-serverless-web</h3>
+          <p class="muted">React + Vite dashboard. A seeded inventory + cart in demo mode; checkout submits through the 202 → poll → stepper pipeline and renders a per-store fulfillment plan.</p>
+        </div>
+        <div class="card glass surface" appReveal="up" [revealDelay]="80">
+          <span class="surface__icon"><app-icon name="server" [size]="20" /></span>
+          <h3>retail-serverless-api</h3>
+          <p class="muted">Node 20 + TypeScript, AWS SDK v3, esbuild-bundled handlers: <code>ingest</code>, <code>process</code> (SQS-triggered, idempotent), <code>status</code> and <code>list</code>.</p>
+        </div>
+        <div class="card glass surface" appReveal="up" [revealDelay]="160">
+          <span class="surface__icon"><app-icon name="cloud" [size]="20" /></span>
+          <h3>retail-serverless-infra</h3>
+          <p class="muted">Terraform modules — <code>api</code>, <code>lambda</code>, <code>queue</code> (SQS + DLQ redrive), <code>topic</code>, <code>table</code>, <code>observability</code> — composed per environment with an OIDC CI pipeline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> Inside the product</h2>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/retail-product.png" alt="A completed retail order: the event-pipeline stepper, the per-store fulfillment plan, the genetic optimizer before/after comparison, and the live dashboard widgets" loading="lazy" width="1600" height="2352" />
+        <figcaption>A finished order — it flowed <code>received → completed</code>, split across two stores with a pickup route, and the optional GA optimizer trimmed the plan from 3 stores / 13.2 km to 2 stores / 10.8 km.</figcaption>
+      </figure>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/retail-testing.png" alt="The retail dashboard layout: the shopping cart, the live orders board, and the multi-store inventory browser" loading="lazy" width="1600" height="1013" />
+        <figcaption>The working surface — cart, the live orders board advancing each order's state machine, and the multi-store inventory browser.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="zap" [size]="18" /> Accept fast (202), process async</h3>
+        <p>
+          The <code>ingest</code> Lambda validates, writes the order as <code>received</code>, enqueues
+          it and returns <code>202</code> immediately — the real work runs off the request path. The
+          trade-off is that the client never gets the final result in the creating request, which the
+          dashboard solves by tracking each order to a terminal state.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="gauge" [size]="18" /> esbuild-bundled Lambdas</h3>
+        <p>
+          Handlers are bundled and tree-shaken with esbuild into tiny <code>dist/</code> zips. Smaller
+          artifacts mean shorter init duration and faster cold starts — the same optimization that was a
+          measurable win in production. The cost is a build step the infra repo depends on.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="shield" [size]="18" /> Idempotent worker + DLQ redrive</h3>
+        <p>
+          SQS is at-least-once, so the <code>process</code> Lambda is idempotent — safe re-delivery, no
+          double reservation. The queue's visibility timeout is ≥6× the handler timeout, and after three
+          failed attempts a message lands in <code>orders-dlq</code> behind a CloudWatch alarm rather
+          than poisoning the pipeline.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="database" [size]="18" /> Single-table DynamoDB</h3>
+        <p>
+          One on-demand table holds every order, with a GSI for the recent-orders list. On-demand
+          capacity suits spiky, pay-per-use retail traffic; single-table keeps access patterns explicit.
+          The trade-off is that new query shapes need deliberate key/GSI design up front.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="network" [size]="18" /> HTTP API over REST API Gateway</h3>
+        <p>
+          The API uses API Gateway's <strong>HTTP API</strong>, not the older REST API — lower latency,
+          lower cost and far less config for a straightforward CRUD-plus-ingest surface. I'd only reach
+          for REST API if I needed its request validators, usage plans or edge features.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="cpu" [size]="18" /> ARM / Graviton + OIDC CI</h3>
+        <p>
+          Lambdas run on ARM/Graviton for better price-performance. Deploys go through GitHub Actions
+          with <strong>OIDC</strong> — short-lived role assumption, no long-lived AWS keys in CI: plan on
+          every PR, apply on <code>main</code>, least-privilege IAM throughout.
+        </p>
+      </div>
+
+      <div class="decision decision--feature" appReveal="up">
+        <h3><app-icon name="route" [size]="18" /> Optional cross-project pickup optimizer</h3>
+        <p>
+          Behind a feature flag, a completed order can be optimized by my
+          <a routerLink="/projects/ga-allocation-services">genetic-algorithm service</a>: the real order
+          and real store inventory are sent as an explicit scenario, and the WebSocket stream's final
+          plan is compared against a naive nearest-store baseline. Both projects stay fully independent —
+          neither depends on the other.
+        </p>
+        <div class="result">
+          <div class="result__row">
+            <span class="result__label">Naive (nearest-store)</span>
+            <span class="result__val">3 stores · 13.2 km</span>
+          </div>
+          <div class="result__row result__row--best">
+            <span class="result__label">GA-optimized pickup</span>
+            <span class="result__val">2 stores · 10.8 km</span>
+          </div>
+          <div class="result__delta"><app-icon name="activity" [size]="15" /> −4.96% total cost — real order, real inventory</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I'd change at scale -->
+  <section class="section scale">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul class="scale-list">
+        <li appReveal="up" [revealDelay]="0"><app-icon name="workflow" [size]="18" /><span><strong>Step Functions</strong> for multi-step orders — replace the single <code>process</code> Lambda with an orchestrated workflow (reserve → charge → fulfill) with built-in retries and compensation.</span></li>
+        <li appReveal="up" [revealDelay]="70"><app-icon name="share" [size]="18" /><span><strong>EventBridge</strong> as the event backbone — publish order events to a bus so new consumers (analytics, fraud, loyalty) subscribe without touching the pipeline.</span></li>
+        <li appReveal="up" [revealDelay]="140"><app-icon name="zap" [size]="18" /><span><strong>Provisioned concurrency</strong> on the hot paths to erase cold starts under sustained load, sized from the CloudWatch init-duration metrics.</span></li>
+        <li appReveal="up" [revealDelay]="210"><app-icon name="globe" [size]="18" /><span><strong>Multi-region</strong> active-active with DynamoDB global tables and health-checked routing for resilience and locality.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Explore the code</span></h2>
+      <p class="muted">All three repositories are public.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>
