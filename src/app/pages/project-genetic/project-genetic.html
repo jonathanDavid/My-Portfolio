@@ -1,0 +1,274 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="activity" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Genetic-Algorithm Visualizer</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span>An honest portfolio reconstruction of the genetic-algorithm allocation services I built at
+        <strong>Xpectrum</strong>. The production system was a set of ML services, not a web toy — but
+        the GA core, the per-generation telemetry and the streaming shape are faithful to what shipped.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        A genetic algorithm is a black box: parameters go in, an answer comes out, and it's hard to
+        believe — or to teach. The goal here was twofold: make the optimization <strong>visible</strong>,
+        so a visitor who has never heard of a GA can watch a population converge and understand what
+        <em>fitness</em> means; and <strong>prove it works</strong> — that the evolved solution actually
+        beats the naive strategies a person would reach for.
+      </p>
+      <p>
+        The flagship scenario is deliberately concrete: one customer, one shopping list, several stores
+        across a city each stocking a subset of products at their own prices. A genome assigns every
+        needed item to a store that stocks it; fitness is the negative of total cost —
+        <code>route · kmCost + itemCost + stores · stopPenalty</code>. Fewer stops, a shorter drive and
+        cheaper items all win.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — stream every generation, draw at 60fps</h2>
+      <p class="lead" appReveal="up">
+        Two repositories, one contract. The whole design turns on one idea: the network arrival rate and
+        the render rate are <strong>decoupled</strong>. A run emits 30+ generation frames per second;
+        React must never re-render on any of them.
+      </p>
+
+      <div class="diagram-wrap" role="img" appReveal="scale"
+        aria-label="Architecture: the FastAPI plus numpy genetic-algorithm engine streams one message per generation over a WebSocket; the web client's EventBuffer absorbs backpressure; a requestAnimationFrame loop drains a paced number of frames and folds them through a pure reducer into the run store; a hot tier of canvases (fitness chart, diversity meter) draws every frame with no React re-render, while a story tier of the map, store cards, timeline and Random-versus-Greedy-versus-GA comparison reads a throttled snapshot about three times a second.">
+        <svg class="diagram" viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg">
+          <!-- api boundary -->
+          <rect class="d-infra" x="16" y="150" width="230" height="180" rx="16" />
+          <text class="d-infra-label" x="34" y="176">genetic-visualizer-api</text>
+
+          <!-- API core -->
+          <rect class="d-core" x="36" y="196" width="190" height="96" rx="12" />
+          <text class="d-core-title" x="131" y="228">FastAPI · numpy</text>
+          <text class="d-core-sub" x="131" y="250">GA engine</text>
+          <text class="d-core-sub" x="131" y="270">selection · crossover · mutation</text>
+
+          <!-- web boundary -->
+          <rect class="d-infra d-infra--web" x="300" y="40" width="544" height="400" rx="16" />
+          <text class="d-infra-label" x="318" y="66">genetic-visualizer-web · decoupled arrival rate ↔ render rate</text>
+
+          <!-- EventBuffer -->
+          <rect class="d-surface" x="322" y="196" width="150" height="96" rx="12" />
+          <text class="d-s-title" x="397" y="230">EventBuffer</text>
+          <text class="d-s-sub" x="397" y="252">backpressure</text>
+          <text class="d-s-sub" x="397" y="270">queue</text>
+
+          <!-- reducer -->
+          <rect class="d-core" x="512" y="196" width="150" height="96" rx="12" />
+          <text class="d-core-title" x="587" y="228">applyEvents</text>
+          <text class="d-core-sub" x="587" y="250">pure reducer</text>
+          <text class="d-core-sub" x="587" y="270">+ milestones</text>
+
+          <!-- hot tier -->
+          <rect class="d-hot" x="700" y="96" width="126" height="94" rx="12" />
+          <text class="d-s-title" x="763" y="126">Canvas 60fps</text>
+          <text class="d-s-sub" x="763" y="148">fitness chart</text>
+          <text class="d-s-sub" x="763" y="166">diversity meter</text>
+
+          <!-- story tier -->
+          <rect class="d-surface" x="700" y="300" width="126" height="94" rx="12" />
+          <text class="d-s-title" x="763" y="330">Story tier</text>
+          <text class="d-s-sub" x="763" y="352">map · cards</text>
+          <text class="d-s-sub" x="763" y="370">timeline · compare</text>
+
+          <!-- connectors -->
+          <line class="d-link" x1="226" y1="244" x2="322" y2="244" />
+          <line class="d-link" x1="472" y1="244" x2="512" y2="244" />
+          <line class="d-link" x1="662" y1="220" x2="700" y2="150" />
+          <line class="d-link d-link--db" x1="662" y1="268" x2="700" y2="340" />
+
+          <!-- edge labels -->
+          <text class="d-edge" x="274" y="232" text-anchor="middle">WS · per-gen</text>
+          <text class="d-edge" x="492" y="232" text-anchor="middle">take(n)</text>
+          <text class="d-edge" x="655" y="176" text-anchor="end">every frame</text>
+          <text class="d-edge d-edge--db" x="655" y="316" text-anchor="end">snapshot ~3/s</text>
+        </svg>
+      </div>
+
+      <div class="surfaces">
+        <div class="card glass surface" appReveal="up" [revealDelay]="0">
+          <span class="surface__icon"><app-icon name="server" [size]="20" /></span>
+          <h3>genetic-visualizer-api</h3>
+          <p class="muted">Python 3.12 + FastAPI + uvicorn. A clean <code>ga/</code> package — a pluggable <code>Problem</code> protocol, a numpy-vectorized engine, and an async runner that yields one event per generation with backpressure-aware throttling.</p>
+        </div>
+        <div class="card glass surface" appReveal="up" [revealDelay]="80">
+          <span class="surface__icon"><app-icon name="sparkles" [size]="20" /></span>
+          <h3>genetic-visualizer-web</h3>
+          <p class="muted">React + Vite + Canvas 2D. A hot tier draws imperatively at 60fps off an <code>onFrame</code> fan-out; a throttled story tier renders the map, store cards, timeline and comparison. A Web Worker runs the same GA offline so the site is demoable with no API.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> Inside the product</h2>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/genetic-visualizer.png" alt="The visualizer running: store cards, a live fitness-over-generations chart, a diversity meter, the Random versus Greedy versus GA comparison panel, and an explainer rail" loading="lazy" width="1600" height="1013" />
+        <figcaption>A pickup run in flight — the population evolves a cheaper, shorter route while the fitness chart climbs and the comparison panel shows exactly what the algorithm earned.</figcaption>
+      </figure>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/genetic-scenario.png" alt="The scenario view: the customer at the map origin, the shopping list, and store cards showing distances, travel times and per-store prices" loading="lazy" width="1600" height="1013" />
+        <figcaption>The scenario — the customer, the shopping list, and store cards with real distances and per-store prices. Cards light up as the evolving plan selects them.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Result / payoff -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="gauge" [size]="18" /></span> Does it actually beat naive?</h2>
+      <p class="muted">
+        The comparison mode is the whole point — it scores the GA's plan against the two strategies a
+        person would reach for, on the same cost model. On the pinned scenario:
+      </p>
+      <div class="compare">
+        <div class="compare__row">
+          <span class="compare__label"><app-icon name="sparkles" [size]="15" /> Random</span>
+          <span class="compare__bar"><span class="compare__fill" style="width:100%"></span></span>
+          <span class="compare__val">baseline</span>
+        </div>
+        <div class="compare__row">
+          <span class="compare__label"><app-icon name="route" [size]="15" /> Greedy (nearest)</span>
+          <span class="compare__bar"><span class="compare__fill" style="width:79%"></span></span>
+          <span class="compare__val">−2% vs random</span>
+        </div>
+        <div class="compare__row compare__row--best">
+          <span class="compare__label"><app-icon name="activity" [size]="15" /> Genetic algorithm</span>
+          <span class="compare__bar"><span class="compare__fill" style="width:59%"></span></span>
+          <span class="compare__val">−23% vs random · −21% vs greedy</span>
+        </div>
+      </div>
+      <p class="muted compare__note">
+        Honest by design: when a shopping list is genuinely single-store fulfillable, there is nothing to
+        consolidate — the UI says <em>"already optimal"</em> rather than inventing a fake saving.
+      </p>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="radio" [size]="18" /> Stream per generation, throttled</h3>
+        <p>
+          The API pushes one WebSocket message per generation (capped at ~30/s for long runs) instead of
+          only returning the final answer — that stream <em>is</em> the visualization. It also powers the
+          animation-speed control: the run computes at full speed while playback drains a buffer at
+          0.5×–Max. Nothing is dropped, only delayed.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="cpu" [size]="18" /> numpy-vectorized fitness</h3>
+        <p>
+          The GA core is numpy, not Python loops — population fitness is evaluated as vectorized array
+          math, which keeps generations cheap enough to stream in real time. The trade-off is expressing
+          each <code>Problem</code>'s fitness in array terms rather than a simple per-genome function.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="monitor" [size]="18" /> Canvas + rAF, not React per generation</h3>
+        <p>
+          A React reconcile per frame at 30–60 gen/s would drop frames and thrash the GC. The hot tier
+          (fitness chart, diversity meter) draws imperatively to canvas on a single
+          <code>requestAnimationFrame</code> loop; the cost is that those visuals live outside React,
+          contained in a small imperative store + <code>onFrame</code> seam.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="layers" [size]="18" /> Two-tier consumption</h3>
+        <p>
+          Store cards, timeline and the comparison need React for layout, but only ~3 updates/s. They
+          read a <strong>throttled snapshot</strong> instead of joining the hot path, so they stay up to
+          ~350ms behind the canvases — a gap CSS transitions mask completely.
+        </p>
+      </div>
+
+      <div class="decision" appReveal="up">
+        <h3><app-icon name="component" [size]="18" /> A pluggable Problem protocol</h3>
+        <p>
+          The engine knows nothing about retail. A <code>Problem</code> interface —
+          <code>random_genome</code>, <code>fitness</code>, <code>crossover</code>, <code>mutate</code>,
+          <code>render_spec</code> — lets shelf-allocation and the pickup scenario share one GA. Adding a
+          new optimization problem is a new class, not an engine change.
+        </p>
+      </div>
+
+      <div class="decision decision--feature" appReveal="up">
+        <h3><app-icon name="route" [size]="18" /> An explicit scenario — optimize a real order</h3>
+        <p>
+          The pickup problem accepts an <em>explicit</em> scenario, not just a seeded one, so the
+          <a routerLink="/projects/retail-serverless">retail backend</a> can send its actual order and
+          store inventory to be optimized. Same fitness law, same shapes — the integration is real, and
+          both projects stay independent.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I'd change at scale -->
+  <section class="section scale">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul class="scale-list">
+        <li appReveal="up" [revealDelay]="0"><app-icon name="waypoints" [size]="18" /><span><strong>Island model</strong> — evolve several sub-populations in parallel and migrate elites between them, escaping local optima that a single population gets stuck in.</span></li>
+        <li appReveal="up" [revealDelay]="70"><app-icon name="boxes" [size]="18" /><span><strong>Ray / Celery workers</strong> — move GA runs off the API process onto a distributed pool; the frontend already treats frames as an opaque stream, so nothing changes client-side.</span></li>
+        <li appReveal="up" [revealDelay]="140"><app-icon name="database" [size]="18" /><span><strong>Persisted, replayable runs</strong> — store a run's seed + params behind <code>/runs/:id</code> so a converged run is a permalink, replayable deterministically with no live compute.</span></li>
+        <li appReveal="up" [revealDelay]="210"><app-icon name="gauge" [size]="18" /><span><strong>Windowed decimation</strong> — for thousands of generations, aggregate into min/max/avg buckets so the chart stays O(pixels), not O(generations).</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Explore the code</span></h2>
+      <p class="muted">Both repositories are public.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>
