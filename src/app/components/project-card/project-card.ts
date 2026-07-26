@@ -36,10 +36,21 @@ export class ProjectCard {
     this.flipped.set(false);
   }
 
+  /** Explicit "show stack & links" control on the front face. */
+  protected flipToBack(): void {
+    this.flipped.set(true);
+  }
+
+  /** Explicit "back to summary" control on the back face. */
+  protected flipToFront(): void {
+    this.flipped.set(false);
+  }
+
   constructor() {
     afterNextRender(() => {
-      // Only wire tap-to-flip where there is no hover (touch). On desktop the
-      // CSS hover/focus-within flip stays in charge.
+      // Only wire tap-anywhere-to-flip where there is no hover (touch). On
+      // desktop the CSS hover/focus-within flip stays in charge. The explicit
+      // flip buttons in the template work on every device regardless.
       if (typeof matchMedia === 'undefined' || !matchMedia('(hover: none)').matches) {
         return;
       }
@@ -67,10 +78,13 @@ export class ProjectCard {
         },
         { passive: true },
       );
-      el.addEventListener('click', (e: MouseEvent) => {
+      // Bonus tap-anywhere toggle. Fires on pointerup (more reliable on touch
+      // than click after a 3D transform). Interactive targets — the flip
+      // buttons and the repo/case-study links — handle their own taps, so we
+      // skip them here and never double-fire or swallow a navigation.
+      el.addEventListener('pointerup', (e: PointerEvent) => {
         if (moved) return; // it was a swipe/drag, not a tap
-        // Let links (title, repos, CTA) do their job instead of flipping.
-        if ((e.target as HTMLElement).closest('a')) return;
+        if ((e.target as HTMLElement).closest('a, button')) return;
         this.flipped.update((v) => !v);
       });
     });

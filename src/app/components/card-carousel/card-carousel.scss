@@ -97,10 +97,11 @@
     transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
       opacity 0.35s ease;
   }
-  /* neighbours dimmed + smaller; active card full-size and elevated */
+  /* neighbours gently recede so they read as "the next card", not disabled;
+     the active card stays full size and full opacity. */
   .cc__item:not(.is-active) app-project-card {
-    transform: scale(0.9);
-    opacity: 0.5;
+    transform: scale(0.94);
+    opacity: 0.85;
   }
   .cc__item.is-active app-project-card {
     transform: scale(1);

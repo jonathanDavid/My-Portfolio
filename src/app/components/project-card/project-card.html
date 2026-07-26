@@ -30,17 +30,22 @@
             <app-tech-chip [name]="t" />
           }
         </div>
-        <span class="flip-hint" aria-hidden="true">
+        <button type="button" class="flip-hint" (click)="flipToBack()" aria-label="Show stack and links">
           <app-icon name="component" [size]="14" />
           <span class="flip-hint__hover">Hover for stack &amp; links</span>
           <span class="flip-hint__tap">Tap for stack &amp; links</span>
-        </span>
+        </button>
       </div>
     </div>
 
     <!-- BACK -->
     <div class="face back card glass">
-      <p class="back__eyebrow"><app-icon name="component" [size]="15" /> Stack &amp; links</p>
+      <div class="back__head">
+        <p class="back__eyebrow"><app-icon name="component" [size]="15" /> Stack &amp; links</p>
+        <button type="button" class="back__flip" (click)="flipToFront()" aria-label="Back to summary">
+          <app-icon name="close" [size]="16" />
+        </button>
+      </div>
       <div class="chip-row back__tech">
         @for (t of project().tech; track t) {
           <app-tech-chip [name]="t" />
