@@ -98,6 +98,18 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'colombia-conflict-atlas',
+    title: 'Colombia Conflict & Security Atlas',
+    tagline: 'A timeline-first map of Colombia built entirely from real public data',
+    summary:
+      'A timeline-first choropleth of all 1,122 Colombian municipalities: scrub the years 2003→2026 and watch five real crime datasets (theft from persons, homicides, vehicle / motorcycle / cellphone theft) evolve, with a 2016 peace-accord marker on the trend line. A build-time ETL pulls each source from datos.gov.co (Socrata), normalizes DIVIPOLA codes and joins them to DANE geometry (99% coverage, orphans reported), emitting sparse, time-indexed JSON that a key-less MapLibre GL front end animates. Bilingual ES/EN.',
+    tech: ['MapLibre GL', 'React', 'TypeScript', 'Vite', 'ETL / Socrata', 'TopoJSON', 'Zustand', 'Vitest'],
+    status: 'in-progress',
+    featured: true,
+    year: '2026',
+    icon: 'map-pin',
+  },
+  {
     slug: 'live-dashboard-go',
     title: 'Go + WebSocket Live Dashboard',
     tagline: 'A low-latency metrics dashboard in Go',
