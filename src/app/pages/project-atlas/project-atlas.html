@@ -1,0 +1,228 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="map-pin" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Colombia Conflict &amp; Security Atlas</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>Real victims, real numbers.</strong> Every layer is official public data — nothing is
+        invented, interpolated, or sensationalized. Missing data renders as <em>no data</em>, never as zero;
+        every view cites its source, granularity, and coverage; perpetrator attribution is shown neutrally,
+        per CNMH classification.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link.label }}
+          </a>
+        }
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        Colombia's public data on violence is abundant but scattered and shapeless: five decades of
+        armed conflict in one institution's archive, police crime statistics in another, coca cultivation
+        in a third — each keyed differently, aggregated differently, and none of them <em>watchable</em>.
+        The question this project answers: can you make eight decades of hard data explorable by anyone,
+        honestly, in the browser, with no backend and no API keys?
+      </p>
+      <p>
+        The answer is <strong>timeline-first</strong>: the whole data model is time-indexed, the map is
+        just its projection at year <em>T</em>. Drag from 1947 to 2026 and watch violence appear, spread,
+        peak around 2002, and recede after the 2016 peace accord — municipality by municipality.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — ETL once, animate forever</h2>
+      <p class="lead" appReveal="up">
+        A build-time ETL does all the heavy lifting; the deployed site is pure static files. Every source
+        is normalized to one join key (the 5-digit DIVIPOLA municipality code) and one shape:
+        <code>{{ '{' }} code → {{ '{' }} year → value {{ '}' }} {{ '}' }}</code>, sparse and gzip-friendly.
+      </p>
+
+      <div class="diagram-wrap" role="img" appReveal="scale"
+        aria-label="Architecture: three ETL scripts pull from datos.gov.co Socrata APIs and DANE Excel files — crime, conflict with perpetrator attribution, coca, and population. They normalize DIVIPOLA codes, measure join orphans against DANE 2018 geometry, and emit sparse time-indexed JSON plus a provenance manifest. A MapLibre GL front end loads the static files, projects the active layer and year through feature-state, and drives the timeline, search, per-100k normalization and perpetrator breakdown.">
+        <svg class="diagram" viewBox="0 0 860 430" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <!-- sources boundary -->
+          <rect class="d-infra" x="16" y="30" width="230" height="370" rx="16" />
+          <text class="d-infra-label" x="34" y="56">real public sources</text>
+
+          <rect class="d-surface" x="36" y="76" width="190" height="64" rx="12" />
+          <text class="d-s-title" x="131" y="102">datos.gov.co · Socrata</text>
+          <text class="d-s-sub" x="131" y="122">5 crime datasets (DIJIN)</text>
+
+          <rect class="d-surface" x="36" y="156" width="190" height="64" rx="12" />
+          <text class="d-s-title" x="131" y="182">CNMH — SIEVCAC</text>
+          <text class="d-s-sub" x="131" y="202">1947→ · perpetrators</text>
+
+          <rect class="d-surface" x="36" y="236" width="190" height="64" rx="12" />
+          <text class="d-s-title" x="131" y="262">UNODC SIMCI</text>
+          <text class="d-s-sub" x="131" y="282">coca ha · 2001–2024</text>
+
+          <rect class="d-surface" x="36" y="316" width="190" height="64" rx="12" />
+          <text class="d-s-title" x="131" y="342">DANE</text>
+          <text class="d-s-sub" x="131" y="362">population xlsx · MGN 2018</text>
+
+          <!-- ETL -->
+          <rect class="d-core" x="330" y="146" width="190" height="140" rx="12" />
+          <text class="d-core-title" x="425" y="180">Build-time ETL</text>
+          <text class="d-core-sub" x="425" y="204">normalize DIVIPOLA</text>
+          <text class="d-core-sub" x="425" y="224">aggregate (muni, year, perp)</text>
+          <text class="d-core-sub" x="425" y="244">measure orphans</text>
+          <text class="d-core-sub" x="425" y="264">emit sparse JSON + manifest</text>
+
+          <!-- static data -->
+          <rect class="d-surface" x="580" y="42" width="120" height="86" rx="12" />
+          <text class="d-s-title" x="640" y="72">static /data</text>
+          <text class="d-s-sub" x="640" y="92">9 layers · topo</text>
+          <text class="d-s-sub" x="640" y="110">key-less</text>
+
+          <!-- frontend -->
+          <rect class="d-hot" x="580" y="200" width="264" height="180" rx="12" />
+          <text class="d-core-title" x="712" y="232">MapLibre GL front end</text>
+          <text class="d-core-sub" x="712" y="258">timeline 1947–2026 · play/scrub</text>
+          <text class="d-core-sub" x="712" y="278">feature-state recolor · fixed breaks</text>
+          <text class="d-core-sub" x="712" y="298">per-100k toggle · search · inset</text>
+          <text class="d-core-sub" x="712" y="318">perpetrator bars · provenance</text>
+          <text class="d-core-sub" x="712" y="338">ES/EN · reduced-motion</text>
+
+          <!-- connectors -->
+          <line class="d-link" x1="226" y1="215" x2="330" y2="215" />
+          <line class="d-link" x1="520" y1="190" x2="580" y2="100" />
+          <line class="d-link d-link--db" x1="640" y1="128" x2="690" y2="200" />
+
+          <!-- edge labels -->
+          <text class="d-edge" x="278" y="203" text-anchor="middle">fetch + retry</text>
+          <text class="d-edge" x="536" y="130" text-anchor="middle">emit</text>
+          <text class="d-edge d-edge--db" x="628" y="172" text-anchor="end">fetch once</text>
+        </svg>
+      </div>
+
+      <ul class="arch-notes">
+        <li appReveal="up"><strong>One join key, four disguises.</strong> Sources key the same municipality as
+          <code>cod_muni</code>, 8-digit <code>codigo_dane</code>, <code>c&oacute;digo_dane_de_municipio</code>, or
+          <code>MPIO_CCNCT</code> — some as numbers that eat leading zeros. Everything normalizes to a
+          zero-padded 5-digit string, and a test suite asserts <strong>zero silent orphans</strong> per layer.</li>
+        <li appReveal="up"><strong>The crosswalk that wasn't needed.</strong> The plan feared decades of municipality
+          splits/renames would break the historic join. Measured: orphan volume is 0.7–1.8%, and it's
+          department-level "municipio not established" sentinels — reported in the provenance panel, not hidden.</li>
+        <li appReveal="up"><strong>Fixed color breaks per layer.</strong> Quantile breaks are computed over all
+          (municipality, year) values once, so a municipality's shade is comparable across the whole
+          timeline — the map never re-normalizes per frame.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- The timeline -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="activity" [size]="18" /></span> The timeline is the product</h2>
+      <p>
+        The scrubber spans each layer's true range — crime from 2003, conflict from 1947. A national
+        trend sparkline rides above it with the cursor dot glued to the curve, and the
+        <strong>2016 peace accord</strong> marked. Hit play and the map animates year by year through
+        MapLibre <code>feature-state</code> — no layer rebuilds, no re-parse, just a recolor per frame.
+      </p>
+      <p>
+        Two honesty mechanisms keep the animation truthful: <strong>per-100k normalization</strong>
+        (DANE population, 2005–2026) so the map shows risk instead of population size — Bogotá is #1 in
+        raw theft but #2 per capita — and explicit <strong>no-data rendering</strong>: a grey municipality
+        means "not reported", never "zero".
+      </p>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>Build-time ETL over a backend</dt>
+          <dd>All aggregation happens server-side on Socrata (SoQL <code>$group</code>) at build time, then
+          ships as ~2&nbsp;MB of sparse JSON. The runtime needs no keys, no server, no CORS — it cannot go
+          down and costs nothing. Trade-off: data freshness requires re-running the ETL (a scripted,
+          idempotent step).</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Perpetrator data, aggregated across years</dt>
+          <dd>Per-year, per-municipality perpetrator counts are often 1–2 cases — too sparse to read and
+          easy to over-interpret. The breakdown panel aggregates a municipality's full history and labels
+          both the range and the classification source (CNMH). Ethics beats granularity here.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>DOM markers instead of a glyph server</dt>
+          <dd>MapLibre text labels need font glyph tiles — an external dependency. City labels are HTML
+          markers revealed by zoom instead: key-less, and collision is managed by showing 5 nationally
+          and more as you zoom.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>An inset instead of distorted geography</dt>
+          <dd>San Andrés y Providencia is genuinely tiny and 720&nbsp;km offshore. Rather than inflate it,
+          a second MapLibre instance renders an enlarged inset sharing the same data, colors and
+          selection — the main map stays proportional.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Scale -->
+  <section class="section scale">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul>
+        <li>Lazy-load layer files per group instead of up-front (~2&nbsp;MB raw today, fine gzipped; not fine
+          with monthly granularity).</li>
+        <li>Month-level periods where sources support them, with a year-level rollup for the zoomed-out view.</li>
+        <li>Vector tiles for the geometry once sub-municipality drill-down (Bogotá localidades) lands.</li>
+        <li>A scheduled CI job re-running the ETL so the atlas tracks the sources without manual refreshes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Explore it</span></h2>
+      <p>Scrub the timeline yourself, or read the ETL and join tests in the repo.</p>
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link.label }}
+          </a>
+        }
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

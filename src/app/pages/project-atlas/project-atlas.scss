@@ -1,0 +1,160 @@
+.narrow { max-width: 760px; }
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.case-hero { padding-top: clamp(2rem, 5vw, 3.5rem); }
+.back {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1.4rem;
+}
+.back app-icon.flip { transform: rotate(180deg); }
+.back:hover { color: var(--accent); text-decoration: none; }
+
+/* Ethics note */
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  max-width: 68ch;
+  margin: 1.4rem 0 0;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent-3) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-3) 22%, var(--border));
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+.note app-icon { color: var(--accent-3); margin-top: 0.15rem; flex: none; }
+.note strong { color: var(--text); }
+
+.case-tech { margin: 1.4rem 0; }
+
+.repo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* Architecture diagram */
+.arch {
+  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+  border-block: 1px solid var(--border);
+}
+
+.diagram-wrap {
+  margin: 2rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+}
+.diagram {
+  display: block;
+  width: 100%;
+  min-width: 700px;
+  height: auto;
+}
+.diagram text {
+  font-family: var(--mono);
+  fill: var(--text-muted);
+}
+.d-infra {
+  fill: color-mix(in srgb, var(--accent) 5%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 35%, var(--border));
+  stroke-dasharray: 6 5;
+}
+.d-infra-label { font-size: 13px; fill: var(--text-faint); }
+.d-core {
+  fill: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  stroke: var(--accent-3);
+  stroke-width: 1.5;
+}
+.d-core-title { font-size: 16px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+.d-core-sub { font-size: 12px; text-anchor: middle; }
+.d-surface { fill: var(--surface-2); stroke: var(--border); }
+.d-s-title { font-size: 15px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+.d-s-sub { font-size: 12px; text-anchor: middle; }
+.d-hot {
+  fill: color-mix(in srgb, var(--accent-3) 14%, var(--surface));
+  stroke: var(--accent-3);
+  stroke-width: 1.5;
+}
+.d-link { stroke: var(--accent-3); stroke-width: 2; }
+.d-link--db { stroke: var(--border); stroke-dasharray: 4 4; }
+.d-edge { font-size: 11px; fill: var(--accent-3); }
+.d-edge--db { fill: var(--text-faint); }
+
+/* Architecture bullet notes */
+.arch-notes {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  max-width: 76ch;
+}
+.arch-notes li {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+.arch-notes strong { color: var(--text); }
+
+/* Decisions */
+.decisions {
+  margin: 1.5rem 0 0;
+}
+.decisions > div {
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--border);
+}
+.decisions > div:first-of-type { border-top: 0; }
+.decisions dt {
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.decisions dd { margin: 0; color: var(--text-muted); }
+
+/* What I'd change at scale */
+.scale ul {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+.scale li {
+  padding-left: 1.1rem;
+  position: relative;
+  color: var(--text-muted);
+}
+.scale li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-3);
+}
+
+.case-cta { text-align: center; }
+.case-cta h2 { justify-content: center; }
+.case-cta .repo-links { justify-content: center; margin-top: 1.2rem; }

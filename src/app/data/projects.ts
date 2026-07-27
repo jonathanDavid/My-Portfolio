@@ -102,10 +102,11 @@ export const projects: Project[] = [
     title: 'Colombia Conflict & Security Atlas',
     tagline: 'A timeline-first map of Colombia built from real public data',
     summary:
-      'Scrub 2003→2026 across all 1,122 Colombian municipalities and watch five real crime datasets evolve, with a 2016 peace-accord marker. A build-time ETL joins datos.gov.co sources to DANE geometry by DIVIPOLA; a key-less MapLibre GL front end animates the time-indexed data. Bilingual ES/EN.',
+      'Scrub 1947→2026 across all 1,122 Colombian municipalities and watch nine real data layers evolve: five police crime datasets, three CNMH armed-conflict datasets with perpetrator attribution, and UNODC coca cultivation — with per-100k normalization and a 2016 peace-accord marker. A build-time ETL joins every source to DANE geometry by DIVIPOLA; a key-less MapLibre GL front end animates it. Bilingual ES/EN.',
     tech: ['MapLibre GL', 'React', 'TypeScript', 'Vite', 'ETL / Socrata', 'TopoJSON', 'Zustand', 'Vitest'],
     status: 'shipped',
     featured: true,
+    caseStudy: true,
     year: '2026',
     icon: 'map-pin',
     repos: [

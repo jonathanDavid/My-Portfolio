@@ -30,6 +30,12 @@ export const routes: Routes = [
     title: 'Genetic-Algorithm Visualizer · Jonathan Ilias',
   },
   {
+    path: 'projects/colombia-conflict-atlas',
+    loadComponent: () =>
+      import('./pages/project-atlas/project-atlas').then((m) => m.ProjectAtlas),
+    title: 'Colombia Conflict & Security Atlas · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',
