@@ -104,7 +104,7 @@ export const projects: Project[] = [
     summary:
       'Scrub 2003→2026 across all 1,122 Colombian municipalities and watch five real crime datasets evolve, with a 2016 peace-accord marker. A build-time ETL joins datos.gov.co sources to DANE geometry by DIVIPOLA; a key-less MapLibre GL front end animates the time-indexed data. Bilingual ES/EN.',
     tech: ['MapLibre GL', 'React', 'TypeScript', 'Vite', 'ETL / Socrata', 'TopoJSON', 'Zustand', 'Vitest'],
-    status: 'in-progress',
+    status: 'shipped',
     featured: true,
     year: '2026',
     icon: 'map-pin',
