@@ -111,6 +111,7 @@ export const projects: Project[] = [
     repos: [
       { label: 'colombia-conflict-atlas', href: 'https://github.com/jonathanDavid/colombia-conflict-atlas', icon: 'map-pin' },
     ],
+    link: { label: 'Try it live', href: 'https://jonathandavid.github.io/colombia-conflict-atlas/' },
   },
   {
     slug: 'live-dashboard-go',
