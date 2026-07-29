@@ -158,3 +158,19 @@ h2 {
 .case-cta { text-align: center; }
 .case-cta h2 { justify-content: center; }
 .case-cta .repo-links { justify-content: center; margin-top: 1.2rem; }
+
+/* Screenshots */
+.shot { margin: 0 0 1.5rem; }
+.shot img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.shot figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  text-align: center;
+}
