@@ -123,7 +123,7 @@ export const projects: Project[] = [
     tagline: 'A focus timer where a masterpiece reveals itself as you work',
     summary:
       'Each focus block starts with a public-domain painting hidden; an always-connected organic reveal (ink-blot propagation via Dijkstra arrival fields) uncovers it in lockstep with real elapsed time, finishing exactly at 00:00. The museum frame is the progress bar — it draws itself in brass around the artwork. Art streams key-less from The Met and Art Institute of Chicago open APIs with bundled fallbacks; breaks keep your finished piece as the reward.',
-    tech: ['React', 'TypeScript', 'Vite', 'Canvas 2D', 'Web Audio', 'Met / AIC APIs', 'Vitest'],
+    tech: ['React', 'TypeScript', 'PWA', 'Canvas 2D', 'Web Audio', 'Met / AIC APIs', 'Vitest'],
     status: 'shipped',
     featured: true,
     caseStudy: true,
