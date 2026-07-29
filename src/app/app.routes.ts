@@ -36,6 +36,12 @@ export const routes: Routes = [
     title: 'Colombia Conflict & Security Atlas · Jonathan Ilias',
   },
   {
+    path: 'projects/art-pomodoro',
+    loadComponent: () =>
+      import('./pages/project-pomodoro/project-pomodoro').then((m) => m.ProjectPomodoro),
+    title: 'Art Pomodoro · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',

@@ -1,0 +1,148 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="sparkles" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Art Pomodoro</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>Public-domain art only, always attributed.</strong> Every piece carries its title,
+        artist, date, and a link to the museum that holds it — streamed key-less from The Met and the
+        Art Institute of Chicago open APIs, with bundled open-access fallbacks so the app never fails
+        to show art, even offline.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link.label }}
+          </a>
+        }
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        Pomodoro timers work, but they're joyless — a countdown you avoid looking at. This one inverts
+        the incentive: <strong>the artwork is the interface</strong>. A public-domain painting starts
+        hidden and is uncovered in lockstep with real elapsed time, so glancing at the canvas tells you
+        how deep into the block you are — and every finished session ends with a small act of
+        discovery, a masterpiece you may never have seen. Time itself is demoted to a small corner
+        readout.
+      </p>
+    </div>
+  </section>
+
+  <!-- The reveal -->
+  <section class="section arch">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="activity" [size]="18" /></span> An always-connected reveal</h2>
+      <p appReveal="up">
+        Early prototypes revealed random squares — it read as dead pixels. The shipped design computes a
+        <strong>Dijkstra arrival field</strong>: a flood spreads from a seed point (the center, a corner,
+        or an edge, chosen per session) through a smooth random cost terrain. The revealed region
+        <em>grows through adjacency</em>, so it is one connected organism by construction — it fingers
+        and wanders like ink blooming through paper, but it can never leave disconnected islands.
+      </p>
+      <p appReveal="up">
+        Rendering punches <strong>soft overlapping circles</strong> out of a persistent veil canvas
+        (incremental, one punch per cell), so edges read as organic blobs, never squares. Brass embers
+        glow along the live frontier. The thresholds are normalized so the final cell lands
+        <strong>exactly at 00:00</strong> — the reveal can never outrun the timer.
+      </p>
+      <ul class="arch-notes">
+        <li appReveal="up"><strong>Pure timer reducer.</strong> Elapsed time is injected as an action, so
+          auto-advance, overshoot carry-over, and long-break cycles are unit-tested without clocks —
+          and a throttled background tab can't drift the countdown.</li>
+        <li appReveal="up"><strong>The frame is the progress bar.</strong> A brass border draws itself
+          clockwise around the painting, completing at 00:00 — then <em>drains</em> through the break
+          while the finished piece stays up as the reward. A pulsing ember rides the tip.</li>
+        <li appReveal="up"><strong>Seeded determinism.</strong> Every pattern derives from a per-session
+          seed (mulberry32), so a reveal never reshuffles between frames, and the same session always
+          blooms the same way.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>Reveal tracks real time, not an animation</dt>
+          <dd>The displayed fraction eases toward true elapsed time each animation frame — smooth
+          motion, but the canvas is honest: it is a progress bar in disguise, not a parallel effect.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Tainted canvas is acceptable</dt>
+          <dd>Some museum image hosts send no CORS headers. The loader tries a CORS-clean load first,
+          then retries plain — and since the reveal never reads pixels back, a tainted canvas costs
+          nothing. Failed images swap silently to a bundled piece; the previous painting keeps
+          rendering while the next loads.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Whole-canvas effects were cut</dt>
+          <dd>Blur and pixelate reveals survived three design rounds, then lost: mid-session they read
+          as a broken smudged image, not progress. Only the organic propagation patterns ship.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Breaks keep the finished piece</dt>
+          <dd>The reward for a completed block is looking at what you uncovered. New art arrives only
+          when the next focus begins.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Scale -->
+  <section class="section scale">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul>
+        <li>Preload the next artwork during the current block so the phase flip is instant.</li>
+        <li>A small service worker caching recent artworks for fully offline sessions.</li>
+        <li>A shareable weekly "gallery" of everything you've revealed.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Reveal one yourself</span></h2>
+      <p>Set a short focus block and watch a masterpiece bloom.</p>
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link.label }}
+          </a>
+        }
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

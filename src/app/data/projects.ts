@@ -115,6 +115,23 @@ export const projects: Project[] = [
     link: { label: 'Try it live', href: 'https://jonathandavid.github.io/colombia-conflict-atlas/' },
   },
   {
+    slug: 'art-pomodoro',
+    title: 'Art Pomodoro',
+    tagline: 'A focus timer where a masterpiece reveals itself as you work',
+    summary:
+      'Each focus block starts with a public-domain painting hidden; an always-connected organic reveal (ink-blot propagation via Dijkstra arrival fields) uncovers it in lockstep with real elapsed time, finishing exactly at 00:00. The museum frame is the progress bar — it draws itself in brass around the artwork. Art streams key-less from The Met and Art Institute of Chicago open APIs with bundled fallbacks; breaks keep your finished piece as the reward.',
+    tech: ['React', 'TypeScript', 'Vite', 'Canvas 2D', 'Web Audio', 'Met / AIC APIs', 'Vitest'],
+    status: 'shipped',
+    featured: true,
+    caseStudy: true,
+    year: '2026',
+    icon: 'sparkles',
+    link: { label: 'Try it live', href: 'https://jonathandavid.github.io/art-pomodoro/', icon: 'external-link' },
+    repos: [
+      { label: 'art-pomodoro', href: 'https://github.com/jonathanDavid/art-pomodoro', icon: 'sparkles' },
+    ],
+  },
+  {
     slug: 'live-dashboard-go',
     title: 'Go + WebSocket Live Dashboard',
     tagline: 'A low-latency metrics dashboard in Go',
