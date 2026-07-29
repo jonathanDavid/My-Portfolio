@@ -38,11 +38,17 @@
         </div>
         <div class="front-actions">
           @if (project().link) {
-            <a class="front-live" [href]="project().link!.href" target="_blank" rel="noopener" (click)="$event.stopPropagation()">
+            <!-- Touch-only: on hover devices the hover-flip exposes the back
+                 link before this could ever be clicked, so it's hidden there.
+                 On phones it guarantees the demo is one tap away even if the
+                 flip misbehaves. -->
+            <a class="front-live" [href]="project().link!.href" target="_blank" rel="noopener"
+               (click)="$event.stopPropagation()" (pointerup)="$event.stopPropagation()">
               <app-icon name="external-link" [size]="13" /> Try it live
             </a>
           }
-          <button type="button" class="flip-hint" (click)="flipToBack()" aria-label="Show stack and links">
+          <button type="button" class="flip-hint" (click)="flipToBack()"
+                  (pointerup)="$event.stopPropagation(); flipToBack()" aria-label="Show stack and links">
             <app-icon name="component" [size]="14" />
             <span class="flip-hint__hover">Hover for stack &amp; links</span>
             <span class="flip-hint__tap">Tap for stack &amp; links</span>
@@ -55,7 +61,8 @@
     <div class="face back card glass">
       <div class="back__head">
         <p class="back__eyebrow"><app-icon name="component" [size]="15" /> Stack &amp; links</p>
-        <button type="button" class="back__flip" (click)="flipToFront()" aria-label="Back to summary">
+        <button type="button" class="back__flip" (click)="flipToFront()"
+                (pointerup)="$event.stopPropagation(); flipToFront()" aria-label="Back to summary">
           <app-icon name="close" [size]="16" />
         </button>
       </div>

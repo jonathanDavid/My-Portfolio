@@ -341,3 +341,8 @@
   text-decoration: none;
   background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
+/* Hover devices flip on hover — the back's link is the reachable one there,
+   so the front pill only exists where there is no hover (touch). */
+@media (hover: hover) {
+  .front-live { display: none; }
+}
