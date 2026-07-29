@@ -109,6 +109,7 @@ export const projects: Project[] = [
     caseStudy: true,
     year: '2026',
     icon: 'map-pin',
+    appIcon: 'assets/app-icons/atlas.svg',
     repos: [
       { label: 'colombia-conflict-atlas', href: 'https://github.com/jonathanDavid/colombia-conflict-atlas', icon: 'map-pin' },
     ],
@@ -126,6 +127,7 @@ export const projects: Project[] = [
     caseStudy: true,
     year: '2026',
     icon: 'sparkles',
+    appIcon: 'assets/app-icons/pomodoro.svg',
     link: { label: 'Try it live', href: 'https://jonathandavid.github.io/art-pomodoro/', icon: 'external-link' },
     repos: [
       { label: 'art-pomodoro', href: 'https://github.com/jonathanDavid/art-pomodoro', icon: 'sparkles' },
