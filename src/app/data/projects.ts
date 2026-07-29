@@ -147,15 +147,22 @@ export const projects: Project[] = [
   },
   {
     slug: 'route-graph-neo4j',
-    title: 'Neo4j Route-Graph App',
-    tagline: 'Shortest-path routing over a property graph',
+    title: 'Colombia Route Graph',
+    tagline: 'Shortest paths over real highways, with the Cypher always visible',
     summary:
-      'A routing app modelling a road network as a Neo4j property graph, with Cypher-driven shortest-path queries exposed through a small NestJS API and an interactive map UI.',
-    tech: ['Neo4j', 'Cypher', 'NestJS', 'TypeScript'],
-    status: 'in-progress',
-    featured: false,
+      'The Colombian intercity road network as a Neo4j property graph: 56 real cities (DANE codes), 69 curated Ruta Nacional edges enriched with OSRM driving distances and real road polylines. The explorer answers fewest-legs / shortest-km / fastest-time with two engines — a key-less client-side Dijkstra and live Neo4j over bolt-in-WebSocket straight from the browser — pinned to identical answers. The roadless Amazon capitals are shown honestly: no road exists, and the app says so.',
+    tech: ['Neo4j', 'Cypher', 'APOC', 'MapLibre GL', 'React', 'TypeScript', 'OSRM', 'Docker', 'Vitest'],
+    status: 'shipped',
+    featured: true,
+    caseStudy: true,
     year: '2026',
     icon: 'route',
+    appIcon: 'assets/app-icons/routegraph.svg',
+    link: { label: 'Try it live', href: 'https://jonathandavid.github.io/routegraph-web/', icon: 'external-link' },
+    repos: [
+      { label: 'routegraph-db', href: 'https://github.com/jonathanDavid/routegraph-db', icon: 'server' },
+      { label: 'routegraph-web', href: 'https://github.com/jonathanDavid/routegraph-web', icon: 'route' },
+    ],
   },
   {
     slug: 'road-trip-agent',

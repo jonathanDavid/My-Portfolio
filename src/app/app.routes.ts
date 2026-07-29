@@ -42,6 +42,12 @@ export const routes: Routes = [
     title: 'Art Pomodoro · Jonathan Ilias',
   },
   {
+    path: 'projects/route-graph-neo4j',
+    loadComponent: () =>
+      import('./pages/project-routegraph/project-routegraph').then((m) => m.ProjectRoutegraph),
+    title: 'Colombia Route Graph · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',

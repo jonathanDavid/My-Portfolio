@@ -1,0 +1,158 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="route" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Colombia Route Graph</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>Real network, honestly drawn.</strong> Cities are DANE DIVIPOLA municipalities; edges
+        exist only where a Ruta Nacional actually connects the pair; distances and road polylines come
+        from OSRM/OpenStreetMap. And the empty Amazon southeast is stated, not hidden — Leticia, Mitú,
+        Inírida and Puerto Carreño appear as roadless ✈ nodes, because no road exists.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link.label }}
+          </a>
+        }
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        Routing questions are <em>path</em> questions — shortest, fastest, what's reachable, which
+        corridor carries the load. In SQL they become recursive self-joins; in a graph database they're
+        one line of Cypher. This project makes that argument <strong>demonstrable</strong>: a real
+        national road network you can query, with the Cypher on screen for every answer.
+      </p>
+      <p>
+        Two repositories, one contract: <code>routegraph-db</code> owns the data and the Neo4j schema;
+        <code>routegraph-web</code> explores it — and also runs entirely without it, so the deployed
+        demo needs no backend at all.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — one graph, two engines</h2>
+      <ul class="arch-notes">
+        <li appReveal="up"><strong>ETL with real sources.</strong> 56 DANE municipalities and 69 curated
+          INVIAS corridors are enriched by OSRM: real driving km/min <em>and the actual road polyline</em>
+          per edge (simplified to ≤80 points), so rendered routes wind through the cordilleras instead of
+          cutting straight lines across the map. An idempotent seed loads Neo4j
+          (<code>MERGE</code> + relationship sweep) with APOC for weighted Dijkstra.</li>
+        <li appReveal="up"><strong>Dual engines, pinned to agree.</strong> The deployed site runs a
+          client-side Dijkstra over the exported graph JSON — key-less, no server. Enter bolt credentials
+          and the SAME Cypher runs against a live Neo4j <em>from the browser</em> over bolt-in-WebSocket —
+          no API layer. Tests pin both engines to identical answers.</li>
+        <li appReveal="up"><strong>The graph corrected itself.</strong> Splitting the long northern
+          corridors at their real junctions (Aguachica, Bosconia) changed the Bogotá→Santa Marta answer
+          from a 1,145 km detour to the true 971 km Ruta del Sol — finer nodes, better shortest paths,
+          exactly as graph theory promises.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> Inside the explorer</h2>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/routegraph-explorer.png" alt="The explorer: Colombia's highway network over the country silhouette, the Bogotá→Santa Marta route winding along the real Ruta del Sol in amber, per-leg breakdown with Ruta Nacional names, and the live Cypher panel" loading="lazy" width="1600" height="1000" />
+        <figcaption>Bogotá → Santa Marta resolving to the real Ruta del Sol — 971 km, six legs, each with its Ruta Nacional name and OSRM metrics. The route follows the actual road geometry.</figcaption>
+      </figure>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/routegraph-roadless.png" alt="Routing to Leticia: the app explains no road route exists because the Amazon capitals have no connection to the national network — access is by air or river only" loading="lazy" width="1600" height="1000" />
+        <figcaption>Routing to Leticia — the honest answer. The four Amazon capitals are roadless ✈ nodes; the empty southeast is real Colombian geography, stated in the UI.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>Browser → Neo4j, no API server</dt>
+          <dd>The official JS driver speaks bolt over WebSocket directly from the page. Credentials are
+          user-entered and live only in localStorage; the deployed site ships none. A NestJS layer was
+          the original plan — it turned out to be pure overhead for this shape of app.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Curated edges over a full OSM import</dt>
+          <dd>Importing all of OpenStreetMap would bury the teaching point in millions of segments. 69
+          hand-curated intercity corridors keep every query result legible — and each edge still carries
+          real OSRM metrics and geometry, so nothing is invented.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Demo engine mirrors the database</dt>
+          <dd>The client-side Dijkstra exists so GitHub Pages can serve a working demo key-less. Tests
+          pin it to the exact corridors Neo4j returns — if they ever diverge, CI fails.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Roadless as a feature, not a gap</dt>
+          <dd>Four departmental capitals have no road to the rest of Colombia. Hiding them would misstate
+          the country; including them with an explanation turns a blank spot into the map's most
+          interesting fact.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Scale -->
+  <section class="section scale">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul>
+        <li>Graph Data Science library (GDS) for betweenness/community detection instead of APOC brute force.</li>
+        <li>Secondary-road tiers (departmental network) with a level-of-detail toggle.</li>
+        <li>A scheduled ETL run so OSRM metrics track road openings (e.g. new 4G concessions).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Query it yourself</span></h2>
+      <p>Pick two cities and watch the Cypher answer — or connect your own Neo4j and run it for real.</p>
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link.label }}
+          </a>
+        }
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>
