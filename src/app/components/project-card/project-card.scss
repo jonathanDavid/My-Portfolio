@@ -346,3 +346,24 @@
 @media (hover: hover) {
   .front-live { display: none; }
 }
+
+/* Back-face live CTA — a real button, not another repo link */
+.back-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bg, #0b1120);
+  background: var(--brand-gradient, var(--accent));
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: transform 0.12s, box-shadow 0.2s;
+}
+.back-live:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 50%, transparent);
+}

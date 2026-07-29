@@ -84,8 +84,9 @@
           </a>
         }
         @if (project().link) {
-          <a class="repo" [href]="project().link!.href" target="_blank" rel="noopener">
-            <app-icon name="external-link" [size]="14" />{{ project().link!.label }}
+          <a class="back-live" [href]="project().link!.href" target="_blank" rel="noopener"
+             (pointerup)="$event.stopPropagation()">
+            <app-icon name="external-link" [size]="15" />{{ project().link!.label }}
           </a>
         }
         @if (!project().caseStudy && !(project().repos?.length) && !project().link) {
