@@ -73,6 +73,7 @@ export const projects: Project[] = [
     year: '2021–2022',
     icon: 'cloud',
     appIcon: 'assets/app-icons/retail.svg',
+    link: { label: 'Try it live', href: 'https://jonathandavid.github.io/retail-serverless-web/', icon: 'external-link' },
     repos: [
       { label: 'retail-serverless-web', href: 'https://github.com/jonathanDavid/retail-serverless-web', icon: 'gauge' },
       { label: 'retail-serverless-api', href: 'https://github.com/jonathanDavid/retail-serverless-api', icon: 'server' },
@@ -92,6 +93,7 @@ export const projects: Project[] = [
     year: '2019–2021',
     icon: 'activity',
     appIcon: 'assets/app-icons/genetic.svg',
+    link: { label: 'Try it live', href: 'https://jonathandavid.github.io/genetic-visualizer-web/', icon: 'external-link' },
     repos: [
       { label: 'genetic-visualizer-api', href: 'https://github.com/jonathanDavid/genetic-visualizer-api', icon: 'server' },
       { label: 'genetic-visualizer-web', href: 'https://github.com/jonathanDavid/genetic-visualizer-web', icon: 'sparkles' },

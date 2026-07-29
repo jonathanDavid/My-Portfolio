@@ -36,11 +36,18 @@
             <app-tech-chip [name]="t" />
           }
         </div>
-        <button type="button" class="flip-hint" (click)="flipToBack()" aria-label="Show stack and links">
-          <app-icon name="component" [size]="14" />
-          <span class="flip-hint__hover">Hover for stack &amp; links</span>
-          <span class="flip-hint__tap">Tap for stack &amp; links</span>
-        </button>
+        <div class="front-actions">
+          @if (project().link) {
+            <a class="front-live" [href]="project().link!.href" target="_blank" rel="noopener" (click)="$event.stopPropagation()">
+              <app-icon name="external-link" [size]="13" /> Try it live
+            </a>
+          }
+          <button type="button" class="flip-hint" (click)="flipToBack()" aria-label="Show stack and links">
+            <app-icon name="component" [size]="14" />
+            <span class="flip-hint__hover">Hover for stack &amp; links</span>
+            <span class="flip-hint__tap">Tap for stack &amp; links</span>
+          </button>
+        </div>
       </div>
     </div>
 
