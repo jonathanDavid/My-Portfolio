@@ -48,6 +48,12 @@ export const routes: Routes = [
     title: 'Colombia Route Graph · Jonathan Ilias',
   },
   {
+    path: 'projects/gamedev-copilot',
+    loadComponent: () =>
+      import('./pages/project-copilot/project-copilot').then((m) => m.ProjectCopilot),
+    title: 'Game-Dev Research Copilot · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',

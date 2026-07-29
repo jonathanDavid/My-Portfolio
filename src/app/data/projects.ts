@@ -136,6 +136,23 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'gamedev-copilot',
+    title: 'Game-Dev Research Copilot',
+    tagline: 'A LangGraph agent with RAG over 12 game frameworks — 100% local inference',
+    summary:
+      'Ask it about Phaser, Godot, PixiJS, Bevy or 8 more frameworks: a LangGraph router decides docs / video / chat, a retriever grounds answers in 226 chunks of real documentation indexed into Chroma (with citations), a key-less YouTube tool finds tutorials, and layered memory keeps project decisions across sessions. Every LLM call runs locally on Ollama + Mistral — private, free, no cloud API. The entire graph is testable without any model: 12 hermetic tests run it in one second against deterministic fakes.',
+    tech: ['LangGraph', 'Python', 'RAG', 'ChromaDB', 'Ollama', 'Mistral 7B', 'pytest'],
+    status: 'shipped',
+    featured: true,
+    caseStudy: true,
+    year: '2026',
+    icon: 'bot',
+    appIcon: 'assets/app-icons/copilot.svg',
+    repos: [
+      { label: 'gamedev-copilot', href: 'https://github.com/jonathanDavid/gamedev-copilot', icon: 'bot' },
+    ],
+  },
+  {
     slug: 'live-dashboard-go',
     title: 'Go + WebSocket Live Dashboard',
     tagline: 'A low-latency metrics dashboard in Go',

@@ -13,6 +13,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'projects/colombia-conflict-atlas', renderMode: RenderMode.Prerender },
   { path: 'projects/art-pomodoro', renderMode: RenderMode.Prerender },
   { path: 'projects/route-graph-neo4j', renderMode: RenderMode.Prerender },
+  { path: 'projects/gamedev-copilot', renderMode: RenderMode.Prerender },
   { path: 'experience', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Prerender },
 ];

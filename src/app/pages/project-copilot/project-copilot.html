@@ -1,0 +1,155 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="bot" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Game-Dev Research Copilot</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>No cloud, no keys, no telemetry.</strong> Every LLM call — routing, generation —
+        runs on the local machine via Ollama + Mistral 7B. The docs corpus is 226 chunks of real
+        documentation from 12 frameworks; answers cite their sources so a 7B model's imprecision is
+        checkable, not hidden. There is deliberately no hosted demo: local inference can't run on
+        static hosting, and a faked one would betray the point.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }} — run it yourself
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        Agent frameworks are easy to demo and hard to trust: a freeform loop calls tools until
+        something plausible appears, and you can't see why — or test any of it without burning API
+        credits. This project takes the opposite stance: an <strong>explicit LangGraph</strong> where
+        every step is a named node, every answer prints the path it took, and the entire workflow runs
+        under pytest in one second <em>with no model at all</em>.
+      </p>
+      <p>
+        The domain is 2D game development: ask about Phaser, Godot, PixiJS, Ebitengine, Bevy and more,
+        and the agent answers from indexed documentation with citations, finds tutorial videos, or
+        just talks — remembering your project's decisions between sessions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — one graph, three routes</h2>
+      <ul class="arch-notes">
+        <li appReveal="up"><strong>Router node:</strong> the first Mistral call does classification only —
+          <code>docs</code> / <code>video</code> / <code>chat</code>, one word, defensively parsed with a
+          keyword-heuristic fallback. It's the only place the LLM touches control flow, and even that is fenced.</li>
+        <li appReveal="up"><strong>RAG path:</strong> the question is embedded (nomic-embed-text) and Chroma
+          returns the nearest chunks by cosine — real doc passages, chunked ~400 words with overlap at
+          index time. The generate prompt orders the model to answer FROM them, cite <code>[n]</code>,
+          and admit gaps: the anti-hallucination contract.</li>
+        <li appReveal="up"><strong>Tool path:</strong> the model never executes anything — our code performs a
+          key-less YouTube search (parsing <code>ytInitialData</code>) and feeds real results back into
+          the prompt. A broken tool degrades to an honest "nothing found", never a crash.</li>
+        <li appReveal="up"><strong>Memory:</strong> a conversation buffer re-sends recent turns (models remember
+          nothing), while durable project decisions — <code>/remember my game uses arcade physics</code> —
+          persist to JSON and are injected into every prompt. That triage is context management.</li>
+        <li appReveal="up"><strong>The testability seam:</strong> every model call goes through two tiny
+          protocols (<code>LLM</code>, <code>Embedder</code>). Production plugs in Ollama; tests plug in
+          scripted fakes and a deterministic hash embedder — 12 hermetic tests assert paths, grounding,
+          memory persistence and router salvage, in ~1 s, offline.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Screenshots (real captured sessions) -->
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> Real sessions, real paths</h2>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/copilot-docs.png" alt="Terminal session: a Godot nodes-and-scenes question routed docs, retrieved the exact Godot documentation page at 0.86 similarity, and produced a grounded answer with citations — path route → retrieve → generate → update_memory" loading="lazy" width="1600" height="1000" />
+        <figcaption>The docs route: a Godot question retrieves the exact nodes-and-scenes page (0.86 cosine) and answers with [n] citations. The printed path is the graph's actual trace — captured, not staged.</figcaption>
+      </figure>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/copilot-video.png" alt="Terminal session: a tutorial request routed video, the key-less YouTube tool returned real tutorials (ourcade ECS movement, and more), and the agent recommended one with its URL" loading="lazy" width="1600" height="1000" />
+        <figcaption>The tool route: the router says video, our code searches YouTube key-less, and the agent recommends from the real results it was fed.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>Local 7B over a cloud frontier model</dt>
+          <dd>60–90 s per grounded answer on CPU, and occasional imprecise paraphrasing — accepted,
+          because the goals were privacy, zero cost, and honesty about what small local models can do.
+          The citations make the imprecision checkable; a bigger model slots in by changing one string.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Explicit graph over a freeform agent loop</dt>
+          <dd>Nodes and conditional edges mean the flow is inspectable and every run is traceable
+          (<code>state.path</code>). The cost is flexibility; the win is that tests can assert exactly
+          which route a question takes.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Index only what servers actually send</dt>
+          <dd>Some doc sites are client-rendered SPAs (a fetcher receives an empty shell) or block
+          non-browser agents. Those are skipped and noted in the corpus file rather than half-indexed —
+          a small honesty lesson every RAG system eventually learns.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>No hosted demo, on purpose</dt>
+          <dd>Local inference cannot run on GitHub Pages, and simulating an agent would undermine the
+          project's whole argument. The repo is the demo: clone, run 12 tests in a second, then pull
+          the models and talk to it.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Scale -->
+  <section class="section scale">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul>
+        <li>Answer streaming for perceived latency; a golden-set retrieval eval in CI.</li>
+        <li>A web UI rendering the graph path visually, with a recorded-transcript demo mode.</li>
+        <li>A summarization node when the conversation buffer overflows, instead of drop-off.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Run it on your machine</span></h2>
+      <p>The README walks from a fresh PC to a working copilot in seven commands.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>
