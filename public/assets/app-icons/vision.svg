@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0d1117"/>
+  <!-- tile grid (the large-image trick) -->
+  <path d="M22 12 H52 M22 26 H52 M22 40 H52 M22 12 V40 M37 12 V40 M52 12 V40" stroke="#30363d" stroke-width="1.6"/>
+  <!-- the eye -->
+  <path d="M8 44 C16 32, 36 32, 44 44 C36 56, 16 56, 8 44 Z" fill="none" stroke="#7ee787" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="26" cy="44" r="6.5" fill="#7ee787"/>
+  <circle cx="26" cy="44" r="2.6" fill="#0d1117"/>
+  <!-- one lit tile: found it -->
+  <rect x="38" y="13.5" width="12.5" height="11" fill="#f0b72f" opacity="0.9"/>
+</svg>

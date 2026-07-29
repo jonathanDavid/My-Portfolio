@@ -153,6 +153,23 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'vision-copilot',
+    title: 'Vision Copilot',
+    tagline: 'Talk to an image — descriptions grounded by tiled detection, 100% local',
+    summary:
+      'Ask anything about a photo and get honest prose: LLaVA describes, while a tiled YOLO scan of the full-resolution image silently grounds every count — small objects in large photos stop disappearing, and the code (not the model) states the numbers, because a 7B repeats them unreliably. IoU+IOS non-max suppression merges tile-cut fragments (the first live run found 8 people in a 4-person photo until that fix). Same testable-without-models architecture as the game-dev copilot: 14 hermetic tests run the whole graph in under a second.',
+    tech: ['LangGraph', 'Python', 'YOLOv8', 'LLaVA', 'Ollama', 'Pillow', 'pytest'],
+    status: 'shipped',
+    featured: true,
+    caseStudy: true,
+    year: '2026',
+    icon: 'monitor',
+    appIcon: 'assets/app-icons/vision.svg',
+    repos: [
+      { label: 'vision-copilot', href: 'https://github.com/jonathanDavid/vision-copilot', icon: 'monitor' },
+    ],
+  },
+  {
     slug: 'live-dashboard-go',
     title: 'Go + WebSocket Live Dashboard',
     tagline: 'A low-latency metrics dashboard in Go',

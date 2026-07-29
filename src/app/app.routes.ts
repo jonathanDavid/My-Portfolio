@@ -54,6 +54,12 @@ export const routes: Routes = [
     title: 'Game-Dev Research Copilot · Jonathan Ilias',
   },
   {
+    path: 'projects/vision-copilot',
+    loadComponent: () =>
+      import('./pages/project-vision/project-vision').then((m) => m.ProjectVision),
+    title: 'Vision Copilot · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',
