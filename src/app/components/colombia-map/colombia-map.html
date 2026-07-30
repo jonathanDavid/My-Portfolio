@@ -1,0 +1,67 @@
+<figure class="co-map">
+  <svg
+    [attr.viewBox]="'0 0 ' + view.w + ' ' + view.h"
+    role="group"
+    aria-label="Map of Colombia — click a department to see what makes it beautiful"
+  >
+    @for (d of depts; track d.id) {
+      <path
+        class="dept"
+        [class.dept--selected]="selected() === d.id"
+        [class.dept--personal]="d.id === 'la-guajira' || d.id === 'atlantico'"
+        [attr.d]="d.d"
+        role="button"
+        tabindex="0"
+        [attr.aria-label]="d.name"
+        [attr.aria-pressed]="selected() === d.id"
+        (click)="pick(d.id)"
+        (keydown.enter)="pick(d.id)"
+        (keydown.space)="$event.preventDefault(); pick(d.id)"
+      >
+        <title>{{ d.name }}</title>
+      </path>
+    }
+
+    <!-- San Andrés inset: 260 km offshore, drawn as a dot in the Caribbean -->
+    <g
+      class="inset"
+      [class.dept--selected]="selected() === 'san-andres-y-providencia'"
+      role="button"
+      tabindex="0"
+      aria-label="San Andrés y Providencia"
+      [attr.aria-pressed]="selected() === 'san-andres-y-providencia'"
+      (click)="pick('san-andres-y-providencia')"
+      (keydown.enter)="pick('san-andres-y-providencia')"
+      (keydown.space)="$event.preventDefault(); pick('san-andres-y-providencia')"
+    >
+      <rect x="6" y="10" width="14" height="14" rx="3" />
+      <circle cx="13" cy="17" r="2.6" />
+      <title>San Andrés y Providencia</title>
+    </g>
+
+    @for (m of markers; track m.id) {
+      <g class="marker" [class.marker--home]="m.kind === 'home'" (click)="pick(m.dept)">
+        <circle class="marker-pulse" [attr.cx]="m.x" [attr.cy]="m.y" r="3.4" />
+        <circle class="marker-dot" [attr.cx]="m.x" [attr.cy]="m.y" r="1.6" />
+      </g>
+    }
+  </svg>
+
+  <figcaption aria-live="polite">
+    @if (info(); as i) {
+      <p class="co-name">
+        {{ i.name }}
+        @if (i.personal === 'home') { <span class="co-tag co-tag--home"><app-icon name="map-pin" [size]="11" /> where I'm from</span> }
+        @if (i.personal === 'current') { <span class="co-tag"><app-icon name="map-pin" [size]="11" /> where I live</span> }
+      </p>
+      @if (i.place) { <p class="co-place">{{ i.place }}</p> }
+      <p class="co-beauty">{{ i.beauty }}</p>
+    } @else {
+      <p class="co-hint">
+        <span class="co-dot co-dot--home"></span> Camarones, La Guajira — where I'm from ·
+        <span class="co-dot"></span> Barranquilla — home base.
+        <span class="co-hint2">Click any department for a glimpse of its beauty.</span>
+      </p>
+    }
+  </figcaption>
+</figure>

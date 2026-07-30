@@ -257,11 +257,14 @@
 .back__tech {
   margin-bottom: 1.1rem;
 }
+/* Stacked, not side-by-side: a hovered link that grows would reflow its row
+   neighbours, and that layout shift re-triggers the flip-face paint artifact
+   on some GPUs. One link per row + transform-only hover = zero reflow. */
 .back__links {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.9rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
   margin-top: auto;
 }
 .link-cta {
@@ -271,7 +274,9 @@
   font-weight: 600;
   font-size: 0.9rem;
 }
-.link-cta:hover { text-decoration: none; gap: 0.55rem; }
+.link-cta app-icon { transition: transform 0.15s ease; }
+.link-cta:hover { text-decoration: none; }
+.link-cta:hover app-icon { transform: translate(2px, -2px); }
 
 .repo {
   display: inline-flex;

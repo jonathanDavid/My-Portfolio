@@ -1,0 +1,102 @@
+:host { display: block; }
+
+.co-map {
+  margin: 0;
+  max-width: 300px;
+}
+
+svg { width: 100%; height: auto; display: block; }
+
+.dept {
+  fill: color-mix(in srgb, var(--accent-3) 7%, transparent);
+  stroke: color-mix(in srgb, var(--accent-3) 35%, var(--border));
+  stroke-width: 0.35;
+  cursor: pointer;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+  outline: none;
+}
+.dept:hover,
+.dept:focus-visible {
+  fill: color-mix(in srgb, var(--accent-3) 22%, transparent);
+  stroke: var(--accent-3);
+}
+.dept--personal {
+  fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+.dept--selected,
+.dept--personal.dept--selected {
+  fill: color-mix(in srgb, var(--accent) 34%, transparent);
+  stroke: var(--accent);
+  stroke-width: 0.6;
+}
+
+.inset {
+  cursor: pointer;
+  outline: none;
+  rect {
+    fill: none;
+    stroke: color-mix(in srgb, var(--accent-3) 40%, var(--border));
+    stroke-width: 0.35;
+    stroke-dasharray: 1.4 1;
+  }
+  circle {
+    fill: color-mix(in srgb, var(--accent-3) 20%, transparent);
+    stroke: color-mix(in srgb, var(--accent-3) 55%, var(--border));
+    stroke-width: 0.35;
+    transition: fill 0.2s ease;
+  }
+  &:hover circle,
+  &:focus-visible circle,
+  &.dept--selected circle { fill: color-mix(in srgb, var(--accent) 40%, transparent); stroke: var(--accent); }
+}
+
+.marker { cursor: pointer; }
+.marker-dot { fill: var(--accent-3); }
+.marker--home .marker-dot { fill: var(--accent); }
+.marker-pulse {
+  fill: none;
+  stroke: var(--accent-3);
+  stroke-width: 0.4;
+  opacity: 0.8;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: co-pulse 2.4s ease-out infinite;
+}
+.marker--home .marker-pulse { stroke: var(--accent); animation-delay: 1.2s; }
+@keyframes co-pulse {
+  0% { transform: scale(0.35); opacity: 0.9; }
+  70% { transform: scale(1); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marker-pulse { animation: none; opacity: 0.35; }
+}
+
+figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  min-height: 4.4em; /* selecting departments must not reflow the footer */
+}
+.co-name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+  display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
+}
+.co-tag {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent-3);
+}
+.co-tag--home { color: var(--accent); }
+.co-place { margin: 0.05rem 0 0; color: var(--text-faint); font-size: 0.74rem; }
+.co-beauty { margin: 0.25rem 0 0; color: var(--text-muted); }
+.co-hint { margin: 0; color: var(--text-muted); }
+.co-hint2 { display: block; margin-top: 0.2rem; color: var(--text-faint); }
+.co-dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent-3); vertical-align: baseline;
+}
+.co-dot--home { background: var(--accent); }
