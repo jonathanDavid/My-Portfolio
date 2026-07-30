@@ -9,15 +9,18 @@
    overlays the faded region instead of hanging below the crop. */
 @media (min-width: 1200px) {
   :host(.hero) .co-map { position: relative; }
+  /* Pixel stops, not percentages: the footer shows a fixed ~730px window of
+     the (much taller) map, so the fade must complete within that window at
+     every scale. */
   :host(.hero) svg {
-    mask-image: linear-gradient(to bottom, #000 46%, rgba(0, 0, 0, 0.35) 70%, transparent 88%);
-    -webkit-mask-image: linear-gradient(to bottom, #000 46%, rgba(0, 0, 0, 0.35) 70%, transparent 88%);
+    mask-image: linear-gradient(to bottom, #000 330px, rgba(0, 0, 0, 0.35) 510px, transparent 690px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 330px, rgba(0, 0, 0, 0.35) 510px, transparent 690px);
   }
   :host(.hero) figcaption {
     position: absolute;
+    top: 560px;
     left: 2%;
-    bottom: 6%;
-    max-width: 300px;
+    max-width: 320px;
     min-height: 0;
   }
 }

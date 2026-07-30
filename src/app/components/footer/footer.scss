@@ -38,8 +38,8 @@
   .footer-map {
     position: absolute;
     top: 36px;
-    right: 1.5rem;
-    width: clamp(430px, 30vw, 560px);
+    right: 0.5rem;
+    width: clamp(700px, 56vw, 1100px);
     max-width: none;
     margin: 0;
     z-index: 0;
@@ -49,10 +49,10 @@
   .footer-meta { max-width: 260px; pointer-events: none; }
   .footer-meta a { pointer-events: auto; }
 }
-/* Very wide: walk the map inward so it overlaps the content column instead
-   of drifting to the far edge with the whitespace */
+/* Very wide: keep a slight inward pull so the map still overlaps the card,
+   but stay close to the right edge */
 @media (min-width: 1500px) {
-  .footer-map { right: calc((100vw - var(--maxw)) / 2 - 6vw); }
+  .footer-map { right: calc((100vw - var(--maxw)) / 2 - 10vw); }
 }
 
 .footer-actions {
