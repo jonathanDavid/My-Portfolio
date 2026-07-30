@@ -13,13 +13,13 @@
      the (much taller) map, so the fade must complete within that window at
      every scale. */
   :host(.hero) svg {
-    mask-image: linear-gradient(to bottom, #000 330px, rgba(0, 0, 0, 0.35) 510px, transparent 690px);
-    -webkit-mask-image: linear-gradient(to bottom, #000 330px, rgba(0, 0, 0, 0.35) 510px, transparent 690px);
+    mask-image: linear-gradient(to bottom, #000 520px, rgba(0, 0, 0, 0.35) 760px, transparent 960px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 520px, rgba(0, 0, 0, 0.35) 760px, transparent 960px);
   }
   :host(.hero) figcaption {
     position: absolute;
-    top: 560px;
-    left: 2%;
+    top: 770px;
+    left: 4%;
     max-width: 320px;
     min-height: 0;
   }

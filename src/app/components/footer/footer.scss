@@ -1,6 +1,6 @@
 .site-footer {
   position: relative;
-  overflow: hidden; /* the map bleeds past the container edge — no h-scroll */
+  overflow: hidden; /* narrow screens: keep the static map inside */
   border-top: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
   backdrop-filter: blur(8px);
@@ -28,21 +28,24 @@
     min-height: 768px;
     display: grid;
     align-items: center;
+    /* the map escapes the card: the coast rises above the footer's top
+       border into the section above */
+    overflow: visible;
   }
   /* NO transform here: appReveal animates transform and would override the
-     centering translate after the reveal — fixed offsets instead, sized
-     against the footer's fixed min-height. */
-  /* Big and top-anchored: the NORTH of the country (La Guajira, the coast,
-     the markers) is the focal point beside the card; the south is allowed to
-     run past the footer and fades out (mask in the component). */
-  /* Negative right: the svg's top band is ~half empty ocean east of La
-     Guajira, so the box must hang past the viewport for the visible COAST
-     to sit near the right edge. The overhang is faded/empty map. */
+     placement after the reveal — fixed offsets instead.
+     Negative right: the svg's top band is ~half empty ocean east of La
+     Guajira, so the box hangs past the viewport for the visible COAST to
+     sit near the right edge. Negative top: the north breaks OUT of the
+     card. The wrap is its own clipping frame (fixed height + hidden) so
+     the huge svg never grows the page's scroll area. */
   .footer-map {
     position: absolute;
-    top: 36px;
-    right: -13vw;
-    width: clamp(700px, 56vw, 1100px);
+    top: -220px;
+    right: -30vw;
+    width: clamp(1200px, 90vw, 1750px);
+    height: 985px;
+    overflow: hidden;
     max-width: none;
     margin: 0;
     z-index: 0;
