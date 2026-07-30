@@ -180,8 +180,9 @@
      full story belongs to the case study. Clamp adds the ellipsis. */
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 8;
-  line-clamp: 8;
+  /* the collage grid sets --summary-lines per size tier */
+  -webkit-line-clamp: var(--summary-lines, 8);
+  line-clamp: var(--summary-lines, 8);
   overflow: hidden;
 }
 

@@ -82,10 +82,19 @@
           <h2>Featured projects</h2>
         </div>
       </div>
-      <a class="see-all" routerLink="/projects">All projects <app-icon name="arrow-right" [size]="16" /></a>
     </div>
 
     <app-card-carousel [projects]="featured" label="Featured projects" appReveal="up" />
+
+    <!-- The six above are the highlight reel — this is the door to the rest -->
+    <div class="see-all-cta" appReveal="up">
+      <a class="btn btn--primary see-all-btn" routerLink="/projects">
+        <app-icon name="boxes" [size]="18" />
+        Explore all {{ totalShipped }} projects
+        <app-icon name="arrow-right" [size]="16" />
+      </a>
+      <p class="see-all-hint">live demos · case studies · honest work-in-progress</p>
+    </div>
   </div>
 </section>
 

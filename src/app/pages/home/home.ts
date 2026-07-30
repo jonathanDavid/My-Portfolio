@@ -8,7 +8,7 @@ import { RevealDirective } from '../../core/reveal.directive';
 import { CountUpDirective } from '../../core/count-up.directive';
 import { SeoService } from '../../core/seo.service';
 import { site } from '../../data/site';
-import { featuredProjects } from '../../data/projects';
+import { featuredProjects, projects } from '../../data/projects';
 import { experience } from '../../data/experience';
 import { profilePageNode } from '../../core/structured-data';
 
@@ -30,6 +30,7 @@ import { profilePageNode } from '../../core/structured-data';
 export class Home {
   protected readonly site = site;
   protected readonly featured = featuredProjects;
+  protected readonly totalShipped = projects.filter((p) => p.status === 'shipped').length;
   protected readonly roles = experience;
 
   constructor() {

@@ -55,6 +55,48 @@
   }
 }
 
+/* ---------- Collage mode (opt-in via class on the host) ----------
+   The all-projects grid as a mosaic: lg cards span two columns with a longer
+   summary, sm cards keep a short one, dense flow fills the gaps. Hovering a
+   card expands it while every other card recedes — grid geometry stays put
+   (transforms only), so nothing reflows under the cursor. */
+@media (min-width: 768px) {
+  :host(.collage) .cc__track {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-auto-flow: dense;
+    align-items: start;
+  }
+  :host(.collage) .cc__item--lg { grid-column: span 2; }
+  :host(.collage) .cc__item--lg app-project-card { --summary-lines: 11; }
+  :host(.collage) .cc__item--sm app-project-card { --summary-lines: 4; }
+
+  :host(.collage) .cc__item {
+    position: relative;
+  }
+  :host(.collage) .cc__item app-project-card {
+    transition: transform 0.38s cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity 0.38s ease, filter 0.38s ease;
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    :host(.collage) .cc__track:has(.cc__item:hover) .cc__item:not(:hover) app-project-card {
+      transform: scale(0.955);
+      opacity: 0.55;
+      filter: saturate(0.75);
+    }
+    :host(.collage) .cc__item:hover {
+      z-index: 6;
+    }
+    :host(.collage) .cc__item:hover app-project-card {
+      transform: scale(1.045);
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  /* two-column viewports: a 2-span card would swallow the whole row anyway,
+     but keep it explicit so sm/lg still alternate the rhythm */
+  :host(.collage) .cc__item--lg { grid-column: span 2; }
+}
+
 /* ---------- Mobile: swipeable snap carousel ---------- */
 @media (max-width: 767px) {
   .cc__viewport {

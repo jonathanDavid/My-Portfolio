@@ -23,6 +23,9 @@ export interface Project {
   repos?: RepoLink[];
   /** External demo/live link, if any. */
   link?: RepoLink;
+  /** Collage size on the all-projects grid: lg spans 2 columns with a longer
+   *  summary, sm keeps a short one. Default is a regular 1-column card. */
+  size?: 'lg' | 'sm';
   /** Representative UI icon for the project card (fallback). */
   icon?: IconName;
   /** The real web-app's own brand icon (favicon), shown on the card/hero when
@@ -33,6 +36,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'digital-signage',
+    size: 'lg',
     title: 'Digital Signage Platform',
     tagline: 'A four-surface, real-time content platform for Smart TVs',
     summary:
@@ -68,7 +72,7 @@ export const projects: Project[] = [
       'Production AWS serverless backend serving retail customers across LATAM (Casaideas, Privilege, Komax, EFE). I rebuilt its core as an open-source, event-driven demo: API Gateway → Lambda → SQS → DynamoDB → SNS, with a live order dashboard and Terraform-managed infrastructure.',
     tech: ['AWS Lambda', 'API Gateway', 'SQS', 'SNS', 'DynamoDB', 'Terraform', 'esbuild', 'TypeScript'],
     status: 'shipped',
-    featured: true,
+    featured: false,
     caseStudy: true,
     year: '2021–2022',
     icon: 'cloud',
@@ -88,7 +92,7 @@ export const projects: Project[] = [
       'FastAPI genetic-algorithm services that optimize how items are allocated across stores. I rebuilt them as an interactive visualizer: a numpy GA that streams every generation over WebSocket to an animated 60fps frontend where you tune the parameters and watch the population converge.',
     tech: ['FastAPI', 'Python', 'NumPy', 'Genetic Algorithms', 'WebSockets', 'Canvas', 'React'],
     status: 'shipped',
-    featured: true,
+    featured: false,
     caseStudy: true,
     year: '2019–2021',
     icon: 'activity',
@@ -101,6 +105,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'colombia-conflict-atlas',
+    size: 'lg',
     title: 'Colombia Conflict & Security Atlas',
     tagline: 'A timeline-first map of Colombia built from real public data',
     summary:
@@ -137,6 +142,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'gamedev-copilot',
+    size: 'lg',
     title: 'Research Copilot',
     tagline: 'A local research copilot for any subject — the domain is a swappable profile',
     summary:
@@ -171,6 +177,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'theclo-set',
+    size: 'sm',
     title: 'TheCloset — 2019 app, revived',
     tagline: 'Expo SDK 30 → 57 in one jump: my oldest side project, redesigned',
     summary:
@@ -187,6 +194,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'bomberman',
+    size: 'sm',
     title: 'Bomberman — Java, no engine',
     tagline: 'University game: hand-rolled render loop, sprites, audio and pathfinding',
     summary:
