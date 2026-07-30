@@ -46,6 +46,28 @@
   transform: rotateY(180deg);
 }
 
+/* backdrop-filter on the faces (.glass) breaks backface-visibility in
+   Chromium: the turned-away face's text bleeds through the shown one —
+   mirrored front-face text rendered that garbles the back's links row. So the
+   turned-away face is hidden EXPLICITLY, swapping at the flip's midpoint.
+   :focus-within is deliberately excluded from hiding the front: hiding a
+   focused element throws keyboard focus to <body>, which would unflip the
+   card and restart the tab order. (Bonus: a hidden face's links leave the
+   tab order, so keyboards no longer tab through invisible links; the back's
+   links become focusable the moment any focus lands in the card.) */
+.project-flip .face {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease,
+    visibility 0s linear 0.15s;
+}
+.project-flip .back { visibility: hidden; }
+:host(.is-flipped) .back { visibility: visible; }
+:host(.is-flipped) .front { visibility: hidden; }
+@media (hover: hover) {
+  .project-flip:hover .back,
+  .project-flip:focus-within .back { visibility: visible; }
+  .project-flip:hover:not(:focus-within) .front { visibility: hidden; }
+}
+
 /* Only the face that is currently shown is interactive. The two faces overlap
    the same grid cell, and backface-visibility alone does not reliably stop the
    turned-away face from intercepting taps — so the hidden face's links/buttons
