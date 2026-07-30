@@ -53,10 +53,15 @@ export class ProjectCard {
 
   constructor() {
     afterNextRender(() => {
-      // Only wire tap-anywhere-to-flip where there is no hover (touch). On
-      // desktop the CSS hover/focus-within flip stays in charge. The explicit
-      // flip buttons in the template work on every device regardless.
-      if (typeof matchMedia === 'undefined' || !matchMedia('(hover: none)').matches) {
+      // Wire tap-anywhere-to-flip on touch (no hover) AND inside the collage,
+      // where hovering reveals the preview instead of flipping — there, a
+      // click anywhere on the card is the flip gesture. On plain desktop
+      // grids the CSS hover/focus-within flip stays in charge.
+      const inCollage = !!(this.host.nativeElement as HTMLElement).closest('.collage');
+      if (
+        !inCollage &&
+        (typeof matchMedia === 'undefined' || !matchMedia('(hover: none)').matches)
+      ) {
         return;
       }
       const el = this.host.nativeElement as HTMLElement;
