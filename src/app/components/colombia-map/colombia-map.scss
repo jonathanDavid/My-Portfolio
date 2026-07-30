@@ -23,18 +23,6 @@
     max-width: 320px;
     min-height: 0;
   }
-  /* At hero scale the inset would dwarf the mainland — shrink it back to its
-     small-map size and show JUST the islands; the frame stays as an
-     invisible click target. */
-  :host(.hero) .inset {
-    transform-box: fill-box;
-    transform-origin: 0 0;
-    transform: scale(0.45);
-  }
-  :host(.hero) .inset rect {
-    stroke: transparent;
-    fill: transparent;
-  }
 }
 
 svg { width: 100%; height: auto; display: block; }
@@ -61,34 +49,6 @@ svg { width: 100%; height: auto; display: block; }
   fill: color-mix(in srgb, var(--accent) 34%, transparent);
   stroke: var(--accent);
   stroke-width: 0.6;
-}
-
-.inset {
-  cursor: pointer;
-  outline: none;
-  rect {
-    fill: color-mix(in srgb, var(--accent-3) 3%, transparent);
-    stroke: color-mix(in srgb, var(--accent-3) 40%, var(--border));
-    stroke-width: 0.35;
-    stroke-dasharray: 1.4 1;
-  }
-  .island {
-    fill: color-mix(in srgb, var(--accent-3) 20%, transparent);
-    stroke: color-mix(in srgb, var(--accent-3) 55%, var(--border));
-    stroke-width: 0.3;
-    transition: fill 0.2s ease;
-  }
-  text {
-    font-size: 2.6px;
-    font-family: var(--mono);
-    fill: var(--text-faint);
-    text-anchor: middle;
-    letter-spacing: 0.04em;
-    pointer-events: none;
-  }
-  &:hover .island,
-  &:focus-visible .island,
-  &.dept--selected .island { fill: color-mix(in srgb, var(--accent) 40%, transparent); stroke: var(--accent); }
 }
 
 .marker { cursor: pointer; }

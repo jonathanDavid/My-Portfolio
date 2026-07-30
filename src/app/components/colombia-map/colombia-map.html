@@ -22,28 +22,6 @@
       </path>
     }
 
-    <!-- San Andrés y Providencia: the islands sit 700 km offshore, so their
-         TRUE outlines (OSM geometry) render in a magnified inset frame -->
-    <g
-      class="inset"
-      [class.dept--selected]="selected() === 'san-andres-y-providencia'"
-      role="button"
-      tabindex="0"
-      aria-label="San Andrés y Providencia"
-      [attr.aria-pressed]="selected() === 'san-andres-y-providencia'"
-      (click)="pick('san-andres-y-providencia')"
-      (keydown.enter)="pick('san-andres-y-providencia')"
-      (keydown.space)="$event.preventDefault(); pick('san-andres-y-providencia')"
-    >
-      <rect
-        [attr.x]="inset.frame.x" [attr.y]="inset.frame.y"
-        [attr.width]="inset.frame.w" [attr.height]="inset.frame.h" rx="2"
-      />
-      <path class="island" [attr.d]="inset.providencia" />
-      <path class="island" [attr.d]="inset.sanAndres" />
-      <title>San Andrés y Providencia</title>
-    </g>
-
     @for (m of markers; track m.id) {
       <g class="marker" [class.marker--home]="m.kind === 'home'" (click)="pick(m.dept)">
         <circle class="marker-pulse" [attr.cx]="m.x" [attr.cy]="m.y" r="3.4" />
