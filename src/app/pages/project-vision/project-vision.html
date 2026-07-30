@@ -9,7 +9,7 @@
 
       <p class="note">
         <app-icon name="shield" [size]="15" />
-        <span><strong>Every model runs locally</strong> — LLaVA via Ollama for language, YOLOv8 for
+        <span><strong>Every model runs locally</strong> — LLaVA via Ollama for language, YOLO11 for
         detection, nothing leaves the machine. The answers are natural prose only: the detector exists
         to make them <em>right</em>, not to expose bounding boxes.</span>
       </p>
@@ -48,7 +48,7 @@
   <!-- Architecture -->
   <section class="section arch">
     <div class="container narrow">
-      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — three lessons, learned live</h2>
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> Architecture — four lessons, learned live</h2>
       <ul class="arch-notes">
         <li appReveal="up"><strong>Tiled detection for large images.</strong> The full-resolution photo is
           sliced into overlapping 640px tiles; YOLO runs per tile; boxes shift back to global
@@ -58,6 +58,14 @@
           fragment box: low IoU against the full box (union is huge), so classic NMS keeps both. The
           first live run found <em>8 people in a 4-person photo</em>. Merging on IOS
           (intersection-over-smaller) as well fixed it — regression-tested with that exact story.</li>
+        <li appReveal="up"><strong>Objects bigger than a tile need an anchor pass.</strong> Upgrading
+          YOLOv8→YOLO11 resurfaced the phantoms differently: an object larger than a tile never
+          appears <em>whole</em> in any tile, every tile reports a different fragment, and IoU
+          <em>and</em> IOS both stay low — <em>6 people in the 4-person photo</em>. The fix is a
+          hybrid scan: one detector pass over the full image supplies whole-object anchor boxes
+          (large objects survive the downscale — only small ones need tiles), tile fragments merge
+          into their anchors even when they outscore them, and unmatched tile finds — the small
+          stuff, tiling's actual job — are kept. Also regression-tested.</li>
         <li appReveal="up"><strong>Don't ask a 7B to repeat numbers.</strong> Even handed the counts as
           "verified facts", LLaVA answered "four people" one run and "two" the next. The fix is
           architectural, not prompt-craft: <code>counts_sentence()</code> states WHAT and HOW MANY
@@ -88,6 +96,14 @@
       <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
       <dl class="decisions">
         <div appReveal="up">
+          <dt>Report first, then drill down</dt>
+          <dd>The moment an image loads, a structured 7-section report runs automatically — scene,
+          people, objects, text, relationships, mood, oddities — opening with a deterministic
+          <em>VERIFIED SCAN</em> line. One giant "tell me everything" underperforms on a 7B; the
+          sectioned prompt forces coverage, and follow-up questions extract the rest. A
+          <code>--once</code> mode makes it pipeable: image in, report out, exit.</dd>
+        </div>
+        <div appReveal="up">
           <dt>Prose only, boxes opt-in</dt>
           <dd>The product is a describer, not a detection dashboard. YOLO output stays internal;
           <code>/annotate</code> exists for whoever wants to audit the grounding layer.</dd>
@@ -105,9 +121,10 @@
         </div>
         <div appReveal="up">
           <dt>Same testability seam as its sibling</dt>
-          <dd>FakeVisionLLM and FakeDetector run the entire graph in under a second offline — 14
-          hermetic tests pin tile planning, both NMS merge modes, path routing, the grounding
-          contract and the streaming callback. The pure tiling math is the most-tested file.</dd>
+          <dd>FakeVisionLLM and FakeDetector run the entire graph in under a second offline — 17
+          hermetic tests pin tile planning, both NMS merge modes, anchor merging, path routing, the
+          grounding contract, the report structure and the streaming callback. The pure tiling math
+          is the most-tested file.</dd>
         </div>
       </dl>
     </div>

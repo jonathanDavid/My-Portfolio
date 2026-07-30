@@ -155,10 +155,10 @@ export const projects: Project[] = [
   {
     slug: 'vision-copilot',
     title: 'Vision Copilot',
-    tagline: 'Talk to an image — descriptions grounded by tiled detection, 100% local',
+    tagline: 'Talk to an image — descriptions grounded by hybrid tiled detection, 100% local',
     summary:
-      'Ask anything about a photo and get honest prose: LLaVA describes, while a tiled YOLO scan of the full-resolution image silently grounds every count — small objects in large photos stop disappearing, and the code (not the model) states the numbers, because a 7B repeats them unreliably. IoU+IOS non-max suppression merges tile-cut fragments (the first live run found 8 people in a 4-person photo until that fix). Same testable-without-models architecture as the game-dev copilot: 14 hermetic tests run the whole graph in under a second.',
-    tech: ['LangGraph', 'Python', 'YOLOv8', 'LLaVA', 'Ollama', 'Pillow', 'pytest'],
+      'Load a photo and a full 7-section report runs automatically — scene, people, objects, text, relationships, mood, oddities — opening with a deterministic VERIFIED SCAN line; then chat to drill down, or use --once for image-in → report-out pipelines. LLaVA narrates while a hybrid YOLO11 scan grounds every count: a full-image pass supplies whole-object anchor boxes and full-resolution tiles add the small stuff, so seam-cut fragments stop becoming phantom people (upgrading YOLOv8→11 counted 6 in a 4-person photo until anchor merging fixed it — the second phantom regression this project turned into a test, after the IoU-vs-IOS story). The code, not the model, states the numbers, because a 7B repeats them unreliably. Same testable-without-models architecture as the game-dev copilot: 17 hermetic tests run the whole graph in under a second.',
+    tech: ['LangGraph', 'Python', 'YOLO11', 'LLaVA', 'Ollama', 'Pillow', 'pytest'],
     status: 'shipped',
     featured: true,
     caseStudy: true,
