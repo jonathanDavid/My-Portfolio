@@ -169,6 +169,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'vision-copilot',
+    size: 'lg',
     preview: 'assets/case/vision-session.png',
     title: 'Vision Copilot',
     tagline: 'Talk to an image — descriptions grounded by hybrid tiled detection, 100% local',
@@ -187,6 +188,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'theclo-set',
+    appIcon: 'assets/app-icons/closet.svg',
     preview: 'assets/case/closet-outfits.png',
     size: 'sm',
     title: 'TheCloset — 2019 app, revived',
@@ -205,6 +207,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'bomberman',
+    appIcon: 'assets/app-icons/bomberman.svg',
     preview: 'https://user-images.githubusercontent.com/17170498/117526895-a8130380-af8d-11eb-830f-32a8d7e214be.png',
     size: 'sm',
     title: 'Bomberman — Java, no engine',
@@ -235,6 +238,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'route-graph-neo4j',
+    size: 'lg',
     preview: 'assets/case/routegraph-explorer.png',
     title: 'Colombia Route Graph',
     tagline: 'Shortest paths over real highways, with the Cypher always visible',
