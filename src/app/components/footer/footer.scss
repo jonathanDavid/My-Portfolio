@@ -42,7 +42,8 @@
   .footer-map {
     position: absolute;
     top: -220px;
-    right: -30vw;
+    /* -26vw leaves the whole La Guajira department on screen with margin */
+    right: -26vw;
     width: clamp(1200px, 90vw, 1750px);
     height: 985px;
     overflow: hidden;

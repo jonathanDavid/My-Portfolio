@@ -23,6 +23,18 @@
     max-width: 320px;
     min-height: 0;
   }
+  /* At hero scale the inset would dwarf the mainland — shrink it back to its
+     small-map size and show JUST the islands; the frame stays as an
+     invisible click target. */
+  :host(.hero) .inset {
+    transform-box: fill-box;
+    transform-origin: 0 0;
+    transform: scale(0.45);
+  }
+  :host(.hero) .inset rect {
+    stroke: transparent;
+    fill: transparent;
+  }
 }
 
 svg { width: 100%; height: auto; display: block; }
