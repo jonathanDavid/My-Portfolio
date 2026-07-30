@@ -175,7 +175,9 @@
 .project__summary {
   color: var(--text-muted);
   font-size: 0.95rem;
-  flex: 1;
+  /* no flex-grow: a stretched summary box taller than its line-clamp leaks
+     extra lines below the ellipsis — the links row pins to the bottom via
+     its own margin-top:auto instead */
   /* Cards stay the same visual size no matter how long a summary gets — the
      full story belongs to the case study. Clamp adds the ellipsis. */
   display: -webkit-box;
@@ -186,7 +188,7 @@
   overflow: hidden;
 }
 
-.project__front-links { margin-top: 1rem; }
+.project__front-links { margin-top: auto; padding-top: 1rem; }
 .project__tech--front { margin-bottom: 0.7rem; }
 /* Real <button>: reset the native chrome, keep the subtle hint look, but give
    it a comfortable touch target so it is a reliable flip control. */
@@ -435,6 +437,15 @@
 
 /* the third hint variant only exists in the desktop collage */
 .flip-hint__click { display: none; }
+
+/* Mobile: the carousel shows one card at a time — long summaries make it a
+   wall of text. Much shorter clamp; the case study carries the full story. */
+@media (max-width: 767px) {
+  .project__summary {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
 
 /* Front-face live CTA — the demo is one click away without flipping */
 .front-actions {
