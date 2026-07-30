@@ -149,7 +149,7 @@ export const projects: Project[] = [
     icon: 'bot',
     appIcon: 'assets/app-icons/copilot.svg',
     repos: [
-      { label: 'gamedev-copilot', href: 'https://github.com/jonathanDavid/gamedev-copilot', icon: 'bot' },
+      { label: 'research-copilot', href: 'https://github.com/jonathanDavid/research-copilot', icon: 'bot' },
     ],
   },
   {
