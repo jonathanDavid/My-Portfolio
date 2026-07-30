@@ -44,13 +44,14 @@
         under pytest in one second <em>with no model at all</em>.
       </p>
       <p>
-        And the subject is <strong>configuration, not architecture</strong>: a small JSON domain
-        profile (persona, router keywords, docs corpus) points the same graph at anything. The demo
-        profile is 2D game development — ask about Phaser, Godot, PixiJS, Ebitengine, Bevy and more,
-        and the agent answers from indexed documentation with citations, finds tutorial videos, or
-        just talks — remembering your project's decisions between sessions. A second shipped profile
-        indexes the FastAPI docs; a hermetic test proves a custom profile leaves no trace of the
-        demo domain in any prompt.
+        And the subject is <strong>conversation, not configuration</strong>: tell it
+        <em>"I want you to be an expert in Svelte"</em> and an agent searches the web (key-less),
+        picks the site that looks like official documentation, crawls a bounded set of pages,
+        and indexes them into that subject's own vector store — then your questions are answered
+        from that corpus, with citations. Subjects persist as small JSON profiles you can also
+        hand-curate; the shipped demo researches 12 game-dev frameworks. A hermetic test proves a
+        custom subject leaves no trace of the demo domain in any prompt, and weak retrieval scores
+        inject an explicit demand to admit the gap instead of summarizing the wrong docs.
       </p>
     </div>
   </section>
@@ -75,8 +76,8 @@
           persist to JSON and are injected into every prompt. That triage is context management.</li>
         <li appReveal="up"><strong>The testability seam:</strong> every model call goes through two tiny
           protocols (<code>LLM</code>, <code>Embedder</code>). Production plugs in Ollama; tests plug in
-          scripted fakes and a deterministic hash embedder — 16 hermetic tests assert paths, grounding,
-          memory persistence, router salvage, and domain-profile reskinning, offline.</li>
+          scripted fakes and a deterministic hash embedder — 20 hermetic tests assert paths, grounding,
+          memory persistence, router salvage, web-docs discovery, and subject reskinning, offline.</li>
       </ul>
     </div>
   </section>
@@ -122,8 +123,8 @@
         <div appReveal="up">
           <dt>No hosted demo, on purpose</dt>
           <dd>Local inference cannot run on GitHub Pages, and simulating an agent would undermine the
-          project's whole argument. The repo is the demo: clone, run 16 tests in seconds, then pull
-          the models and talk to it.</dd>
+          project's whole argument. The repo is the demo: clone, run 20 tests in seconds, then pull
+          the models and tell it what to become an expert in.</dd>
         </div>
       </dl>
     </div>

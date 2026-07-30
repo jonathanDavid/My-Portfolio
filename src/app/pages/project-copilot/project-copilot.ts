@@ -21,7 +21,7 @@ export class ProjectCopilot {
     inject(SeoService).update({
       title: 'Research Copilot',
       description:
-        'Case study: a local research copilot for any subject — a swappable domain profile reskins a LangGraph agent that routes questions to RAG (Chroma), a key-less YouTube tool, or direct chat. Demo corpus: 12 game frameworks. All inference local via Ollama + Mistral; the whole graph testable without any model.',
+        'Case study: a local research copilot for any subject — say "be an expert in X" and an agent finds the official docs on the web, indexes them, and answers with citations. LangGraph routing, per-subject Chroma indexes, all inference local via Ollama + Mistral; the whole graph testable without any model.',
       path: 'projects/gamedev-copilot',
       type: 'article',
       structuredData: [

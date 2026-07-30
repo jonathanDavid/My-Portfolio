@@ -140,7 +140,7 @@ export const projects: Project[] = [
     title: 'Research Copilot',
     tagline: 'A local research copilot for any subject — the domain is a swappable profile',
     summary:
-      'Point it at any subject: a small JSON profile (persona, router keywords, docs corpus) reskins the whole agent — the shipped demo researches 12 game frameworks, a second profile indexes the FastAPI docs. A LangGraph router decides docs / video / chat, a retriever grounds answers in 226 chunks of real documentation indexed into Chroma (with citations), a key-less YouTube tool finds tutorials, and layered memory keeps project decisions across sessions. Every LLM call runs locally on Ollama + Mistral — private, free, no cloud API. 16 hermetic tests run the entire graph against deterministic fakes, including that a custom profile leaves no residue of the demo domain.',
+      'Tell it "be an expert in Svelte" and an agent searches the web, finds the official docs, crawls and indexes them, then answers your questions from that corpus with citations — any subject, switchable mid-conversation. A LangGraph router decides docs / video / chat, a retriever grounds answers in the subject\'s own Chroma index, a key-less YouTube tool finds tutorials, and layered memory keeps decisions across sessions. Every LLM call runs locally on Ollama + Mistral — private, free, no cloud API. 20 hermetic tests run the entire graph against deterministic fakes: discovery, crawling, grounding, and that a custom subject leaves no residue of the demo domain.',
     tech: ['LangGraph', 'Python', 'RAG', 'ChromaDB', 'Ollama', 'Mistral 7B', 'pytest'],
     status: 'shipped',
     featured: true,
