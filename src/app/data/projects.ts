@@ -170,6 +170,38 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'theclo-set',
+    title: 'TheCloset — 2019 app, revived',
+    tagline: 'Expo SDK 30 → 57 in one jump: my oldest side project, redesigned',
+    summary:
+      'A digital closet: garments with photos or color swatches, outfits composed from them, laundry tracking, and a hand-rolled month-grid planner. The 2019 original (Expo SDK 30, native-base, react-navigation 2, Firebase) had zero surviving dependencies — the revival is a fresh Expo 57 + TypeScript + React Navigation 7 app, rebuilt local-first (AsyncStorage behind one reducer, no accounts or keys) with a dark-first design system, optional photos, and deliberate empty states. Before/after screenshots in the repo tell the seven-year story.',
+    tech: ['React Native', 'Expo', 'TypeScript', 'React Navigation', 'AsyncStorage'],
+    status: 'shipped',
+    featured: false,
+    caseStudy: false,
+    year: '2018–2026',
+    icon: 'layers',
+    repos: [
+      { label: 'Theclo-set', href: 'https://github.com/jonathanDavid/Theclo-set', icon: 'repo' },
+    ],
+  },
+  {
+    slug: 'bomberman',
+    title: 'Bomberman — Java, no engine',
+    tagline: 'University game: hand-rolled render loop, sprites, audio and pathfinding',
+    summary:
+      'A complete Bomberman in plain Java (AWT Canvas) with no engine and no libraries: layered rendering, a sprite animation framework, WAV audio, menus, and enemies that hunt the player by modeling the board as a graph and searching for a route. Levels are a documented text format — edit Niveles.txt and the game picks it up, data-driven design before I knew its name. The code is intentionally frozen as a time capsule; the README is the design doc.',
+    tech: ['Java', 'AWT', 'Ant', 'Graphs'],
+    status: 'shipped',
+    featured: false,
+    caseStudy: false,
+    year: '2021',
+    icon: 'gamepad',
+    repos: [
+      { label: 'Bomberman', href: 'https://github.com/jonathanDavid/Bomberman', icon: 'gamepad' },
+    ],
+  },
+  {
     slug: 'live-dashboard-go',
     title: 'Go + WebSocket Live Dashboard',
     tagline: 'A low-latency metrics dashboard in Go',
