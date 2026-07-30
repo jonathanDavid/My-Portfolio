@@ -17,8 +17,7 @@ export const experience: Role[] = [
   {
     company: 'UDT / Havrion',
     title: 'Full Stack Developer',
-    period: 'Oct 2022 — Present',
-    current: true,
+    period: 'Oct 2022 — Nov 2025',
     icon: 'tv',
     summary:
       'Owned the Digital Signage Platform — three client surfaces plus the cloud infrastructure behind them.',

@@ -157,7 +157,7 @@ export const projects: Project[] = [
     title: 'Vision Copilot',
     tagline: 'Talk to an image — descriptions grounded by hybrid tiled detection, 100% local',
     summary:
-      'Load a photo and a full 7-section report runs automatically — scene, people, objects, text, relationships, mood, oddities — opening with a deterministic VERIFIED SCAN line; then chat to drill down, or use --once for image-in → report-out pipelines. LLaVA narrates while a hybrid YOLO11 scan grounds every count: a full-image pass supplies whole-object anchor boxes and full-resolution tiles add the small stuff, so seam-cut fragments stop becoming phantom people (upgrading YOLOv8→11 counted 6 in a 4-person photo until anchor merging fixed it — the second phantom regression this project turned into a test, after the IoU-vs-IOS story). The code, not the model, states the numbers, because a 7B repeats them unreliably. Same testable-without-models architecture as the game-dev copilot: 17 hermetic tests run the whole graph in under a second.',
+      'Load a photo and a full 7-section report runs automatically — scene, people, objects, text, relationships, mood, oddities — led by a deterministic VERIFIED SCAN line; then chat to drill down, or --once for image-in → report-out pipelines. LLaVA narrates while a hybrid YOLO11 scan grounds every count (full-image anchors + full-resolution tiles, so seam-cut fragments never become phantom people). The code states the numbers — a 7B repeats them unreliably. 17 hermetic tests, no models needed.',
     tech: ['LangGraph', 'Python', 'YOLO11', 'LLaVA', 'Ollama', 'Pillow', 'pytest'],
     status: 'shipped',
     featured: true,

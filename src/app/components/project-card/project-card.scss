@@ -172,6 +172,13 @@
   color: var(--text-muted);
   font-size: 0.95rem;
   flex: 1;
+  /* Cards stay the same visual size no matter how long a summary gets — the
+     full story belongs to the case study. Clamp adds the ellipsis. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+  overflow: hidden;
 }
 
 .project__front-links { margin-top: 1rem; }
