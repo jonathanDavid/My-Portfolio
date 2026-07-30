@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { Icon } from '../icon/icon';
-import { CO_DEPTS, CO_MARKERS, CO_VIEW } from '../../data/colombia-map';
+import { CO_DEPTS, CO_INSET, CO_MARKERS, CO_VIEW } from '../../data/colombia-map';
 import { CO_NOTES } from '../../data/colombia-notes';
 
 /** Footer map of Colombia: every department clickable for one line of its
@@ -18,6 +18,7 @@ export class ColombiaMap {
   protected readonly view = CO_VIEW;
   protected readonly depts = CO_DEPTS;
   protected readonly markers = CO_MARKERS;
+  protected readonly inset = CO_INSET;
 
   protected readonly selected = signal<string | null>(null);
 

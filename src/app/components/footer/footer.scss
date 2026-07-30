@@ -1,4 +1,6 @@
 .site-footer {
+  position: relative;
+  overflow: hidden; /* the map bleeds past the container edge — no h-scroll */
   border-top: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
   backdrop-filter: blur(8px);
@@ -11,6 +13,43 @@
   grid-template-columns: 1.6fr 1fr;
   gap: 2.5rem;
   align-items: start;
+}
+
+/* Mobile / narrow: the map flows after the grid, centered */
+.footer-map {
+  margin: 2rem auto 0;
+  max-width: 340px;
+}
+/* Wide: a BIG map escaping the content column into the empty right edge,
+   overlapping the card — the footer's visual signature. The footer grows
+   tall enough to hold the full map (it must never clip). */
+@media (min-width: 1200px) {
+  .site-footer {
+    min-height: 768px;
+    display: grid;
+    align-items: center;
+  }
+  /* NO transform here: appReveal animates transform and would override the
+     centering translate after the reveal — fixed offsets instead, sized
+     against the footer's fixed min-height. */
+  .footer-map {
+    position: absolute;
+    top: 44px;
+    right: 1.5rem;
+    width: clamp(360px, 24vw, 430px);
+    max-width: none;
+    margin: 0;
+    z-index: 0;
+  }
+  /* keep the grid content above the map where they overlap */
+  .footer-grid, .footer-bottom { position: relative; z-index: 1; }
+  .footer-meta { max-width: 260px; pointer-events: none; }
+  .footer-meta a { pointer-events: auto; }
+}
+/* Very wide: walk the map inward so it overlaps the content column instead
+   of drifting to the far edge with the whitespace */
+@media (min-width: 1500px) {
+  .footer-map { right: calc((100vw - var(--maxw)) / 2 - 6vw); }
 }
 
 .footer-actions {

@@ -22,7 +22,8 @@
       </path>
     }
 
-    <!-- San Andrés inset: 260 km offshore, drawn as a dot in the Caribbean -->
+    <!-- San Andrés y Providencia: the islands sit 700 km offshore, so their
+         TRUE outlines (OSM geometry) render in a magnified inset frame -->
     <g
       class="inset"
       [class.dept--selected]="selected() === 'san-andres-y-providencia'"
@@ -34,8 +35,15 @@
       (keydown.enter)="pick('san-andres-y-providencia')"
       (keydown.space)="$event.preventDefault(); pick('san-andres-y-providencia')"
     >
-      <rect x="6" y="10" width="14" height="14" rx="3" />
-      <circle cx="13" cy="17" r="2.6" />
+      <rect
+        [attr.x]="inset.frame.x" [attr.y]="inset.frame.y"
+        [attr.width]="inset.frame.w" [attr.height]="inset.frame.h" rx="2"
+      />
+      <path class="island" [attr.d]="inset.providencia" />
+      <path class="island" [attr.d]="inset.sanAndres" />
+      <text [attr.x]="inset.frame.x + inset.frame.w / 2" [attr.y]="inset.frame.y + inset.frame.h + 3.2">
+        San Andrés
+      </text>
       <title>San Andrés y Providencia</title>
     </g>
 

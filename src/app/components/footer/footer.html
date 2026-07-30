@@ -25,10 +25,13 @@
           <span class="muted"><app-icon name="map-pin" [size]="14" /> Location</span><br />{{ site.location }}
         </p>
         <p>
+          <span class="muted"><app-icon name="map-pin" [size]="14" /> Roots</span><br />
+          Camarones, La Guajira
+        </p>
+        <p>
           <span class="muted"><app-icon name="mail" [size]="14" /> Email</span><br />
           <a [href]="'mailto:' + site.email">{{ site.email }}</a>
         </p>
-        <app-colombia-map />
       </div>
     </div>
 
@@ -38,5 +41,12 @@
         <app-icon name="zap" [size]="13" /> Built with Angular · statically prerendered
       </span>
     </div>
+  </div>
+
+  <!-- Big map: direct child of the footer (NOT .container — that has its own
+       position:relative and would hijack the absolute anchoring). On wide
+       screens it overlaps the content column and fills the empty right edge. -->
+  <div class="footer-map">
+    <app-colombia-map />
   </div>
 </footer>
