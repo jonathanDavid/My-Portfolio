@@ -32,11 +32,14 @@
   /* NO transform here: appReveal animates transform and would override the
      centering translate after the reveal — fixed offsets instead, sized
      against the footer's fixed min-height. */
+  /* Big and top-anchored: the NORTH of the country (La Guajira, the coast,
+     the markers) is the focal point beside the card; the south is allowed to
+     run past the footer and fades out (mask in the component). */
   .footer-map {
     position: absolute;
-    top: 44px;
+    top: 36px;
     right: 1.5rem;
-    width: clamp(360px, 24vw, 430px);
+    width: clamp(430px, 30vw, 560px);
     max-width: none;
     margin: 0;
     z-index: 0;

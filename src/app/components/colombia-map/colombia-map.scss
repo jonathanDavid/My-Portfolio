@@ -4,6 +4,24 @@
   margin: 0;
 }
 
+/* Hero mode (footer, wide screens): the north is the focal point — the
+   southern half fades out where it runs past the footer, and the caption
+   overlays the faded region instead of hanging below the crop. */
+@media (min-width: 1200px) {
+  :host(.hero) .co-map { position: relative; }
+  :host(.hero) svg {
+    mask-image: linear-gradient(to bottom, #000 46%, rgba(0, 0, 0, 0.35) 70%, transparent 88%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 46%, rgba(0, 0, 0, 0.35) 70%, transparent 88%);
+  }
+  :host(.hero) figcaption {
+    position: absolute;
+    left: 2%;
+    bottom: 6%;
+    max-width: 300px;
+    min-height: 0;
+  }
+}
+
 svg { width: 100%; height: auto; display: block; }
 
 .dept {
