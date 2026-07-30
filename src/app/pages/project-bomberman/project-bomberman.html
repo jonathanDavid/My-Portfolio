@@ -1,0 +1,109 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="gamepad" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Bomberman — Java, no engine</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>The code is intentionally frozen</strong> — a time capsule of how I wrote Java
+        at university. ~2,750 lines, 21 classes, zero libraries: every subsystem an engine would
+        provide is hand-rolled.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }} — the design-doc README
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Screens -->
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> The game</h2>
+      <figure class="shot" appReveal="up">
+        <img src="https://user-images.githubusercontent.com/17170498/117526777-e6f48980-af8c-11eb-9b5b-1e0c07ecd0f2.png" alt="Bomberman main menu, hand-drawn UI" loading="lazy" />
+        <figcaption>The menu — hand-rolled GUI: layers, labels, a timer class, WAV cues on every keypress.</figcaption>
+      </figure>
+      <figure class="shot shot--pair" appReveal="up">
+        <div class="pair-row">
+          <img src="https://user-images.githubusercontent.com/17170498/117526895-a8130380-af8d-11eb-830f-32a8d7e214be.png" alt="Level with bombs and enemies on a grid" loading="lazy" />
+          <img src="https://user-images.githubusercontent.com/17170498/117527830-705b8a00-af94-11eb-85dc-d0a77a429bba.png" alt="Chained bomb explosion with extended blast radius" loading="lazy" />
+        </div>
+        <figcaption>Grid combat; blast radius is a per-level parameter and explosions chain.</figcaption>
+      </figure>
+      <figure class="shot" appReveal="up">
+        <img src="https://user-images.githubusercontent.com/17170498/117527780-270b3a80-af94-11eb-8a06-1f88773923ae.png" alt="Enemy following a discovered path toward the player" loading="lazy" />
+        <figcaption>Enemies hunt: the board is a graph (Grafo/Nodo) — when a route to the player's node exists, they follow it.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section arch">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> What "no engine" means here</h2>
+      <ul class="arch-notes">
+        <li appReveal="up"><strong>The loop:</strong> input → update → collision → draw on a raw AWT
+          <code>Canvas</code> — timing, double-buffering and frame pacing by hand.</li>
+        <li appReveal="up"><strong>Rendering &amp; animation:</strong> a layer system (<code>Capa</code>),
+          drawables, and a sprite <code>Animacion</code> framework — sprite sheets before I knew the term.</li>
+        <li appReveal="up"><strong>Pathfinding:</strong> the grid becomes a graph; enemies search it for a
+          route to the player's node. My first graph algorithm in production — the ancestor of the
+          <a routerLink="/projects/route-graph-neo4j">Route Graph</a>'s Dijkstra explorer.</li>
+        <li appReveal="up"><strong>Data-driven levels:</strong> <code>Niveles.txt</code> defines every level as
+          a header plus a sprite-code grid, documented in <code>FormatoDeMapas.txt</code> — edit the text
+          file, get a new level, no recompile.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Why freeze it?</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>A time capsule beats a facelift</dt>
+          <dd>Rewriting student code erases the evidence of growth. The commits stay as written; only
+          the README was rewritten to explain what's actually inside.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>The value is the struggle</dt>
+          <dd>This is where I first hit the problems engines solve — game loops, sprite timing, grid
+          collision, audio latency, "how does the enemy find me?" Every later project rhymes with
+          something first attempted here.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Read it like a fossil record</span></h2>
+      <p>NetBeans/Ant project; a prebuilt jar lives in dist/ — arrow keys, space drops the bomb.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

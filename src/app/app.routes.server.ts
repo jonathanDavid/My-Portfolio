@@ -15,6 +15,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'projects/route-graph-neo4j', renderMode: RenderMode.Prerender },
   { path: 'projects/gamedev-copilot', renderMode: RenderMode.Prerender },
   { path: 'projects/vision-copilot', renderMode: RenderMode.Prerender },
+  { path: 'projects/theclo-set', renderMode: RenderMode.Prerender },
+  { path: 'projects/bomberman', renderMode: RenderMode.Prerender },
   { path: 'experience', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Prerender },
 ];

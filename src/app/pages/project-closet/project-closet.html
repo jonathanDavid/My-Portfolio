@@ -1,0 +1,127 @@
+<article class="case">
+  <!-- Header -->
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="layers" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">TheCloset — a 2019 app, revived</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>My oldest surviving side project.</strong> A digital closet — garments, outfits,
+        laundry, a what-to-wear planner — built in 2019 on Expo SDK 30, revived in 2026 on SDK 57.
+        The 2019 code stays in git history; the repo tells the before/after story.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
+            {{ repo.label }} — run it yourself
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        Seven years of mobile-platform drift in one repo: Expo SDK 30, React 16.3,
+        react-navigation v2, native-base 2, rn-fetch-blob, Firebase v5 — <strong>every single
+        dependency is dead</strong>. An in-place upgrade doesn't exist; v2 navigation APIs are gone,
+        native-base is deprecated, the camera library is abandoned. The honest engineering call was
+        a <strong>fresh Expo 57 + TypeScript app carrying the same product</strong>, with the 2019
+        implementation preserved in history — a revival, not a resurrection.
+      </p>
+    </div>
+  </section>
+
+  <!-- Before / after -->
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> Before / after</h2>
+      <figure class="shot shot--phones" appReveal="up">
+        <div class="phone-row">
+          <img src="assets/case/closet-before.png" alt="2019 app: white native-base list screen" loading="lazy" width="390" height="800" />
+          <img src="assets/case/closet-after.png" alt="2026 revival: dark closet grid with category chips, garment cards with color swatches and worn counts" loading="lazy" width="390" height="844" />
+        </div>
+        <figcaption>2019 native-base defaults on white → 2026 dark-first design system: category chips, swatch cards, worn counts, laundry badges.</figcaption>
+      </figure>
+      <figure class="shot shot--phones" appReveal="up">
+        <div class="phone-row">
+          <img src="assets/case/closet-outfits.png" alt="Outfits tab: looks composed from garments shown as color tiles" loading="lazy" width="390" height="844" />
+          <img src="assets/case/closet-planner.png" alt="Planner tab: hand-rolled month grid with a selected day and outfit picker" loading="lazy" width="390" height="844" />
+        </div>
+        <figcaption>Outfits composed from garments, and a planner whose month grid is ~80 hand-rolled lines — replacing the react-native-calendars dependency.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Decisions -->
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> Decisions &amp; trade-offs</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>Local-first, not Firebase</dt>
+          <dd>The 2019 app needed an account before it showed anything. The revival keeps everything
+          in AsyncStorage behind one reducer — no accounts, no keys, useful in seconds — and a cloud
+          sync layer can plug into that same seam later.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Photos optional</dt>
+          <dd>The old flow forced the camera before a garment existed. Now a garment is a name +
+          category + color swatch in ten seconds; a photo can come whenever.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Empty states as design, not absence</dt>
+          <dd>Every tab explains what belongs there and how to add it — the 2019 app rendered blank
+          white lists.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Four tabs, one glance</dt>
+          <dd>Closet · Outfits · Laundry · Planner. The old app nested list → list → detail three
+          levels deep before showing a garment.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Scale -->
+  <section class="section scale">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> What I'd change at scale</h2>
+      <ul>
+        <li>Cloud sync + auth behind the existing reducer seam — the 2019 Firebase idea, done properly.</li>
+        <li>On-device background removal for garment photos.</li>
+        <li>Wear statistics: cost-per-wear, seasonal rotation hints.</li>
+        <li>Reducer and planner date-math tests.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Open the closet</span></h2>
+      <p>npm install, expo start — the seed closet shows every screen immediately.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

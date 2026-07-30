@@ -60,6 +60,18 @@ export const routes: Routes = [
     title: 'Vision Copilot · Jonathan Ilias',
   },
   {
+    path: 'projects/theclo-set',
+    loadComponent: () =>
+      import('./pages/project-closet/project-closet').then((m) => m.ProjectCloset),
+    title: 'TheCloset — a 2019 app, revived · Jonathan Ilias',
+  },
+  {
+    path: 'projects/bomberman',
+    loadComponent: () =>
+      import('./pages/project-bomberman/project-bomberman').then((m) => m.ProjectBomberman),
+    title: 'Bomberman — Java, no engine · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',

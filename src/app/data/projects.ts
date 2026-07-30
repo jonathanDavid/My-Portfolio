@@ -178,7 +178,7 @@ export const projects: Project[] = [
     tech: ['React Native', 'Expo', 'TypeScript', 'React Navigation', 'AsyncStorage'],
     status: 'shipped',
     featured: false,
-    caseStudy: false,
+    caseStudy: true,
     year: '2018–2026',
     icon: 'layers',
     repos: [
@@ -194,7 +194,7 @@ export const projects: Project[] = [
     tech: ['Java', 'AWT', 'Ant', 'Graphs'],
     status: 'shipped',
     featured: false,
-    caseStudy: false,
+    caseStudy: true,
     year: '2021',
     icon: 'gamepad',
     repos: [
