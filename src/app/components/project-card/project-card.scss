@@ -401,11 +401,40 @@
       pointer-events: none;
       visibility: hidden;
     }
-    /* the hint reads as a click affordance here */
+    /* Desktop collage: the hint row leaves the card body. The whole card is
+       the click target (pointer cursor); a floating pill fades in on hover
+       as the indicator. The button itself remains for keyboard users —
+       pointer-events off so mouse clicks fall through to the card. */
+    :host-context(.collage) .front { cursor: pointer; }
+    :host-context(.collage) .flip-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      margin: 0;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent-3) 45%, var(--border));
+      color: var(--text-muted);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    :host-context(.collage) .project-flip:not(.is-flipped):hover .flip-hint,
+    :host-context(.collage) .flip-hint:focus-visible {
+      opacity: 1;
+      transform: none;
+    }
     :host-context(.collage) .flip-hint__hover { display: none; }
-    :host-context(.collage) .flip-hint__tap { display: inline; }
+    :host-context(.collage) .flip-hint__tap { display: none; }
+    :host-context(.collage) .flip-hint__click { display: inline; }
   }
 }
+
+/* the third hint variant only exists in the desktop collage */
+.flip-hint__click { display: none; }
 
 /* Front-face live CTA — the demo is one click away without flipping */
 .front-actions {
