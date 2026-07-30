@@ -355,6 +355,58 @@
   }
 }
 
+/* ---------- Collage mode (projects page) ----------
+   Inside the collage the hover gesture means FOCUS + REVEAL, not flip:
+   the card grows a screenshot instead of turning away. The stack & links
+   back face stays reachable through the explicit button (click). */
+.project__preview { display: none; }
+@media (min-width: 768px) {
+  :host-context(.collage) .project__preview {
+    display: block;
+    overflow: hidden;
+    margin-top: 0.9rem;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.35s ease;
+  }
+  :host-context(.collage) .project__preview img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  /* lg cards wear their screenshot permanently — it fills the 2-column width */
+  :host-context(.cc__item--lg) .project__preview {
+    max-height: 220px;
+    opacity: 1;
+  }
+  @media (hover: hover) {
+    /* hover slides the screenshot open on the rest */
+    :host-context(.collage) .project-flip:not(.is-flipped):hover .project__preview {
+      max-height: 220px;
+      opacity: 1;
+    }
+    /* …and does NOT flip the card (click the hint button for stack & links) */
+    :host-context(.collage) .project-flip:not(.is-flipped):hover .flip-inner {
+      transform: none;
+    }
+    :host-context(.collage) .project-flip:not(.is-flipped):hover .front {
+      pointer-events: auto;
+      visibility: visible;
+    }
+    :host-context(.collage) .project-flip:not(.is-flipped):hover .back {
+      pointer-events: none;
+      visibility: hidden;
+    }
+    /* the hint reads as a click affordance here */
+    :host-context(.collage) .flip-hint__hover { display: none; }
+    :host-context(.collage) .flip-hint__tap { display: inline; }
+  }
+}
+
 /* Front-face live CTA — the demo is one click away without flipping */
 .front-actions {
   display: flex;

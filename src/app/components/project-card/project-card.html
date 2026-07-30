@@ -1,4 +1,4 @@
-<article class="project-flip" [class.is-case]="project().caseStudy">
+<article class="project-flip" [class.is-case]="project().caseStudy" [class.is-flipped]="flipped()">
   <div class="flip-inner">
     <!-- FRONT -->
     <div class="face front card glass">
@@ -28,6 +28,14 @@
 
       <p class="project__tagline">{{ project().tagline }}</p>
       <p class="project__summary">{{ project().summary }}</p>
+
+      <!-- Collage-only screenshot: always open on lg cards, slides open on
+           hover for the rest — hovering genuinely shows MORE, not just bigger -->
+      @if (project().preview) {
+        <div class="project__preview">
+          <img [src]="project().preview" [alt]="project().title + ' screenshot'" loading="lazy" />
+        </div>
+      }
 
       <!-- Links live on the front too, so touch / no-hover users always reach them -->
       <div class="project__front-links">

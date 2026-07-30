@@ -26,6 +26,9 @@ export interface Project {
   /** Collage size on the all-projects grid: lg spans 2 columns with a longer
    *  summary, sm keeps a short one. Default is a regular 1-column card. */
   size?: 'lg' | 'sm';
+  /** Screenshot shown on the collage card — always on lg cards, revealed on
+   *  hover for the rest. */
+  preview?: string;
   /** Representative UI icon for the project card (fallback). */
   icon?: IconName;
   /** The real web-app's own brand icon (favicon), shown on the card/hero when
@@ -36,6 +39,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'digital-signage',
+    preview: 'assets/screenshots/editor.png',
     size: 'lg',
     title: 'Digital Signage Platform',
     tagline: 'A four-surface, real-time content platform for Smart TVs',
@@ -66,6 +70,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'retail-serverless',
+    preview: 'assets/case/retail-product.png',
     title: 'Retail Serverless Backend',
     tagline: '20+ Lambdas and 100+ endpoints powering enterprise retail',
     summary:
@@ -86,6 +91,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'ga-allocation-services',
+    preview: 'assets/case/genetic-visualizer.png',
     title: 'Genetic-Algorithm Allocation Services',
     tagline: 'ML that optimizes store-item allocation — now interactive',
     summary:
@@ -105,6 +111,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'colombia-conflict-atlas',
+    preview: 'assets/case/atlas-conflict-2002.png',
     size: 'lg',
     title: 'Colombia Conflict & Security Atlas',
     tagline: 'A timeline-first map of Colombia built from real public data',
@@ -124,6 +131,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'art-pomodoro',
+    preview: 'assets/case/pomodoro-reveal.png',
     title: 'Art Pomodoro',
     tagline: 'A focus timer where a masterpiece reveals itself as you work',
     summary:
@@ -142,6 +150,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'gamedev-copilot',
+    preview: 'assets/case/copilot-docs.png',
     size: 'lg',
     title: 'Research Copilot',
     tagline: 'A local research copilot for any subject — the domain is a swappable profile',
@@ -160,6 +169,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'vision-copilot',
+    preview: 'assets/case/vision-session.png',
     title: 'Vision Copilot',
     tagline: 'Talk to an image — descriptions grounded by hybrid tiled detection, 100% local',
     summary:
@@ -177,6 +187,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'theclo-set',
+    preview: 'assets/case/closet-outfits.png',
     size: 'sm',
     title: 'TheCloset — 2019 app, revived',
     tagline: 'Expo SDK 30 → 57 in one jump: my oldest side project, redesigned',
@@ -194,6 +205,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'bomberman',
+    preview: 'https://user-images.githubusercontent.com/17170498/117526895-a8130380-af8d-11eb-830f-32a8d7e214be.png',
     size: 'sm',
     title: 'Bomberman — Java, no engine',
     tagline: 'University game: hand-rolled render loop, sprites, audio and pathfinding',
@@ -223,6 +235,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'route-graph-neo4j',
+    preview: 'assets/case/routegraph-explorer.png',
     title: 'Colombia Route Graph',
     tagline: 'Shortest paths over real highways, with the Cypher always visible',
     summary:

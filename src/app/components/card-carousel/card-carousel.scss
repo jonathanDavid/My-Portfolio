@@ -61,10 +61,11 @@
    card expands it while every other card recedes — grid geometry stays put
    (transforms only), so nothing reflows under the cursor. */
 @media (min-width: 768px) {
+  /* rows stretch (default) so short cards never leave holes beside tall ones;
+     lg cards fill their width with a permanent preview image instead */
   :host(.collage) .cc__track {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     grid-auto-flow: dense;
-    align-items: start;
   }
   :host(.collage) .cc__item--lg { grid-column: span 2; }
   :host(.collage) .cc__item--lg app-project-card { --summary-lines: 11; }
