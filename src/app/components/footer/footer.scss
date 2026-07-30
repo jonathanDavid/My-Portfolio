@@ -35,10 +35,13 @@
   /* Big and top-anchored: the NORTH of the country (La Guajira, the coast,
      the markers) is the focal point beside the card; the south is allowed to
      run past the footer and fades out (mask in the component). */
+  /* Negative right: the svg's top band is ~half empty ocean east of La
+     Guajira, so the box must hang past the viewport for the visible COAST
+     to sit near the right edge. The overhang is faded/empty map. */
   .footer-map {
     position: absolute;
     top: 36px;
-    right: 0.5rem;
+    right: -13vw;
     width: clamp(700px, 56vw, 1100px);
     max-width: none;
     margin: 0;
@@ -48,11 +51,6 @@
   .footer-grid, .footer-bottom { position: relative; z-index: 1; }
   .footer-meta { max-width: 260px; pointer-events: none; }
   .footer-meta a { pointer-events: auto; }
-}
-/* Very wide: keep a slight inward pull so the map still overlaps the card,
-   but stay close to the right edge */
-@media (min-width: 1500px) {
-  .footer-map { right: calc((100vw - var(--maxw)) / 2 - 10vw); }
 }
 
 .footer-actions {
