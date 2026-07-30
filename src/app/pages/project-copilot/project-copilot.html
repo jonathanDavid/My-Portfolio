@@ -4,7 +4,7 @@
     <div class="container">
       <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
       <p class="eyebrow"><app-icon name="bot" [size]="15" />Case study · {{ project.year }}</p>
-      <h1><span class="gradient-text">Game-Dev Research Copilot</span></h1>
+      <h1><span class="gradient-text">Research Copilot</span></h1>
       <p class="lead">{{ project.tagline }}.</p>
 
       <p class="note">
@@ -44,9 +44,13 @@
         under pytest in one second <em>with no model at all</em>.
       </p>
       <p>
-        The domain is 2D game development: ask about Phaser, Godot, PixiJS, Ebitengine, Bevy and more,
+        And the subject is <strong>configuration, not architecture</strong>: a small JSON domain
+        profile (persona, router keywords, docs corpus) points the same graph at anything. The demo
+        profile is 2D game development — ask about Phaser, Godot, PixiJS, Ebitengine, Bevy and more,
         and the agent answers from indexed documentation with citations, finds tutorial videos, or
-        just talks — remembering your project's decisions between sessions.
+        just talks — remembering your project's decisions between sessions. A second shipped profile
+        indexes the FastAPI docs; a hermetic test proves a custom profile leaves no trace of the
+        demo domain in any prompt.
       </p>
     </div>
   </section>
@@ -71,8 +75,8 @@
           persist to JSON and are injected into every prompt. That triage is context management.</li>
         <li appReveal="up"><strong>The testability seam:</strong> every model call goes through two tiny
           protocols (<code>LLM</code>, <code>Embedder</code>). Production plugs in Ollama; tests plug in
-          scripted fakes and a deterministic hash embedder — 12 hermetic tests assert paths, grounding,
-          memory persistence and router salvage, in ~1 s, offline.</li>
+          scripted fakes and a deterministic hash embedder — 16 hermetic tests assert paths, grounding,
+          memory persistence, router salvage, and domain-profile reskinning, offline.</li>
       </ul>
     </div>
   </section>
@@ -118,7 +122,7 @@
         <div appReveal="up">
           <dt>No hosted demo, on purpose</dt>
           <dd>Local inference cannot run on GitHub Pages, and simulating an agent would undermine the
-          project's whole argument. The repo is the demo: clone, run 12 tests in a second, then pull
+          project's whole argument. The repo is the demo: clone, run 16 tests in seconds, then pull
           the models and talk to it.</dd>
         </div>
       </dl>

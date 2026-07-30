@@ -19,25 +19,25 @@ export class ProjectCopilot {
 
   constructor() {
     inject(SeoService).update({
-      title: 'Game-Dev Research Copilot',
+      title: 'Research Copilot',
       description:
-        'Case study: a LangGraph agent that routes questions to RAG over 12 game frameworks (Chroma), a key-less YouTube tool, or direct chat — all inference local via Ollama + Mistral, and the whole graph testable in one second without any model.',
+        'Case study: a local research copilot for any subject — a swappable domain profile reskins a LangGraph agent that routes questions to RAG (Chroma), a key-less YouTube tool, or direct chat. Demo corpus: 12 game frameworks. All inference local via Ollama + Mistral; the whole graph testable without any model.',
       path: 'projects/gamedev-copilot',
       type: 'article',
       structuredData: [
         caseStudyCreativeWork({
           slug: 'gamedev-copilot',
-          name: 'Game-Dev Research Copilot',
-          headline: 'An agent you can read, test, and run without the cloud',
+          name: 'Research Copilot',
+          headline: 'An agent you can read, test, run without the cloud — and point at any subject',
           description:
-            'LangGraph router → RAG retrieve / YouTube tool / direct chat → grounded generation → memory update. 226 chunks of real docs across 12 frameworks in Chroma; Ollama + Mistral for every LLM call; deterministic fakes make the whole graph hermetically testable.',
+            'LangGraph router → RAG retrieve / YouTube tool / direct chat → grounded generation → memory update. The subject is a swappable DomainProfile (demo: 226 chunks across 12 game frameworks in Chroma); Ollama + Mistral for every LLM call; deterministic fakes make the whole graph hermetically testable.',
           languages: ['Python'],
           tech: this.project.tech,
         }),
         breadcrumb([
           { name: 'Home', path: '' },
           { name: 'Projects', path: 'projects' },
-          { name: 'Game-Dev Research Copilot', path: 'projects/gamedev-copilot' },
+          { name: 'Research Copilot', path: 'projects/gamedev-copilot' },
         ]),
       ],
     });

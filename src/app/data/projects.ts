@@ -137,10 +137,10 @@ export const projects: Project[] = [
   },
   {
     slug: 'gamedev-copilot',
-    title: 'Game-Dev Research Copilot',
-    tagline: 'A LangGraph agent with RAG over 12 game frameworks — 100% local inference',
+    title: 'Research Copilot',
+    tagline: 'A local research copilot for any subject — the domain is a swappable profile',
     summary:
-      'Ask it about Phaser, Godot, PixiJS, Bevy or 8 more frameworks: a LangGraph router decides docs / video / chat, a retriever grounds answers in 226 chunks of real documentation indexed into Chroma (with citations), a key-less YouTube tool finds tutorials, and layered memory keeps project decisions across sessions. Every LLM call runs locally on Ollama + Mistral — private, free, no cloud API. The entire graph is testable without any model: 12 hermetic tests run it in one second against deterministic fakes.',
+      'Point it at any subject: a small JSON profile (persona, router keywords, docs corpus) reskins the whole agent — the shipped demo researches 12 game frameworks, a second profile indexes the FastAPI docs. A LangGraph router decides docs / video / chat, a retriever grounds answers in 226 chunks of real documentation indexed into Chroma (with citations), a key-less YouTube tool finds tutorials, and layered memory keeps project decisions across sessions. Every LLM call runs locally on Ollama + Mistral — private, free, no cloud API. 16 hermetic tests run the entire graph against deterministic fakes, including that a custom profile leaves no residue of the demo domain.',
     tech: ['LangGraph', 'Python', 'RAG', 'ChromaDB', 'Ollama', 'Mistral 7B', 'pytest'],
     status: 'shipped',
     featured: true,
