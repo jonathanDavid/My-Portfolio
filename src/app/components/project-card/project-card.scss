@@ -439,11 +439,20 @@
 .flip-hint__click { display: none; }
 
 /* Mobile: the carousel shows one card at a time — long summaries make it a
-   wall of text. Much shorter clamp; the case study carries the full story. */
+   wall of text. Much shorter clamp; the case study carries the full story.
+   The back face also drives card height (the flip cell grows to the TALLER
+   face), so its links go back to wrapped rows here — the vertical stack
+   exists for a desktop hover-paint bug that touch never hits. */
 @media (max-width: 767px) {
   .project__summary {
     -webkit-line-clamp: 4;
     line-clamp: 4;
+  }
+  .back__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
   }
 }
 

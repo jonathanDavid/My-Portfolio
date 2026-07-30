@@ -102,12 +102,16 @@
 @media (max-width: 767px) {
   .cc__viewport {
     overflow-x: auto;
-    overflow-y: visible;
+    /* a scroll container cannot keep overflow-y visible (it computes to
+       auto), so the flip rotation and glow WILL clip at the padding edge —
+       push that edge far out and cancel the layout cost with a negative
+       margin, so mid-flip 3D projection never leaves the visible box */
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    /* room for the scaled active card's shadow/glow */
-    padding-block: 0.5rem;
+    padding-block: 3rem;
+    margin-block: -2.5rem;
   }
   .cc__viewport::-webkit-scrollbar {
     display: none;
