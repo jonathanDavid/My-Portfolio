@@ -64,6 +64,7 @@ export const projects: Project[] = [
     repos: [
       { label: 'signage-web', href: 'https://github.com/jonathanDavid/signage-web', icon: 'panels' },
       { label: 'signage-api', href: 'https://github.com/jonathanDavid/signage-api', icon: 'server' },
+      { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/signage-api/', icon: 'globe' },
       { label: 'signage-tv', href: 'https://github.com/jonathanDavid/signage-tv', icon: 'tv' },
       { label: 'signage-infra', href: 'https://github.com/jonathanDavid/signage-infra', icon: 'cloud' },
     ],
@@ -86,6 +87,7 @@ export const projects: Project[] = [
     repos: [
       { label: 'retail-serverless-web', href: 'https://github.com/jonathanDavid/retail-serverless-web', icon: 'gauge' },
       { label: 'retail-serverless-api', href: 'https://github.com/jonathanDavid/retail-serverless-api', icon: 'server' },
+      { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/retail-serverless-api/', icon: 'globe' },
       { label: 'retail-serverless-infra', href: 'https://github.com/jonathanDavid/retail-serverless-infra', icon: 'cloud' },
     ],
   },
@@ -106,6 +108,7 @@ export const projects: Project[] = [
     link: { label: 'Try it live', href: 'https://jonathandavid.github.io/genetic-visualizer-web/', icon: 'external-link' },
     repos: [
       { label: 'genetic-visualizer-api', href: 'https://github.com/jonathanDavid/genetic-visualizer-api', icon: 'server' },
+      { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/genetic-visualizer-api/', icon: 'globe' },
       { label: 'genetic-visualizer-web', href: 'https://github.com/jonathanDavid/genetic-visualizer-web', icon: 'sparkles' },
     ],
   },
