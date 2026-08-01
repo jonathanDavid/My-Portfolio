@@ -228,6 +228,25 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'mongo-showdown',
+    preview: 'assets/case/mongo-showdown.png',
+    title: 'Mongo Showdown',
+    tagline: 'Mongoose vs the native driver — one contract, fairness-tested, measured',
+    summary:
+      'The same retail domain modeled twice behind one interface. A fairness suite proves both implementations return identical results — including multi-document transaction rollback — and only then does the benchmark time them: native is 1.3–1.5× faster where the driver does the work (bulk casting, reads, updates) but just 1.12× where the server does (aggregation). The comparison site shows the recorded numbers next to the verbatim code both sides ran, with a verdict per operation and honest caveats.',
+    tech: ['MongoDB', 'Mongoose', 'TypeScript', 'Docker', 'Vitest', 'React'],
+    status: 'shipped',
+    featured: false,
+    caseStudy: false,
+    year: '2026',
+    icon: 'database',
+    link: { label: 'Try it live', href: 'https://jonathandavid.github.io/mongo-showdown-web/', icon: 'external-link' },
+    repos: [
+      { label: 'mongo-showdown-api', href: 'https://github.com/jonathanDavid/mongo-showdown-api', icon: 'database' },
+      { label: 'mongo-showdown-web', href: 'https://github.com/jonathanDavid/mongo-showdown-web', icon: 'gauge' },
+    ],
+  },
+  {
     slug: 'live-dashboard-go',
     title: 'Go + WebSocket Live Dashboard',
     tagline: 'A low-latency metrics dashboard in Go',
