@@ -247,16 +247,21 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'live-dashboard-go',
-    title: 'Go + WebSocket Live Dashboard',
-    tagline: 'A low-latency metrics dashboard in Go',
+    slug: 'goflow',
+    preview: 'assets/case/goflow-dashboard.png',
+    title: 'goflow — Go L7 Load Balancer',
+    tagline: 'Health checks, safe retries and a live traffic dashboard — zero dependencies',
     summary:
-      'A real-time metrics dashboard: a Go WebSocket hub fanning out live updates to an Angular front end. Exploring back-pressure, reconnection and clean concurrency patterns in Go.',
-    tech: ['Go', 'WebSockets', 'Angular', 'Docker'],
-    status: 'in-progress',
+      'An L7 load balancer in pure Go stdlib: round-robin and least-connections over atomically-stated backends, active health checks with hysteresis (three fails eject, two passes readmit), retries that never replay a consumed body or a real 5xx, and per-backend p50/p95 from a latency ring buffer. The dashboard is embedded with go:embed and streamed over Server-Sent Events. One command — go run . demo — spins up three synthetic backends (one health-flapping) plus bursty traffic, so you watch ejection, redistribution and recovery live. go.mod has no require block at all.',
+    tech: ['Go', 'net/http', 'httputil', 'SSE', 'go:embed'],
+    status: 'shipped',
     featured: false,
+    caseStudy: false,
     year: '2026',
     icon: 'gauge',
+    repos: [
+      { label: 'goflow', href: 'https://github.com/jonathanDavid/goflow', icon: 'zap' },
+    ],
   },
   {
     slug: 'route-graph-neo4j',
