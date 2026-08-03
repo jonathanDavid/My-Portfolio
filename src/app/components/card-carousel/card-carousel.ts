@@ -49,6 +49,7 @@ import { Project } from '../../data/projects';
               [class.is-active]="i === active()"
               [class.cc__item--lg]="p.size === 'lg'"
               [class.cc__item--sm]="p.size === 'sm'"
+              [class.cc__item--half]="p.size === 'half'"
             >
               <app-project-card [project]="p" [active]="i === active()" />
             </li>

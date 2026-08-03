@@ -27,7 +27,7 @@ export interface Project {
   docs?: RepoLink;
   /** Collage size on the all-projects grid: lg spans 2 columns with a longer
    *  summary, sm keeps a short one. Default is a regular 1-column card. */
-  size?: 'lg' | 'sm';
+  size?: 'lg' | 'sm' | 'half';
   /** Screenshot shown on the collage card — always on lg cards, revealed on
    *  hover for the rest. */
   preview?: string;
@@ -214,7 +214,7 @@ export const projects: Project[] = [
     slug: 'bomberman',
     appIcon: 'assets/app-icons/bomberman.svg',
     preview: 'https://user-images.githubusercontent.com/17170498/117526895-a8130380-af8d-11eb-830f-32a8d7e214be.png',
-    size: 'sm',
+    size: 'half',
     title: 'Bomberman — Java, no engine',
     tagline: 'University game: hand-rolled render loop, sprites, audio and pathfinding',
     summary:
@@ -231,6 +231,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'mongo-showdown',
+    size: 'half',
     preview: 'assets/case/mongo-showdown.png',
     title: 'Mongo Showdown',
     tagline: 'Mongoose vs the native driver — one contract, fairness-tested, measured',
@@ -250,6 +251,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'goflow',
+    size: 'half',
     preview: 'assets/case/goflow-dashboard.png',
     title: 'goflow — Go L7 Load Balancer',
     tagline: 'Health checks, safe retries and a live traffic dashboard — zero dependencies',
@@ -267,7 +269,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'route-graph-neo4j',
-    size: 'lg',
+    size: 'half',
     preview: 'assets/case/routegraph-explorer.png',
     title: 'Colombia Route Graph',
     tagline: 'Shortest paths over real highways, with the Cypher always visible',
