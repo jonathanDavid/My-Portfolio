@@ -23,6 +23,8 @@ export interface Project {
   repos?: RepoLink[];
   /** External demo/live link, if any. */
   link?: RepoLink;
+  /** Hosted API documentation (Swagger UI), if the project has an API. */
+  docs?: RepoLink;
   /** Collage size on the all-projects grid: lg spans 2 columns with a longer
    *  summary, sm keeps a short one. Default is a regular 1-column card. */
   size?: 'lg' | 'sm';
@@ -39,6 +41,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'digital-signage',
+    docs: { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/signage-api/', icon: 'globe' },
     preview: 'assets/screenshots/editor.png',
     size: 'lg',
     title: 'Digital Signage Platform',
@@ -64,13 +67,13 @@ export const projects: Project[] = [
     repos: [
       { label: 'signage-web', href: 'https://github.com/jonathanDavid/signage-web', icon: 'panels' },
       { label: 'signage-api', href: 'https://github.com/jonathanDavid/signage-api', icon: 'server' },
-      { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/signage-api/', icon: 'globe' },
       { label: 'signage-tv', href: 'https://github.com/jonathanDavid/signage-tv', icon: 'tv' },
       { label: 'signage-infra', href: 'https://github.com/jonathanDavid/signage-infra', icon: 'cloud' },
     ],
   },
   {
     slug: 'retail-serverless',
+    docs: { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/retail-serverless-api/', icon: 'globe' },
     preview: 'assets/case/retail-product.png',
     title: 'Retail Serverless Backend',
     tagline: '20+ Lambdas and 100+ endpoints powering enterprise retail',
@@ -87,12 +90,12 @@ export const projects: Project[] = [
     repos: [
       { label: 'retail-serverless-web', href: 'https://github.com/jonathanDavid/retail-serverless-web', icon: 'gauge' },
       { label: 'retail-serverless-api', href: 'https://github.com/jonathanDavid/retail-serverless-api', icon: 'server' },
-      { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/retail-serverless-api/', icon: 'globe' },
       { label: 'retail-serverless-infra', href: 'https://github.com/jonathanDavid/retail-serverless-infra', icon: 'cloud' },
     ],
   },
   {
     slug: 'ga-allocation-services',
+    docs: { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/genetic-visualizer-api/', icon: 'globe' },
     preview: 'assets/case/genetic-visualizer.png',
     title: 'Genetic-Algorithm Allocation Services',
     tagline: 'ML that optimizes store-item allocation — now interactive',
@@ -108,7 +111,6 @@ export const projects: Project[] = [
     link: { label: 'Try it live', href: 'https://jonathandavid.github.io/genetic-visualizer-web/', icon: 'external-link' },
     repos: [
       { label: 'genetic-visualizer-api', href: 'https://github.com/jonathanDavid/genetic-visualizer-api', icon: 'server' },
-      { label: 'API docs (Swagger)', href: 'https://jonathandavid.github.io/genetic-visualizer-api/', icon: 'globe' },
       { label: 'genetic-visualizer-web', href: 'https://github.com/jonathanDavid/genetic-visualizer-web', icon: 'sparkles' },
     ],
   },
@@ -237,7 +239,7 @@ export const projects: Project[] = [
     tech: ['MongoDB', 'Mongoose', 'TypeScript', 'Docker', 'Vitest', 'React'],
     status: 'shipped',
     featured: false,
-    caseStudy: false,
+    caseStudy: true,
     year: '2026',
     icon: 'database',
     link: { label: 'Try it live', href: 'https://jonathandavid.github.io/mongo-showdown-web/', icon: 'external-link' },
@@ -256,7 +258,7 @@ export const projects: Project[] = [
     tech: ['Go', 'net/http', 'httputil', 'SSE', 'go:embed'],
     status: 'shipped',
     featured: false,
-    caseStudy: false,
+    caseStudy: true,
     year: '2026',
     icon: 'gauge',
     repos: [

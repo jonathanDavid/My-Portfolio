@@ -72,6 +72,16 @@ export const routes: Routes = [
     title: 'Bomberman — Java, no engine · Jonathan Ilias',
   },
   {
+    path: 'projects/mongo-showdown',
+    loadComponent: () => import('./pages/project-mongo/project-mongo').then((m) => m.ProjectMongo),
+    title: 'Mongo Showdown · Jonathan Ilias',
+  },
+  {
+    path: 'projects/goflow',
+    loadComponent: () => import('./pages/project-goflow/project-goflow').then((m) => m.ProjectGoflow),
+    title: 'goflow — Go L7 Load Balancer · Jonathan Ilias',
+  },
+  {
     path: 'experience',
     loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
     title: 'Experience · Jonathan Ilias',

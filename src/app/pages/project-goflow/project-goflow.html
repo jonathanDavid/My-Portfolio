@@ -1,0 +1,90 @@
+<article class="case">
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="gauge" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">goflow — Go L7 Load Balancer</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>Zero dependencies is the thesis</strong> — go.mod has no require block at
+        all. Everything a balancer must get right (picking, health, retries, metrics, a live
+        dashboard) built on net/http, httputil, go:embed and Server-Sent Events.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }} — go run . demo
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> The dashboard, under real traffic</h2>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/goflow-dashboard.png" alt="goflow dashboard: 49 requests per second, RPS sparkline, three backends with share bars, p50/p95 latencies and status counts" loading="lazy" />
+        <figcaption>Captured live at 49 RPS: share bars, p50/p95 per backend, and api-flaky's smaller share — the residue of its health-check ejection. Streamed over SSE once a second.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section arch">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="network" [size]="18" /></span> The decisions that matter</h2>
+      <ul class="arch-notes">
+        <li appReveal="up"><strong>Hysteresis, not flapping:</strong> three consecutive failed probes
+          eject a backend, two consecutive passes readmit it — one flaky health check never
+          destabilizes the pool. Tested against a real flapping httptest server.</li>
+        <li appReveal="up"><strong>Mark, don't write:</strong> the proxy's ErrorHandler records the
+          transport failure instead of answering, so the attempt loop can retry the next healthy
+          backend — 502 goes out only when every attempt is spent. A genuine backend 5xx is an
+          answer, never retried; a consumed POST body is never replayed.</li>
+        <li appReveal="up"><strong>Cheap where it's hot:</strong> backends carry their own atomic
+          state (healthy / in-flight / served); latencies land in a fixed 512-slot ring and
+          percentiles are computed only when the dashboard reads, once a second.</li>
+        <li appReveal="up"><strong>SSE over websockets:</strong> one-way metrics fan-out doesn't
+          justify a dependency. The dashboard is a single embedded HTML file; the stream is
+          text/event-stream from stdlib.</li>
+        <li appReveal="up"><strong>The demo is the proof:</strong> <code>go run . demo</code> starts
+          three synthetic backends — one deliberately failing health checks every 20s — plus bursty
+          traffic. You watch ejection, redistribution and recovery happen, live.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section scale">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="rocket" [size]="18" /></span> Honest scope</h2>
+      <ul>
+        <li>L7/HTTP only — TCP balancing, TLS termination and connection draining are out of scope by design.</li>
+        <li>least-conn counts in-flight requests at this proxy, not true backend load.</li>
+        <li>Next: Kubernetes manifests (Deployment + probes + HPA) — a balancer is the perfect K8s subject.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Watch a backend die and come back</span></h2>
+      <p>go run . demo — proxy on :8080, dashboard on :9000, story in 30 seconds.</p>
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

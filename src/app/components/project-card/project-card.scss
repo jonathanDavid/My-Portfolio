@@ -407,7 +407,10 @@
        the click target (pointer cursor); a floating pill fades in on hover
        as the indicator. The button itself remains for keyboard users —
        pointer-events off so mouse clicks fall through to the card. */
-    :host-context(.collage) .front { cursor: pointer; }
+    /* BOTH faces advertise the click: front flips open, back flips home
+       (links and buttons keep their own cursors and handle their own clicks) */
+    :host-context(.collage) .front,
+    :host-context(.collage) .back { cursor: pointer; }
     :host-context(.collage) .flip-hint {
       position: absolute;
       right: 12px;
@@ -485,6 +488,27 @@
    so the front pill only exists where there is no hover (touch). */
 @media (hover: hover) {
   .front-live { display: none; }
+}
+
+/* Back-face API-docs button — a peer of Try-it-live, outline flavor */
+.back-docs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-3);
+  border: 1px solid color-mix(in srgb, var(--accent-3) 55%, var(--border));
+  background: color-mix(in srgb, var(--accent-3) 10%, transparent);
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  transition: background 0.15s, transform 0.12s;
+}
+.back-docs:hover {
+  text-decoration: none;
+  background: color-mix(in srgb, var(--accent-3) 20%, transparent);
+  transform: translateY(-1px);
 }
 
 /* Back-face live CTA — a real button, not another repo link */

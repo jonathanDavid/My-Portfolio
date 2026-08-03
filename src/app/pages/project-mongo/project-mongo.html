@@ -1,0 +1,107 @@
+<article class="case">
+  <section class="section case-hero">
+    <div class="container">
+      <a class="back" routerLink="/projects"><app-icon name="arrow-right" [size]="14" class="flip" /> All projects</a>
+      <p class="eyebrow"><app-icon name="database" [size]="15" />Case study · {{ project.year }}</p>
+      <h1><span class="gradient-text">Mongo Showdown</span></h1>
+      <p class="lead">{{ project.tagline }}.</p>
+
+      <p class="note">
+        <app-icon name="shield" [size]="15" />
+        <span><strong>Mongoose is MongoDB's ORM-style layer</strong> (an ODM: schemas, models,
+        validation, casting). This project answers "what does it cost?" with measurement instead of
+        opinion — and refuses to publish a number until a fairness suite proves both sides do
+        identical work.</span>
+      </p>
+
+      <div class="chip-row case-tech">
+        @for (t of project.tech; track t) {
+          <app-tech-chip [name]="t" />
+        }
+      </div>
+
+      <div class="repo-links">
+        @for (repo of project.repos ?? []; track repo.href) {
+          <a class="btn btn--primary" [href]="repo.href" target="_blank" rel="noopener">
+            <app-icon [name]="repo.icon ?? 'repo'" [size]="16" /> {{ repo.label }}
+          </a>
+        }
+        @if (project.link) {
+          <a class="btn btn--ghost" [href]="project.link!.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link!.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="head-icon"><app-icon name="brain" [size]="18" /></span> The problem</h2>
+      <p>
+        Every team eventually argues about Mongoose vs the native driver — usually with adjectives.
+        Benchmarks you find online compare different code doing different work, which makes the
+        numbers marketing. The fix is structural: <strong>one contract</strong> (bulk insert, point
+        read, indexed range query, atomic update, a $lookup aggregation, and a multi-document
+        transaction), <strong>two implementations</strong>, and a <strong>fairness suite</strong>
+        that runs every operation through both and asserts identical results — including the
+        transaction rolling back all partial stock decrements. Only then is timing meaningful.
+      </p>
+    </div>
+  </section>
+
+  <section class="section shots">
+    <div class="container">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="monitor" [size]="18" /></span> The verdict, measured</h2>
+      <figure class="shot" appReveal="up">
+        <img src="assets/case/mongo-showdown.png" alt="The comparison site: paired bars per operation with p95 ticks, ratio badges, and the real code side by side" loading="lazy" />
+        <figcaption>Median bars + p95 ticks per operation, and the verbatim code both sides ran — extracted from the repo's #region blocks, never a prettified copy.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2 appReveal="up"><span class="head-icon"><app-icon name="waypoints" [size]="18" /></span> What the numbers said</h2>
+      <dl class="decisions">
+        <div appReveal="up">
+          <dt>The tax lives in the driver, not the database</dt>
+          <dd>Where the server does the work (the aggregation), Mongoose costs ~12%. Where the
+          driver does the work (casting 1,000 documents on bulk insert), it costs ~54%. Reads,
+          updates and transactions sit between at 1.3–1.5×.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Best-practice Mongoose only</dt>
+          <dd>.lean() on every read, insertMany, schema-declared indexes. The classic accidental
+          tax — hydrating full documents with change tracking — is deliberately not measured as if
+          it were mandatory. No straw men.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>What Mongoose buys for its tax</dt>
+          <dd>Validation, casting and index declarations in one place. The native version trusts
+          its caller — which is exactly how silent bad data happens. My call: native driver + a
+          thin zod layer at the edges for hot paths; Mongoose for read-light CRUD teams.</dd>
+        </div>
+        <div appReveal="up">
+          <dt>Honest constraints, published with the numbers</dt>
+          <dd>Localhost Mongo (no network latency — real wires shrink the relative gap), single-node
+          replica set, machine specs and driver versions travel inside results.json.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section case-cta">
+    <div class="container narrow" appReveal="up">
+      <h2><span class="gradient-text">Read the numbers yourself</span></h2>
+      <p>The site ships the recorded results; the API repo reruns them with one command.</p>
+      <div class="repo-links">
+        @if (project.link) {
+          <a class="btn btn--primary" [href]="project.link!.href" target="_blank" rel="noopener">
+            <app-icon name="external-link" [size]="16" /> {{ project.link!.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</article>

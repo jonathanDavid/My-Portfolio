@@ -17,6 +17,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'projects/vision-copilot', renderMode: RenderMode.Prerender },
   { path: 'projects/theclo-set', renderMode: RenderMode.Prerender },
   { path: 'projects/bomberman', renderMode: RenderMode.Prerender },
+  { path: 'projects/mongo-showdown', renderMode: RenderMode.Prerender },
+  { path: 'projects/goflow', renderMode: RenderMode.Prerender },
   { path: 'experience', renderMode: RenderMode.Prerender },
   { path: '**', renderMode: RenderMode.Prerender },
 ];

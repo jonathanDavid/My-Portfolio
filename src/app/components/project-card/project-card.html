@@ -92,6 +92,12 @@
             <app-icon [name]="repo.icon ?? 'repo'" [size]="14" />{{ repo.label }}
           </a>
         }
+        @if (project().docs) {
+          <a class="back-docs" [href]="project().docs!.href" target="_blank" rel="noopener"
+             (pointerup)="$event.stopPropagation()">
+            <app-icon name="globe" [size]="15" />{{ project().docs!.label }}
+          </a>
+        }
         @if (project().link) {
           <a class="back-live" [href]="project().link!.href" target="_blank" rel="noopener"
              (pointerup)="$event.stopPropagation()">

@@ -18,6 +18,11 @@
           <a class="btn btn--ghost" [href]="repo.href" target="_blank" rel="noopener">
             <app-icon [name]="repo.icon ?? 'repo'" [size]="16" />
             {{ repo.label }}
+        @if (project.docs) {
+          <a class="btn btn--ghost" [href]="project.docs!.href" target="_blank" rel="noopener">
+            <app-icon name="globe" [size]="16" /> {{ project.docs!.label }}
+          </a>
+        }
           </a>
         }
       </div>
